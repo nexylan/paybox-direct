@@ -5,8 +5,8 @@ Paybox Direct and Paybox Direct Plus PHP SDK. Under development.
 [![Latest Stable Version](https://poser.pugx.org/nexylan/paybox-direct/v/stable)](https://packagist.org/packages/nexylan/paybox-direct)
 [![Latest Unstable Version](https://poser.pugx.org/nexylan/paybox-direct/v/unstable)](https://packagist.org/packages/nexylan/paybox-direct)
 [![License](https://poser.pugx.org/nexylan/paybox-direct/license)](https://packagist.org/packages/nexylan/paybox-direct)
-[![Dependency Status](https://www.versioneye.com/php/nexy:paybox-direct/badge.svg)](https://www.versioneye.com/php/nexylan:paybox-direct)
-[![Reference Status](https://www.versioneye.com/php/nexy:paybox-direct/reference_badge.svg)](https://www.versioneye.com/php/nexylan:paybox-direct/references)
+[![Dependency Status](https://www.versioneye.com/php/nexylan:paybox-direct/badge.svg)](https://www.versioneye.com/php/nexylan:paybox-direct)
+[![Reference Status](https://www.versioneye.com/php/nexylan:paybox-direct/reference_badge.svg)](https://www.versioneye.com/php/nexylan:paybox-direct/references)
 
 [![Total Downloads](https://poser.pugx.org/nexylan/paybox-direct/downloads)](https://packagist.org/packages/nexylan/paybox-direct)
 [![Monthly Downloads](https://poser.pugx.org/nexylan/paybox-direct/d/monthly)](https://packagist.org/packages/nexylan/paybox-direct)
