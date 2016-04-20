@@ -29,9 +29,15 @@ cache:
 
 before_script:
   - composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
+  - composer global require phpunit/phpunit:@stable satooshi/php-coveralls:@stable codeclimate/php-test-reporter:@stable --no-update
+  - composer global update --prefer-dist --no-interaction
   - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script: php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
+
+after_script:
+  - coveralls -v
+  - test-reporter
 
 notifications:
   slack:
