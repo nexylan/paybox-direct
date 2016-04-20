@@ -1,6 +1,7 @@
 {
-    "name": "nexylan/paybox-direct-plus",
-    "description": "PayBox Direct Plus API wrapper",
+    "name": "nexylan/paybox-direct",
+    "description": "PayBox Direct and Direct Plus API wrapper",
+    "keywords": ["Paybox", "Direct", "API", "Symfony"],
     "type": "library",
     "license": "MIT",
     "authors": [
