@@ -1,0 +1,46 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - nightly
+  - hhvm
+
+env:
+  global:
+    - PATH="$HOME/.composer/vendor/bin:$PATH"
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.6
+      env: COMPOSER_FLAGS="--prefer-lowest"
+  allow_failures:
+    - php: nightly
+    - php: hhvm
+    - php: hhvm-nightly
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+before_install:
+  - composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
+  - composer global require phpunit/phpunit:@stable satooshi/php-coveralls:@stable codeclimate/php-test-reporter:@stable --no-update
+
+install:
+  - composer global update --prefer-dist --no-interaction
+  - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
+
+script: php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
+
+after_script:
+  - coveralls -v
+  - test-reporter
+
+notifications:
+  slack:
+    secure: ScaYPjatptVIUB1PlwOaH7Yp8thfklqrSgOePqgi9hrWh454OpJXKt7r0TlmRtdzlTXJ/389kIgFrByGUIoaLhe1uUySorRcLQyvGMCK68qUuMO7Q/5q7oEhLe7pGzzqUTBmNLqEUboo95G5GB0jm/vAZ0dLF57U40gfZmV8FQOSmlAa9k7oAuiUXoP60pB4CMTmYB5WFVZeK0n/w/dyH+nTQu6t5pk+iQdy7zYHH2ubxd7QezEsb1zcQJxgE2VPzFrEN9Lt0m4tHSXI1rfWTuany1zhhx3Xya6J7mPLtK9ZQjgcPdyZZS+zCnH6L1NhJpedqlkh78j9oOooameTH/sCA8rgLSYfBT9qlZV4KW5B1XSgb5byb9JLhvWBYUXR1NilEkNFgsYifZV3VRnzbOpByHjJPWt0HFI8w+ThevdpCrZueQpvSO7cdX5PeC0RDQpH8jrNeMWMgjv62PsH9ii5uWygGBLA0F9B1pfZKBGX9w+ZUkRcNBi+jf45T4bCJGnk4pOyrxqoDhVU5ngLEh2y3XYPYirOOYqPCha8LMxJsPs/e8wF3I4Um5VP4GrasiI1KkVF05T9w4HiY2GKiKyc9939yrhCV4zSWnDtff3YCg3r5uCCTUPk+EHvmfJa6e5/XpX35kVOzYcRcPI3xdt6mVyfNDgX/GsP7EGH84w=
