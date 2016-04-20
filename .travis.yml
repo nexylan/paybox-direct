@@ -33,3 +33,7 @@ before_script:
   - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script: php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
+
+notifications:
+  slack:
+    secure: "oIDE7wREgXnJb32btG2G8Hz5TDny/vPL4JpkSH1r9kzMEDDgiu085+32tKsD8YUBrlTjBeFN3H6r9WtEpmkapRWCkis62M1AgKdu5ZJkjIAiVqyPH51nVB6HZBjq3XSNkzL14wXoqXZX3+XToHpaDbisnCXnsNkvTK7JiKm337tFC3iVo9MaAOxe7wwD6a3Lh4L0piRJKkhe02Gp6U7m+gCH1qga5mSAyc6L2tu5UqFWxJ+WITnC/xwL1XS7KgnHUlbu9s+u2TckdF6x+5SA9FDxiHD2o9Utt5u84f8hcGtKd33f4ZvHRYB8UmP9ke7xTUWL/K1jvjuu/TOIKFPIpmSY/WHx3Za+HJsW8CJMVUn5B0iyPgc5eT7gK75VWqR98flZMekAJN1GTW//ExanL0vJ3Cux8TW8/f45S/RLVe7wCBdWe5rU+hy5w+tFbZiZ21Lglv5lfihf9QJ/u5OdR2EtUWbKE7gGCls644rdYp2FbJd0yDyNvz6ieElWFREqUTWdck3BD6BeLhva4FvIMr5ZW4efL1+hKlk9TfJUaJgw+PvdPrP6JIILehi3PIIFgt+epzFEvYX02nS+D/iR9sGAinQdGYeoYVlBwE+jahvfAhzIY1bTv7PnPfrqpjuPaMSK1KqSzEbk+u9wmw1XciwioSlB0o4pYK+ZK/OcpvM="
