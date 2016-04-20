@@ -22,7 +22,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame([
             'timeout' => 10,
             'production' => false,
-            'paybox_devise' => '978',
+            'paybox_devise' => 978,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rang' => '32',
@@ -46,7 +46,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame([
             'timeout' => 5,
             'production' => true,
-            'paybox_devise' => '978',
+            'paybox_devise' => 978,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rang' => '32',
