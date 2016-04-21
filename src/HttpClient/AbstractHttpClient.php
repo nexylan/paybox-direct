@@ -9,7 +9,7 @@ use Nexy\PayboxDirect\Response\PayboxResponse;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractHttpClient implements HttpClientInterface
+abstract class AbstractHttpClient
 {
     /**
      * @var int
@@ -55,7 +55,13 @@ abstract class AbstractHttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Calls PayBox Direct platform with given operation type and parameters.
+     *
+     * @param string   $type       Request type
+     * @param string[] $parameters Request parameters
+     *
+     * @return PayboxResponse The response content
+     * @throws PayboxException
      */
     final public function call($type, array $parameters)
     {
@@ -86,6 +92,11 @@ abstract class AbstractHttpClient implements HttpClientInterface
 
         return new PayboxResponse($results);
     }
+
+    /**
+     * Init and setup http client with PayboxDirectPlus SDK options.
+     */
+    abstract public function init();
 
     /**
      * Sends a request to the server, receive a response and returns it as a string.
