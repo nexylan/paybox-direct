@@ -63,6 +63,7 @@ abstract class AbstractHttpClient
      * @param string[] $parameters Request parameters
      *
      * @return PayboxResponse The response content
+     *
      * @throws PayboxException
      */
     final public function call($type, array $parameters)
