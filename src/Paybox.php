@@ -36,12 +36,27 @@ use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
  */
 final class Paybox
 {
+    const DEFAULT_TIMEOUT = 10;
+    const DEFAULT_PRODUCTION = false;
+    const DEFAULT_DEVISE = self::DEVISE_EURO;
+
     const VERSION_DIRECT = '00103';
     const VERSION_DIRECT_PLUS = '00104';
+
+    const VERSIONS = [
+        'direct' => self::VERSION_DIRECT,
+        'direct_plus' => self::VERSION_DIRECT_PLUS,
+    ];
 
     const DEVISE_EURO = 978;
     const DEVISE_US_DOLLAR = 840;
     const DEVISE_CFA = 952;
+
+    const DEVISES = [
+        'euro' => self::DEVISE_EURO,
+        'us_dollar' => self::DEVISE_US_DOLLAR,
+        'cfa' => self::DEVISE_CFA,
+    ];
 
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
@@ -366,9 +381,9 @@ final class Paybox
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'timeout' => 10,
-            'production' => false,
-            'paybox_devise' => static::DEVISE_EURO,
+            'timeout' => static::DEFAULT_TIMEOUT,
+            'production' => static::DEFAULT_PRODUCTION,
+            'paybox_devise' => static::DEFAULT_DEVISE,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
@@ -387,10 +402,7 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_identifiant', 'string');
         $resolver->setAllowedTypes('paybox_cle', 'string');
 
-        $resolver->setAllowedValues('paybox_version', [
-            static::VERSION_DIRECT,
-            static::VERSION_DIRECT_PLUS,
-        ]);
+        $resolver->setAllowedValues('paybox_version', static::VERSIONS);
     }
 
     /**

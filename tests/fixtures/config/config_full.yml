@@ -1,0 +1,11 @@
+nexy_paybox_direct:
+  client:
+    timeout: 20
+    production: true
+  paybox:
+    version: direct_plus
+    site: 1999888
+    rang: 32
+    identifiant: 107904482
+    cle: 1999888I
+    devise: us_dollar

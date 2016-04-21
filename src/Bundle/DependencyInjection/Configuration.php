@@ -1,0 +1,61 @@
+<?php
+
+namespace Nexy\PayboxDirect\Bundle\DependencyInjection;
+
+use Nexy\PayboxDirect\Paybox;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+
+/**
+ * @author Sullivan Senechal <soullivaneuh@gmail.com>
+ */
+final class Configuration implements ConfigurationInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfigTreeBuilder()
+    {
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root('nexy_paybox_direct');
+
+        $rootNode
+            ->children()
+                ->arrayNode('client')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->integerNode('timeout')->defaultValue(Paybox::DEFAULT_TIMEOUT)->end()
+                        ->booleanNode('production')->defaultValue(Paybox::DEFAULT_PRODUCTION)->end()
+                    ->end()
+                ->end()
+                ->arrayNode('paybox')
+                    ->isRequired()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('version')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                            ->validate()
+                                ->ifNotInArray(array_keys(Paybox::VERSIONS))
+                                ->thenInvalid('Invalid Paybox version')
+                            ->end()
+                        ->end()
+                        ->scalarNode('site')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('rang')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('identifiant')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('cle')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('devise')
+                            ->defaultValue(array_search(Paybox::DEFAULT_DEVISE, Paybox::DEVISES))
+                            ->validate()
+                                ->ifNotInArray(array_keys(Paybox::DEVISES))
+                                ->thenInvalid('Invalid Paybox version')
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $treeBuilder;
+    }
+}
