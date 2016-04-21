@@ -19,7 +19,6 @@ matrix:
   allow_failures:
     - php: nightly
     - php: hhvm
-    - php: hhvm-nightly
 
 sudo: false
 
