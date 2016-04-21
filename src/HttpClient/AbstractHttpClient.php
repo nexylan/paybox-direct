@@ -8,6 +8,8 @@ use Nexy\PayboxDirect\Response\PayboxResponse;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
+ *
+ * @see http://www1.paybox.com/espace-integrateur-documentation/les-solutions-paybox-direct-et-paybox-direct-plus/
  */
 abstract class AbstractHttpClient
 {
