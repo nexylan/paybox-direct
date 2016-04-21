@@ -36,10 +36,6 @@ use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
  */
 final class Paybox
 {
-    const DEFAULT_TIMEOUT = 10;
-    const DEFAULT_PRODUCTION = false;
-    const DEFAULT_DEVISE = self::DEVISE_EURO;
-
     const VERSION_DIRECT = '00103';
     const VERSION_DIRECT_PLUS = '00104';
 
@@ -381,9 +377,9 @@ final class Paybox
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'timeout' => static::DEFAULT_TIMEOUT,
-            'production' => static::DEFAULT_PRODUCTION,
-            'paybox_devise' => static::DEFAULT_DEVISE,
+            'timeout' => 10,
+            'production' => false,
+            'paybox_devise' => static::DEVISE_EURO,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol

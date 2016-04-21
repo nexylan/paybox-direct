@@ -16,9 +16,36 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $payboxOptions = [
-            'timeout' => Paybox::DEFAULT_TIMEOUT,
-            'production' => Paybox::DEFAULT_PRODUCTION,
-            'paybox_devise' => Paybox::DEFAULT_DEVISE,
+            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_site' => '1999888',
+            'paybox_rang' => '32',
+            'paybox_identifiant' => '107904482',
+            'paybox_cle' => '1999888I',
+        ];
+
+        $this->assertContainerBuilderHasParameter('nexy_paybox_direct.options', $payboxOptions);
+
+        $this->assertContainerBuilderHasService('nexy_paybox_direct.sdk', Paybox::class);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('nexy_paybox_direct.sdk', 0, '%nexy_paybox_direct.options%');
+    }
+
+    public function testLoadWithSomeExtraOptions()
+    {
+        $this->load([
+            'client' => [
+                'timeout' => 20,
+                'production' => true,
+            ],
+            'paybox' => [
+                'devise' => 'us_dollar',
+            ],
+        ]);
+
+        $payboxOptions = [
+            'timeout' => 20,
+            'production' => true,
+            'paybox_devise' => Paybox::DEVISE_US_DOLLAR,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rang' => '32',

@@ -41,8 +41,10 @@ final class NexyPayboxDirectExtension extends Extension
         // Paybox version and devise special hack: Get the number.
         $options['paybox_version'] = Paybox::VERSIONS[$config['paybox']['version']];
         unset($config['paybox']['version']);
-        $options['paybox_devise'] = Paybox::DEVISES[$config['paybox']['devise']];
-        unset($config['paybox']['devise']);
+        if (array_key_exists('devise', $config['paybox'])) {
+            $options['paybox_devise'] = Paybox::DEVISES[$config['paybox']['devise']];
+            unset($config['paybox']['devise']);
+        }
 
         // Convert paybox option format
         foreach ($config['paybox'] as $key => $value) {

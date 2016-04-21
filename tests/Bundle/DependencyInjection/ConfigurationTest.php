@@ -5,7 +5,6 @@ namespace Nexy\PayboxDirect\Tests\Bundle\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Nexy\PayboxDirect\Bundle\DependencyInjection\Configuration;
 use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
-use Nexy\PayboxDirect\Paybox;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -16,8 +15,6 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     {
         $expectedConfiguration = [
             'client' => [
-                'timeout' => Paybox::DEFAULT_TIMEOUT,
-                'production' => Paybox::DEFAULT_PRODUCTION,
             ],
             'paybox' => [
                 'version' => 'direct_plus',
@@ -25,7 +22,6 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'rang' => '32',
                 'identifiant' => '107904482',
                 'cle' => '1999888I',
-                'devise' => 'euro',
             ],
         ];
 
