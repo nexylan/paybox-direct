@@ -14,8 +14,8 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     public function testMinimalConfigurationProcess()
     {
         $expectedConfiguration = [
-            'client' => [
-            ],
+            'client' => null,
+            'options' => [],
             'paybox' => [
                 'version' => 'direct_plus',
                 'site' => '1999888',
@@ -35,7 +35,8 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     public function testFullConfigurationProcess()
     {
         $expectedConfiguration = [
-            'client' => [
+            'client' => 'fake',
+            'options' => [
                 'timeout' => 20,
                 'production' => true,
             ],

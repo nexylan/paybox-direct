@@ -39,9 +39,17 @@ abstract class AbstractHttpClient
     private $questionNumber;
 
     /**
+     * Constructor.
+     */
+    final public function __construct()
+    {
+        $this->questionNumber = rand(0, time());
+    }
+
+    /**
      * @param array $options
      */
-    final public function __construct($options)
+    final public function setOptions($options)
     {
         $this->timeout = $options['timeout'];
         $this->baseUrl = true === $options['production'] ? Paybox::API_URL_PRODUCTION : Paybox::API_URL_TEST;
@@ -53,7 +61,6 @@ abstract class AbstractHttpClient
             'CLE' => $options['paybox_cle'],
         ];
         $this->defaultDevise = $options['paybox_devise'];
-        $this->questionNumber = rand(0, time());
     }
 
     /**

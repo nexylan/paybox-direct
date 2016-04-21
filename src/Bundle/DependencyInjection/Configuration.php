@@ -21,7 +21,8 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('client')
+                ->scalarNode('client')->defaultNull()->end()
+                ->arrayNode('options')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->integerNode('timeout')->end()

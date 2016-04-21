@@ -353,7 +353,8 @@ final class Paybox
 
         $this->options = $resolver->resolve($options);
 
-        $this->httpClient = $httpClient ? $httpClient : new GuzzleHttpClient($this->options);
+        $this->httpClient = $httpClient ? $httpClient : new GuzzleHttpClient();
+        $this->httpClient->setOptions($this->options);
         $this->httpClient->init();
     }
 

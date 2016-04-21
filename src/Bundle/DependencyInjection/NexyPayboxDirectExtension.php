@@ -25,6 +25,7 @@ final class NexyPayboxDirectExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('sdk.xml');
+        $loader->load('http_clients.xml');
 
         $this->processClient($config, $container);
     }
@@ -36,7 +37,7 @@ final class NexyPayboxDirectExtension extends Extension
     private function processOptions(array $config, ContainerBuilder $container)
     {
         // Start with client option
-        $options = $config['client'];
+        $options = $config['options'];
 
         // Paybox version and devise special hack: Get the number.
         $options['paybox_version'] = Paybox::VERSIONS[$config['paybox']['version']];
@@ -60,6 +61,11 @@ final class NexyPayboxDirectExtension extends Extension
      */
     private function processClient(array $config, ContainerBuilder $container)
     {
-        // Define http_client_* as private services and set the nexy_paybox_direct.http_client_default one
+        if (null === $config['client']) {
+            return;
+        }
+
+        $httpClientDefinition = $container->findDefinition('nexy_paybox_direct.http_client.'.$config['client']);
+        $container->findDefinition('nexy_paybox_direct.sdk')->addArgument($httpClientDefinition);
     }
 }

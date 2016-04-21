@@ -4,6 +4,7 @@ namespace Nexy\PayboxDirect\Tests\Bundle\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
+use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\Paybox;
 
 /**
@@ -33,7 +34,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
     public function testLoadWithSomeExtraOptions()
     {
         $this->load([
-            'client' => [
+            'options' => [
                 'timeout' => 20,
                 'production' => true,
             ],
@@ -58,6 +59,25 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('nexy_paybox_direct.sdk', Paybox::class);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('nexy_paybox_direct.sdk', 0, '%nexy_paybox_direct.options%');
+    }
+
+    public function testLoadWithCustomHttpClient()
+    {
+        $this->load([
+            'client' => 'guzzle',
+        ]);
+
+        $this->assertAttributeInstanceOf(GuzzleHttpClient::class, 'httpClient', $this->container->get('nexy_paybox_direct.sdk'));
+    }
+
+    /**
+     * @expectedException \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     */
+    public function testLoadWithNotExistentHttpClient()
+    {
+        $this->load([
+            'client' => 'fake',
+        ]);
     }
 
     public function testSdkCall()

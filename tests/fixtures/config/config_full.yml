@@ -1,5 +1,6 @@
 nexy_paybox_direct:
-  client:
+  client: fake
+  options:
     timeout: 20
     production: true
   paybox:
