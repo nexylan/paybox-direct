@@ -33,6 +33,21 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('nexy_paybox_direct.sdk', 0, '%nexy_paybox_direct.options%');
     }
 
+    public function testSdkCall()
+    {
+        $this->load();
+
+        $response = $this->container->get('nexy_paybox_direct.sdk')->authorize([
+            'MONTANT' => 7000,
+            'REFERENCE' => uniqid('ref_'),
+            'PORTEUR' => '1111222233334444',
+            'DATEVAL' => '1216',
+            'CVV' => '123',
+        ]);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
     /**
      * {@inheritdoc}
      */
