@@ -2,8 +2,8 @@
 
 namespace Nexy\PayboxDirect;
 
+use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
-use Nexy\PayboxDirect\HttpClient\HttpClientInterface;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
 use Nexy\PayboxDirect\Response\PayboxResponse;
 use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
@@ -326,7 +326,7 @@ final class Paybox
     ];
 
     /**
-     * @var HttpClientInterface
+     * @var AbstractHttpClient
      */
     private $httpClient;
 
@@ -335,7 +335,7 @@ final class Paybox
      */
     private $options;
 
-    public function __construct(array $options = [], HttpClientInterface $httpClient = null)
+    public function __construct(array $options = [], AbstractHttpClient $httpClient = null)
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
