@@ -13,26 +13,6 @@ use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
  *
  * @see http://www1.paybox.com/espace-integrateur-documentation/les-solutions-paybox-direct-et-paybox-direct-plus/les-operations-de-caisse-direct-plus/
  * @see http://www1.paybox.com/espace-integrateur-documentation/dictionnaire-des-donnees/paybox-direct-et-direct-plus/
- *
- * @method PayboxResponse authorize(array $parameters)
- * @method PayboxResponse debit(array $parameters)
- * @method PayboxResponse authorizeAndCapture(array $parameters)
- * @method PayboxResponse credit(array $parameters)
- * @method PayboxResponse cancel(array $parameters)
- * @method PayboxResponse check(array $parameters)
- * @method PayboxResponse transact(array $parameters)
- * @method PayboxResponse updateAmount(array $parameters)
- * @method PayboxResponse refund(array $parameters)
- * @method PayboxResponse inquiry(array $parameters)
- * @method PayboxResponse authorizeSubscriber(array $parameters)
- * @method PayboxResponse debitSubscriber(array $parameters)
- * @method PayboxResponse authorizeAndCaptureSubscriber(array $parameters)
- * @method PayboxResponse creditSubscriber(array $parameters)
- * @method PayboxResponse cancelSubscriberTransaction(array $parameters)
- * @method PayboxResponse registerSubscriber(array $parameters)
- * @method PayboxResponse updateSubscriber(array $parameters)
- * @method PayboxResponse deleteSubscriber(array $parameters)
- * @method PayboxResponse transactSubscriber(array $parameters)
  */
 final class Paybox
 {
@@ -58,284 +38,6 @@ final class Paybox
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
 
-    private static $operations = [
-        'authorize' => [
-            'code' => '00001',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'debit' => [
-            'code' => '00002',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'authorizeAndCapture' => [
-            'code' => '00003',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'credit' => [
-            'code' => '00004',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'cancel' => [
-            'code' => '00005',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANSL',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'check' => [
-            'code' => '00011',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'transact' => [
-            'code' => '00012',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'updateAmount' => [
-            'code' => '00013',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                ],
-            ],
-        ],
-        'refund' => [
-            'code' => '00014',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                ],
-            ],
-        ],
-        'inquiry' => [
-            'code' => '00017',
-            'parameters' => [
-                'required' => [
-                    'NUMTRANS',
-                ],
-            ],
-        ],
-        'authorizeSubscriber' => [
-            'code' => '00051',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'debitSubscriber' => [
-            'code' => '00052',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'authorizeAndCaptureSubscriber' => [
-            'code' => '00053',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'creditSubscriber' => [
-            'code' => '00054',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'cancelSubscriberTransaction' => [
-            'code' => '00055',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'registerSubscriber' => [
-            'code' => '00056',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'updateSubscriber' => [
-            'code' => '00057',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                ],
-            ],
-        ],
-        'deleteSubscriber' => [
-            'code' => '00058',
-            'parameters' => [
-                'required' => [
-                    'REFABONNE',
-                ],
-            ],
-        ],
-        'transactSubscriber' => [
-            'code' => '00061',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-    ];
-
     /**
      * @var AbstractHttpClient
      */
@@ -358,21 +60,525 @@ final class Paybox
         $this->httpClient->init();
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param string      $DATEVAL
+     * @param int         $MONTANT
+     * @param string      $PORTEUR
+     * @param string      $REFERENCE
+     * @param string|null $AUTORISATION
+     * @param int|null    $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function authorize($DATEVAL, $MONTANT, $PORTEUR, $REFERENCE, $AUTORISATION = null, $DEVISE = null)
     {
-        if (!isset(static::$operations[$name])) {
-            throw new \BadMethodCallException('Undefined method '.$name);
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $AUTORISATION) {
+            $parameters['AUTORISATION'] = $AUTORISATION;
         }
-        if (count($arguments) != 1 || !is_array($arguments[0])) {
-            throw new \InvalidArgumentException('Expected argument 1 of '.__CLASS__.'::'.$name.' to be an array');
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
         }
 
-        $operation = static::$operations[$name];
-        $resolver = new OptionsResolver();
-        $this->configurePayboxCallParameters($operation, $resolver);
-        $parameters = $resolver->resolve($arguments[0]);
+        return $this->httpClient->call(1, $parameters);
+    }
 
-        return $this->httpClient->call($operation['code'], $parameters);
+    /**
+     * @param int      $MONTANT
+     * @param int      $NUMAPPEL
+     * @param int      $NUMTRANS
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function debit($MONTANT, $NUMAPPEL, $NUMTRANS, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'MONTANT' => $MONTANT,
+            'NUMAPPEL' => $NUMAPPEL,
+            'NUMTRANS' => $NUMTRANS,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(2, $parameters);
+    }
+
+    /**
+     * @param string      $DATEVAL
+     * @param int         $MONTANT
+     * @param string      $PORTEUR
+     * @param string      $REFERENCE
+     * @param string|null $AUTORISATION
+     * @param int|null    $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function authorizeAndCapture($DATEVAL, $MONTANT, $PORTEUR, $REFERENCE, $AUTORISATION = null, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $AUTORISATION) {
+            $parameters['AUTORISATION'] = $AUTORISATION;
+        }
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(3, $parameters);
+    }
+
+    /**
+     * @param string   $DATEVAL
+     * @param int      $MONTANT
+     * @param string   $PORTEUR
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function credit($DATEVAL, $MONTANT, $PORTEUR, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(4, $parameters);
+    }
+
+    /**
+     * @param int      $MONTANT
+     * @param int      $NUMAPPEL
+     * @param int      $NUMTRANSL
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function cancel($MONTANT, $NUMAPPEL, $NUMTRANSL, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'MONTANT' => $MONTANT,
+            'NUMAPPEL' => $NUMAPPEL,
+            'NUMTRANSL' => $NUMTRANSL,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(5, $parameters);
+    }
+
+    /**
+     * @param int      $MONTANT
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function check($MONTANT, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'MONTANT' => $MONTANT,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(11, $parameters);
+    }
+
+    /**
+     * @param string   $DATEVAL
+     * @param int      $MONTANT
+     * @param string   $PORTEUR
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function transact($DATEVAL, $MONTANT, $PORTEUR, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(12, $parameters);
+    }
+
+    /**
+     * @param int         $MONTANT
+     * @param int         $NUMAPPEL
+     * @param int         $NUMTRANS
+     * @param string|null $AUTORISATION
+     * @param int|null    $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function updateAmount($MONTANT, $NUMAPPEL, $NUMTRANS, $AUTORISATION = null, $DEVISE = null)
+    {
+        $parameters = [
+            'MONTANT' => $MONTANT,
+            'NUMAPPEL' => $NUMAPPEL,
+            'NUMTRANS' => $NUMTRANS,
+        ];
+
+        if (null !== $AUTORISATION) {
+            $parameters['AUTORISATION'] = $AUTORISATION;
+        }
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(13, $parameters);
+    }
+
+    /**
+     * @param int      $MONTANT
+     * @param int      $NUMAPPEL
+     * @param int      $NUMTRANS
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function refund($MONTANT, $NUMAPPEL, $NUMTRANS, $DEVISE = null)
+    {
+        $parameters = [
+            'MONTANT' => $MONTANT,
+            'NUMAPPEL' => $NUMAPPEL,
+            'NUMTRANS' => $NUMTRANS,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(14, $parameters);
+    }
+
+    /**
+     * @param int $NUMTRANS
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function inquiry($NUMTRANS)
+    {
+        $parameters = [
+            'NUMTRANS' => $NUMTRANS,
+        ];
+
+        return $this->httpClient->call(17, $parameters);
+    }
+
+    /**
+     * @param string      $DATEVAL
+     * @param string      $PORTEUR
+     * @param string      $REFABONNE
+     * @param string      $REFERENCE
+     * @param string|null $AUTORISATION
+     * @param string|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function authorizeSubscriber($DATEVAL, $PORTEUR, $REFABONNE, $REFERENCE, $AUTORISATION = null, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $AUTORISATION) {
+            $parameters['AUTORISATION'] = $AUTORISATION;
+        }
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(51, $parameters);
+    }
+
+    /**
+     * @param int      $MONTANT
+     * @param int      $NUMAPPEL
+     * @param int      $NUMTRANS
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function debitSubscriber($MONTANT, $NUMAPPEL, $NUMTRANS, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'MONTANT' => $MONTANT,
+            'NUMAPPEL' => $NUMAPPEL,
+            'NUMTRANS' => $NUMTRANS,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(52, $parameters);
+    }
+
+    /**
+     * @param string   $DATEVAL
+     * @param int      $MONTANT
+     * @param string   $PORTEUR
+     * @param string   $REFABONNE
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function authorizeAndCaptureSubscriber($DATEVAL, $MONTANT, $PORTEUR, $REFABONNE, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(53, $parameters);
+    }
+
+    /**
+     * @param string   $DATEVAL
+     * @param int      $MONTANT
+     * @param string   $PORTEUR
+     * @param string   $REFABONNE
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function creditSubscriber($DATEVAL, $MONTANT, $PORTEUR, $REFABONNE, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(54, $parameters);
+    }
+
+    /**
+     * @param string   $DATEVAL
+     * @param int      $MONTANT
+     * @param int      $NUMAPPEL
+     * @param int      $NUMTRANS
+     * @param string   $PORTEUR
+     * @param string   $REFABONNE
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function cancelSubscriberTransaction($DATEVAL, $MONTANT, $NUMAPPEL, $NUMTRANS, $PORTEUR, $REFABONNE, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'NUMAPPEL' => $NUMAPPEL,
+            'NUMTRANS' => $NUMTRANS,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(55, $parameters);
+    }
+
+    /**
+     * @param string      $DATEVAL
+     * @param int         $MONTANT
+     * @param string      $PORTEUR
+     * @param string      $REFABONNE
+     * @param string      $REFERENCE
+     * @param string|null $AUTORISATION
+     * @param int|null    $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function registerSubscriber($DATEVAL, $MONTANT, $PORTEUR, $REFABONNE, $REFERENCE, $AUTORISATION = null, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $AUTORISATION) {
+            $parameters['AUTORISATION'] = $AUTORISATION;
+        }
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(56, $parameters);
+    }
+
+    /**
+     * @param string      $DATEVAL
+     * @param int         $MONTANT
+     * @param string      $PORTEUR
+     * @param string      $REFABONNE
+     * @param string|null $AUTORISATION
+     * @param int|null    $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function updateSubscriber($DATEVAL, $MONTANT, $PORTEUR, $REFABONNE, $AUTORISATION = null, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+        ];
+
+        if (null !== $AUTORISATION) {
+            $parameters['AUTORISATION'] = $AUTORISATION;
+        }
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(57, $parameters);
+    }
+
+    /**
+     * @param string $REFABONNE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function deleteSubscriber($REFABONNE)
+    {
+        $parameters = [
+            'REFABONNE' => $REFABONNE,
+        ];
+
+        return $this->httpClient->call(58, $parameters);
+    }
+
+    /**
+     * @param string   $DATEVAL
+     * @param int      $MONTANT
+     * @param string   $PORTEUR
+     * @param string   $REFABONNE
+     * @param string   $REFERENCE
+     * @param int|null $DEVISE
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function transactSubscriber($DATEVAL, $MONTANT, $PORTEUR, $REFABONNE, $REFERENCE, $DEVISE = null)
+    {
+        $parameters = [
+            'DATEVAL' => $DATEVAL,
+            'MONTANT' => $MONTANT,
+            'PORTEUR' => $PORTEUR,
+            'REFABONNE' => $REFABONNE,
+            'REFERENCE' => $REFERENCE,
+        ];
+
+        if (null !== $DEVISE) {
+            $parameters['DEVISE'] = $DEVISE;
+        }
+
+        return $this->httpClient->call(61, $parameters);
     }
 
     private function configureOptions(OptionsResolver $resolver)
