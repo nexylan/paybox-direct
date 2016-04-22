@@ -24,10 +24,14 @@ abstract class AbstractTransactionRequest extends AbstractRequest
 
     /**
      * @param int $currency
+     *
+     * @return $this
      */
     final public function setCurrency($currency = null)
     {
         $this->currency = $currency;
+
+        return $this;
     }
 
     public function getParameters()

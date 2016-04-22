@@ -21,18 +21,26 @@ abstract class AbstractRequest implements RequestInterface
 
     /**
      * @param int $activity
+     *
+     * @return $this
      */
     public function setActivity($activity)
     {
         $this->activity = $activity;
+
+        return $this;
     }
 
     /**
      * @param \DateTime|null $date
+     *
+     * @return $this
      */
     final public function setDate(\DateTime $date = null)
     {
         $this->date = $date;
+
+        return $this;
     }
 
     /**

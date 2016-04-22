@@ -38,10 +38,14 @@ final class AuthorizeRequest extends AbstractReferencedTransactionRequest
 
     /**
      * @param string|null $cardVerificationValue
+     *
+     * @return $this
      */
     public function setCardVerificationValue($cardVerificationValue = null)
     {
         $this->cardVerificationValue = $cardVerificationValue;
+
+        return $this;
     }
 
     /**

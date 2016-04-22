@@ -24,8 +24,10 @@ final class AuthorizeRequestTest extends AbstractRequestTest
     public function testCallCustomCurrency()
     {
         $request = new AuthorizeRequest($this->generateReference(), 7000, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
-        $request->setCurrency(Currency::US_DOLLAR);
+        $request
+            ->setCardVerificationValue('123')
+            ->setCurrency(Currency::US_DOLLAR)
+        ;
 
         $response = $this->paybox->request($request);
 
@@ -35,8 +37,10 @@ final class AuthorizeRequestTest extends AbstractRequestTest
     public function testCallWithCustomActivity()
     {
         $request = new AuthorizeRequest($this->generateReference(), 7000, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
-        $request->setActivity(Activity::PHONE_REQUEST);
+        $request
+            ->setCardVerificationValue('123')
+            ->setActivity(Activity::PHONE_REQUEST)
+        ;
 
         $response = $this->paybox->request($request);
 
