@@ -387,7 +387,7 @@ final class Paybox
             'paybox_site',
             'paybox_rank',
             'paybox_identifier',
-            'paybox_cle',
+            'paybox_key',
         ]);
 
         $resolver->setAllowedTypes('timeout', 'int');
@@ -397,7 +397,7 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_site', 'string');
         $resolver->setAllowedTypes('paybox_rank', 'string');
         $resolver->setAllowedTypes('paybox_identifier', 'string');
-        $resolver->setAllowedTypes('paybox_cle', 'string');
+        $resolver->setAllowedTypes('paybox_key', 'string');
 
         $resolver->setAllowedValues('paybox_version', static::VERSIONS);
     }

@@ -44,7 +44,7 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('site')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('rank')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('identifier')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('cle')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('key')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('currency')
                             ->validate()
                                 ->ifNotInArray(array_keys(Paybox::CURRENCIES))

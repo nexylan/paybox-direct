@@ -21,7 +21,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_key' => '1999888I',
         ];
 
         $this->assertContainerBuilderHasParameter('nexy_paybox_direct.options', $payboxOptions);
@@ -51,7 +51,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_key' => '1999888I',
         ];
 
         $this->assertContainerBuilderHasParameter('nexy_paybox_direct.options', $payboxOptions);
@@ -106,7 +106,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
                 'site' => '1999888',
                 'rank' => '32',
                 'identifier' => '107904482',
-                'cle' => '1999888I',
+                'key' => '1999888I',
             ],
         ];
     }

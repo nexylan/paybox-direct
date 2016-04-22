@@ -21,7 +21,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'site' => '1999888',
                 'rank' => '32',
                 'identifier' => '107904482',
-                'cle' => '1999888I',
+                'key' => '1999888I',
             ],
         ];
 
@@ -45,7 +45,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'site' => '1999888',
                 'rank' => '32',
                 'identifier' => '107904482',
-                'cle' => '1999888I',
+                'key' => '1999888I',
                 'currency' => 'us_dollar',
             ],
         ];
