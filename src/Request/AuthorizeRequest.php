@@ -59,7 +59,7 @@ class AuthorizeRequest implements RequestInterface
      */
     public function getRequestId()
     {
-        return 1;
+        return RequestInterface::AUTHORIZE;
     }
 
     /**
