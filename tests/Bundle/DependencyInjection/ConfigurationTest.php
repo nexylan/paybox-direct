@@ -19,9 +19,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'paybox' => [
                 'version' => 'direct_plus',
                 'site' => '1999888',
-                'rang' => '32',
-                'identifiant' => '107904482',
-                'cle' => '1999888I',
+                'rank' => '32',
+                'identifier' => '107904482',
+                'key' => '1999888I',
             ],
         ];
 
@@ -43,10 +43,10 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'paybox' => [
                 'version' => 'direct_plus',
                 'site' => '1999888',
-                'rang' => '32',
-                'identifiant' => '107904482',
-                'cle' => '1999888I',
-                'devise' => 'us_dollar',
+                'rank' => '32',
+                'identifier' => '107904482',
+                'key' => '1999888I',
+                'default_currency' => 'us_dollar',
             ],
         ];
 

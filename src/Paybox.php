@@ -44,14 +44,14 @@ final class Paybox
         'direct_plus' => self::VERSION_DIRECT_PLUS,
     ];
 
-    const DEVISE_EURO = 978;
-    const DEVISE_US_DOLLAR = 840;
-    const DEVISE_CFA = 952;
+    const CURRENCY_EURO = 978;
+    const CURRENCY_US_DOLLAR = 840;
+    const CURRENCY_CFA = 952;
 
-    const DEVISES = [
-        'euro' => self::DEVISE_EURO,
-        'us_dollar' => self::DEVISE_US_DOLLAR,
-        'cfa' => self::DEVISE_CFA,
+    const CURRENCIES = [
+        'euro' => self::CURRENCY_EURO,
+        'us_dollar' => self::CURRENCY_US_DOLLAR,
+        'cfa' => self::CURRENCY_CFA,
     ];
 
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
@@ -380,24 +380,24 @@ final class Paybox
         $resolver->setDefaults([
             'timeout' => 10,
             'production' => false,
-            'paybox_devise' => static::DEVISE_EURO,
+            'paybox_default_currency' => static::CURRENCY_EURO,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
             'paybox_site',
-            'paybox_rang',
-            'paybox_identifiant',
-            'paybox_cle',
+            'paybox_rank',
+            'paybox_identifier',
+            'paybox_key',
         ]);
 
         $resolver->setAllowedTypes('timeout', 'int');
         $resolver->setAllowedTypes('production', 'bool');
         $resolver->setAllowedTypes('paybox_version', 'string');
-        $resolver->setAllowedTypes('paybox_devise', 'int');
+        $resolver->setAllowedTypes('paybox_default_currency', 'int');
         $resolver->setAllowedTypes('paybox_site', 'string');
-        $resolver->setAllowedTypes('paybox_rang', 'string');
-        $resolver->setAllowedTypes('paybox_identifiant', 'string');
-        $resolver->setAllowedTypes('paybox_cle', 'string');
+        $resolver->setAllowedTypes('paybox_rank', 'string');
+        $resolver->setAllowedTypes('paybox_identifier', 'string');
+        $resolver->setAllowedTypes('paybox_key', 'string');
 
         $resolver->setAllowedValues('paybox_version', static::VERSIONS);
     }
@@ -471,7 +471,7 @@ final class Paybox
                 PayboxVariableActivity::WEB_REQUEST,
                 PayboxVariableActivity::RECURRING_PAYMENT,
             ])
-            ->setAllowedValuesIfDefined('DEVISE', [null, static::DEVISE_EURO, static::DEVISE_US_DOLLAR, static::DEVISE_CFA])
+            ->setAllowedValuesIfDefined('DEVISE', [null, static::CURRENCY_EURO, static::CURRENCY_US_DOLLAR, static::CURRENCY_CFA])
             ->setAllowedValuesIfDefined('PAYS', '')
             ->setAllowedValuesIfDefined('SHA-1', '')
             ->setAllowedValuesIfDefined('TYPECARTE', '')

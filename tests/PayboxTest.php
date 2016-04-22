@@ -14,20 +14,20 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $client = new Paybox([
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
-            'paybox_identifiant' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_rank' => '32',
+            'paybox_identifier' => '107904482',
+            'paybox_key' => '1999888I',
         ]);
 
         $this->assertAttributeSame([
             'timeout' => 10,
             'production' => false,
-            'paybox_devise' => 978,
+            'paybox_default_currency' => 978,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
-            'paybox_identifiant' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_rank' => '32',
+            'paybox_identifier' => '107904482',
+            'paybox_key' => '1999888I',
         ], 'options', $client);
     }
 
@@ -38,20 +38,20 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'production' => true,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
-            'paybox_identifiant' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_rank' => '32',
+            'paybox_identifier' => '107904482',
+            'paybox_key' => '1999888I',
         ]);
 
         $this->assertAttributeSame([
             'timeout' => 5,
             'production' => true,
-            'paybox_devise' => 978,
+            'paybox_default_currency' => 978,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
-            'paybox_identifiant' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_rank' => '32',
+            'paybox_identifier' => '107904482',
+            'paybox_key' => '1999888I',
         ], 'options', $client);
     }
 
@@ -65,9 +65,9 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $requiredOptionsData = [
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
-            'paybox_identifiant' => '107904482',
-            'paybox_cle' => '1999888I',
+            'paybox_rank' => '32',
+            'paybox_identifier' => '107904482',
+            'paybox_key' => '1999888I',
         ];
 
         unset($requiredOptionsData[$option]);
@@ -80,9 +80,9 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         return [
             ['paybox_version'],
             ['paybox_site'],
-            ['paybox_rang'],
-            ['paybox_identifiant'],
-            ['paybox_cle'],
+            ['paybox_rank'],
+            ['paybox_identifier'],
+            ['paybox_key'],
         ];
     }
 }
