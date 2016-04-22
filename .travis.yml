@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.5
   - 5.6
   - 7.0
   - nightly
@@ -14,11 +13,20 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 5.5
+    - php: 5.6
       env: COMPOSER_FLAGS="--prefer-lowest"
+    - php: 5.6
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.1.*@dev
   allow_failures:
     - php: nightly
     - php: hhvm
+    - env: SYMFONY_VERSION=3.1.*@dev
 
 sudo: false
 
