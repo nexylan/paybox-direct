@@ -18,14 +18,14 @@ final class PayboxResponseTest extends \PHPUnit_Framework_TestCase
     {
         $this->response = new PayboxResponse([
             'CODEREPONSE' => 1337,
-            'COMMENTAIRE' => 'French keywords is bad, and you should feel bad!',
+            'COMMENTAIRE' => 'French keywords are bad, and you should feel bad!',
         ]);
     }
 
     public function testValidGetter()
     {
         $this->assertSame(1337, $this->response->getCode());
-        $this->assertSame('French keywords is bad, and you should feel bad!', $this->response->getComment());
+        $this->assertSame('French keywords are bad, and you should feel bad!', $this->response->getComment());
     }
 
     public function testNotExistsProperty()
