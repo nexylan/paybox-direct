@@ -20,7 +20,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'version' => 'direct_plus',
                 'site' => '1999888',
                 'rank' => '32',
-                'identifiant' => '107904482',
+                'identifier' => '107904482',
                 'cle' => '1999888I',
             ],
         ];
@@ -44,7 +44,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'version' => 'direct_plus',
                 'site' => '1999888',
                 'rank' => '32',
-                'identifiant' => '107904482',
+                'identifier' => '107904482',
                 'cle' => '1999888I',
                 'devise' => 'us_dollar',
             ],

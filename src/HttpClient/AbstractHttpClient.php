@@ -57,7 +57,7 @@ abstract class AbstractHttpClient
             'VERSION' => $options['paybox_version'],
             'SITE' => $options['paybox_site'],
             'RANG' => $options['paybox_rank'],
-            'IDENTIFIANT' => $options['paybox_identifiant'],
+            'IDENTIFIANT' => $options['paybox_identifier'],
             'CLE' => $options['paybox_cle'],
         ];
         $this->defaultDevise = $options['paybox_devise'];

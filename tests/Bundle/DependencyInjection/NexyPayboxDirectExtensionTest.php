@@ -20,7 +20,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
-            'paybox_identifiant' => '107904482',
+            'paybox_identifier' => '107904482',
             'paybox_cle' => '1999888I',
         ];
 
@@ -50,7 +50,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
-            'paybox_identifiant' => '107904482',
+            'paybox_identifier' => '107904482',
             'paybox_cle' => '1999888I',
         ];
 
@@ -105,7 +105,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
                 'version' => 'direct_plus',
                 'site' => '1999888',
                 'rank' => '32',
-                'identifiant' => '107904482',
+                'identifier' => '107904482',
                 'cle' => '1999888I',
             ],
         ];

@@ -22,7 +22,7 @@ class PayboxDirectPlusTest extends \PHPUnit_Framework_TestCase
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
-            'paybox_identifiant' => '107904482',
+            'paybox_identifier' => '107904482',
             'paybox_cle' => '1999888I',
         ]);
     }

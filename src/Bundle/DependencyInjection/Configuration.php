@@ -43,7 +43,7 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('site')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('rank')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('identifiant')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('identifier')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('cle')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('devise')
                             ->validate()
