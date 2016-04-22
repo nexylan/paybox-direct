@@ -39,14 +39,14 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
                 'production' => true,
             ],
             'paybox' => [
-                'devise' => 'us_dollar',
+                'currency' => 'us_dollar',
             ],
         ]);
 
         $payboxOptions = [
             'timeout' => 20,
             'production' => true,
-            'paybox_devise' => Paybox::CURRENCY_US_DOLLAR,
+            'paybox_currency' => Paybox::CURRENCY_US_DOLLAR,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',

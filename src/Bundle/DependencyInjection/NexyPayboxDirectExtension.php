@@ -39,12 +39,12 @@ final class NexyPayboxDirectExtension extends Extension
         // Start with client option
         $options = $config['options'];
 
-        // Paybox version and devise special hack: Get the number.
+        // Paybox version and currency special hack: Get the number.
         $options['paybox_version'] = Paybox::VERSIONS[$config['paybox']['version']];
         unset($config['paybox']['version']);
-        if (array_key_exists('devise', $config['paybox'])) {
-            $options['paybox_devise'] = Paybox::CURRENCIES[$config['paybox']['devise']];
-            unset($config['paybox']['devise']);
+        if (array_key_exists('currency', $config['paybox'])) {
+            $options['paybox_currency'] = Paybox::CURRENCIES[$config['paybox']['currency']];
+            unset($config['paybox']['currency']);
         }
 
         // Convert paybox option format

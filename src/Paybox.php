@@ -380,7 +380,7 @@ final class Paybox
         $resolver->setDefaults([
             'timeout' => 10,
             'production' => false,
-            'paybox_devise' => static::CURRENCY_EURO,
+            'paybox_currency' => static::CURRENCY_EURO,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
@@ -393,7 +393,7 @@ final class Paybox
         $resolver->setAllowedTypes('timeout', 'int');
         $resolver->setAllowedTypes('production', 'bool');
         $resolver->setAllowedTypes('paybox_version', 'string');
-        $resolver->setAllowedTypes('paybox_devise', 'int');
+        $resolver->setAllowedTypes('paybox_currency', 'int');
         $resolver->setAllowedTypes('paybox_site', 'string');
         $resolver->setAllowedTypes('paybox_rank', 'string');
         $resolver->setAllowedTypes('paybox_identifier', 'string');

@@ -60,7 +60,7 @@ abstract class AbstractHttpClient
             'IDENTIFIANT' => $options['paybox_identifier'],
             'CLE' => $options['paybox_cle'],
         ];
-        $this->defaultDevise = $options['paybox_devise'];
+        $this->defaultDevise = $options['paybox_currency'];
     }
 
     /**
@@ -79,7 +79,7 @@ abstract class AbstractHttpClient
         $bodyParams['TYPE'] = $type;
         $bodyParams['NUMQUESTION'] = $this->questionNumber;
         $bodyParams['DATEQ'] = null !== $parameters['DATEQ'] ? $parameters['DATEQ'] : date('dmYHis');
-        // Restore devise from parameters if given
+        // Restore currency from parameters if given
         if (array_key_exists('DEVISE', $parameters)) {
             $bodyParams['DEVISE'] = null !== $parameters['DEVISE'] ? $parameters['DEVISE'] : $this->defaultDevise;
         }
