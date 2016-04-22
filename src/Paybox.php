@@ -5,6 +5,7 @@ namespace Nexy\PayboxDirect;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
+use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\PayboxResponse;
 use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
 
@@ -58,6 +59,7 @@ final class Paybox
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
 
+    // TODO: Remove it
     private static $operations = [
         'authorize' => [
             'code' => '00001',
@@ -358,23 +360,26 @@ final class Paybox
         $this->httpClient->init();
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param RequestInterface $request
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function request(RequestInterface $request)
     {
-        if (!isset(static::$operations[$name])) {
-            throw new \BadMethodCallException('Undefined method '.$name);
-        }
-        if (count($arguments) != 1 || !is_array($arguments[0])) {
-            throw new \InvalidArgumentException('Expected argument 1 of '.__CLASS__.'::'.$name.' to be an array');
-        }
-
-        $operation = static::$operations[$name];
-        $resolver = new OptionsResolver();
-        $this->configurePayboxCallParameters($operation, $resolver);
-        $parameters = $resolver->resolve($arguments[0]);
-
-        return $this->httpClient->call($operation['code'], $parameters);
+        return $this->httpClient->call(
+            $request->getRequestId(),
+            $this->resolveRequestParameters($request->getParameters())
+        );
     }
 
+    /**
+     * Paybox base options validation.
+     *
+     * @param OptionsResolver $resolver
+     */
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -403,41 +408,20 @@ final class Paybox
     }
 
     /**
-     * @param string          $operation
-     * @param OptionsResolver $resolver
+     * Paybox request paramaters validation.
+     *
+     * @param array $parameters
+     *
+     * @return array
      */
-    private function configurePayboxCallParameters($operation, OptionsResolver $resolver)
+    private function resolveRequestParameters(array $parameters)
     {
-        $parametersDefinition = $operation['parameters'];
+        $resolver = new OptionsResolver();
 
-        // Available for each Paybox Action
-        $defaults = [
-            'ACTIVITE' => PayboxVariableActivity::WEB_REQUEST,
-            'DATEQ' => null,
-        ];
-        $defined = [
-            'CVV',
-            'DATENAISS',
-            'DIFFERE',
-            'ERRORCODETEST',
-            'ID3D',
-            'PAYS',
-            'PRIV_CODETRAITEMENT',
-            'SHA-1',
-            'TYPECARTE',
-        ];
-
-        if (isset($parametersDefinition['defaults'])) {
-            $defaults = array_merge($defaults, $parametersDefinition['defaults']);
+        // Defines parameters keys to enable them.
+        foreach (array_keys($parameters) as $key) {
+            $resolver->setDefined($key);
         }
-        $resolver->setDefaults($defaults);
-        if (isset($parametersDefinition['required'])) {
-            $resolver->setRequired($parametersDefinition['required']);
-        }
-        if (isset($parametersDefinition['defined'])) {
-            $defined = array_merge($defined, $parametersDefinition['defined']);
-        }
-        $resolver->setDefined($defined);
 
         $resolver
             ->setAllowedTypesIfDefined('ACQUEREUR', 'string')
@@ -476,5 +460,7 @@ final class Paybox
             ->setAllowedValuesIfDefined('SHA-1', '')
             ->setAllowedValuesIfDefined('TYPECARTE', '')
         ;
+
+        return $resolver->resolve($parameters);
     }
 }

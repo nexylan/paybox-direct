@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-class AuthorizeRequest implements RequestInterface
+final class AuthorizeRequest implements RequestInterface
 {
     /**
      * @var string

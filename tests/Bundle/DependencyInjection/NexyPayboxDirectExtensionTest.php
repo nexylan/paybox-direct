@@ -6,6 +6,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\Paybox;
+use Nexy\PayboxDirect\Request\AuthorizeRequest;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -84,13 +85,10 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $response = $this->container->get('nexy_paybox_direct.sdk')->authorize([
-            'MONTANT' => 7000,
-            'REFERENCE' => uniqid('ref_'),
-            'PORTEUR' => '1111222233334444',
-            'DATEVAL' => '1216',
-            'CVV' => '123',
-        ]);
+        $request = new AuthorizeRequest(uniqid('ref_'), 7000, '1111222233334444', '1216');
+        $request->setCardVerificationValue('123');
+
+        $response = $this->container->get('nexy_paybox_direct.sdk')->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
