@@ -3,6 +3,7 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
+use Nexy\PayboxDirect\Variable\Activity;
 use Nexy\PayboxDirect\Variable\Currency;
 
 /**
@@ -30,7 +31,18 @@ final class AuthorizeRequestTest extends AbstractRequestTest
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
-//
+
+    public function testCallWithCustomActivity()
+    {
+        $request = new AuthorizeRequest($this->generateReference(), 7000, '1111222233334444', '1216');
+        $request->setCardVerificationValue('123');
+        $request->setActivity(Activity::PHONE_REQUEST);
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
 //    public function testCallGetCountry()
 //    {
 //        $response = $this->paybox->authorize([
