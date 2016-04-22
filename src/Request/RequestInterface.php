@@ -17,15 +17,16 @@ interface RequestInterface
     const UPDATE_AMOUNT = 13;
     const REFUND = 14;
     const INQUIRY = 17;
-    const AUTHORIZE_SUBSCRIBER = 51;
-    const DEBIT_SUBSCRIBER = 52;
-    const AUTHORIZE_AND_CAPTURE_SUBSCRIBER = 53;
-    const CREDIT_SUBSCRIBER = 54;
-    const CANCEL_SUBSCRIBER_TRANSACTION = 55;
-    const REGISTER_SUBSCRIBER = 56;
-    const UPDATE_SUBSCRIBER = 57;
-    const DELETE_SUBSCRIBER = 58;
-    const TRANSACT_SUBSCRIBER = 61;
+
+    const SUBSCRIBER_AUTHORIZE = 51;
+    const SUBSCRIBER_DEBIT = 52;
+    const SUBSCRIBER_AUTHORIZE_AND_CAPTURE = 53;
+    const SUBSCRIBER_CREDIT = 54;
+    const SUBSCRIBER_CANCEL_TRANSACTION = 55;
+    const SUBSCRIBER_REGISTER = 56;
+    const SUBSCRIBER_UPDATE = 57;
+    const SUBSCRIBER_DELETE = 58;
+    const SUBSCRIBER_TRANSACT = 61;
 
     /**
      * Returns the request ID.
