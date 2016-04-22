@@ -11,7 +11,7 @@ final class AuthorizeRequestTest extends AbstractRequestTest
 {
     public function testCall()
     {
-        $request = new AuthorizeRequest(uniqid('ref_'), 7000, '1111222233334444', '1216');
+        $request = new AuthorizeRequest($this->generateReference(), 7000, '1111222233334444', '1216');
         $request->setCardVerificationValue('123');
 
         $response = $this->paybox->request($request);

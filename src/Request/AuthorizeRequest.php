@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class AuthorizeRequest implements RequestInterface
+final class AuthorizeRequest extends AbstractRequest
 {
     /**
      * @var string
@@ -16,6 +16,11 @@ final class AuthorizeRequest implements RequestInterface
      * @var int
      */
     private $amount;
+
+    /**
+     * @var int
+     */
+    private $currency = null;
 
     /**
      * @var string
@@ -47,6 +52,14 @@ final class AuthorizeRequest implements RequestInterface
     }
 
     /**
+     * @param int $currency
+     */
+    public function setCurrency($currency = null)
+    {
+        $this->currency = $currency;
+    }
+
+    /**
      * @param string|null $cardVerificationValue
      */
     public function setCardVerificationValue($cardVerificationValue = null)
@@ -70,6 +83,7 @@ final class AuthorizeRequest implements RequestInterface
         $parameters = [
             'REFERENCE' => $this->reference,
             'MONTANT' => $this->amount,
+            'DEVISE' => $this->currency,
             'PORTEUR' => $this->cardSerial,
             'DATEVAL' => $this->cardValidity,
         ];
@@ -78,6 +92,6 @@ final class AuthorizeRequest implements RequestInterface
             $parameters['CVV'] = $this->cardVerificationValue;
         }
 
-        return $parameters;
+        return array_merge(parent::getParameters(), $parameters);
     }
 }

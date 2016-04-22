@@ -32,4 +32,15 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     {
         return Paybox::VERSION_DIRECT_PLUS;
     }
+
+    /**
+     * @return string
+     */
+    final protected function generateReference()
+    {
+        $requestClassTab = explode('\\', get_class($this));
+        $requestName = strtolower(str_replace('RequestTest', '', end($requestClassTab)));
+
+        return uniqid('nexy_paybox_direct_'.$requestName.'_');
+    }
 }
