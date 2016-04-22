@@ -19,7 +19,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         $payboxOptions = [
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ];
@@ -49,7 +49,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'paybox_devise' => Paybox::CURRENCY_US_DOLLAR,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ];
@@ -104,7 +104,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'paybox' => [
                 'version' => 'direct_plus',
                 'site' => '1999888',
-                'rang' => '32',
+                'rank' => '32',
                 'identifiant' => '107904482',
                 'cle' => '1999888I',
             ],

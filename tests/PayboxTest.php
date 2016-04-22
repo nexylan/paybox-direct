@@ -14,7 +14,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $client = new Paybox([
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ]);
@@ -25,7 +25,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'paybox_devise' => 978,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ], 'options', $client);
@@ -38,7 +38,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'production' => true,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ]);
@@ -49,7 +49,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'paybox_devise' => 978,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ], 'options', $client);
@@ -65,7 +65,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $requiredOptionsData = [
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
-            'paybox_rang' => '32',
+            'paybox_rank' => '32',
             'paybox_identifiant' => '107904482',
             'paybox_cle' => '1999888I',
         ];
@@ -80,7 +80,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         return [
             ['paybox_version'],
             ['paybox_site'],
-            ['paybox_rang'],
+            ['paybox_rank'],
             ['paybox_identifiant'],
             ['paybox_cle'],
         ];

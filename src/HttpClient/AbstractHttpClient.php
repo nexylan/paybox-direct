@@ -56,7 +56,7 @@ abstract class AbstractHttpClient
         $this->baseParameters = [
             'VERSION' => $options['paybox_version'],
             'SITE' => $options['paybox_site'],
-            'RANG' => $options['paybox_rang'],
+            'RANG' => $options['paybox_rank'],
             'IDENTIFIANT' => $options['paybox_identifiant'],
             'CLE' => $options['paybox_cle'],
         ];

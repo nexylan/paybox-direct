@@ -385,7 +385,7 @@ final class Paybox
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
             'paybox_site',
-            'paybox_rang',
+            'paybox_rank',
             'paybox_identifiant',
             'paybox_cle',
         ]);
@@ -395,7 +395,7 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_version', 'string');
         $resolver->setAllowedTypes('paybox_devise', 'int');
         $resolver->setAllowedTypes('paybox_site', 'string');
-        $resolver->setAllowedTypes('paybox_rang', 'string');
+        $resolver->setAllowedTypes('paybox_rank', 'string');
         $resolver->setAllowedTypes('paybox_identifiant', 'string');
         $resolver->setAllowedTypes('paybox_cle', 'string');
 
