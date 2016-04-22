@@ -2,7 +2,7 @@
 
 namespace Nexy\PayboxDirect\Request;
 
-use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
+use Nexy\PayboxDirect\Variable\Activity;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -12,7 +12,7 @@ abstract class AbstractRequest implements RequestInterface
     /**
      * @var int
      */
-    private $activity = PayboxVariableActivity::WEB_REQUEST;
+    private $activity = Activity::WEB_REQUEST;
 
     /**
      * @var \DateTime

@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Variable;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class PayboxVariableStatus
+final class Status
 {
     const REFUNDED = 'Remboursé';
     const CANCELED = 'Annulé';

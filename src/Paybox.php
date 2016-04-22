@@ -7,8 +7,8 @@ use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\PayboxResponse;
-use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
-use Nexy\PayboxDirect\Variable\PayboxVariableCurrency;
+use Nexy\PayboxDirect\Variable\Activity;
+use Nexy\PayboxDirect\Variable\Currency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -376,7 +376,7 @@ final class Paybox
         $resolver->setDefaults([
             'timeout' => 10,
             'production' => false,
-            'paybox_default_currency' => PayboxVariableCurrency::EURO,
+            'paybox_default_currency' => Currency::EURO,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
@@ -439,18 +439,18 @@ final class Paybox
         $resolver
             ->setAllowedValuesIfDefined('ACQUEREUR', ['PAYPAL', 'EMS', 'ATOSBE', 'BCMC', 'PSC', 'FINAREF', 'BUYSTER', '34ONEY'])
             ->setAllowedValuesIfDefined('ACTIVITE', [
-                PayboxVariableActivity::NOT_SPECIFIED,
-                PayboxVariableActivity::PHONE_REQUEST,
-                PayboxVariableActivity::MAIL_REQUEST,
-                PayboxVariableActivity::MINITEL_REQUEST,
-                PayboxVariableActivity::WEB_REQUEST,
-                PayboxVariableActivity::RECURRING_PAYMENT,
+                Activity::NOT_SPECIFIED,
+                Activity::PHONE_REQUEST,
+                Activity::MAIL_REQUEST,
+                Activity::MINITEL_REQUEST,
+                Activity::WEB_REQUEST,
+                Activity::RECURRING_PAYMENT,
             ])
             ->setAllowedValuesIfDefined('DEVISE', [
                 null,
-                PayboxVariableCurrency::EURO,
-                PayboxVariableCurrency::US_DOLLAR,
-                PayboxVariableCurrency::CFA,
+                Currency::EURO,
+                Currency::US_DOLLAR,
+                Currency::CFA,
             ])
             ->setAllowedValuesIfDefined('PAYS', '')
             ->setAllowedValuesIfDefined('SHA-1', '')

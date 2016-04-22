@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Variable;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class PayboxVariableActivity
+final class Activity
 {
     const NOT_SPECIFIED = 20;
     const PHONE_REQUEST = 21;

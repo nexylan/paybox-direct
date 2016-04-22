@@ -3,7 +3,7 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
-use Nexy\PayboxDirect\Variable\PayboxVariableCurrency;
+use Nexy\PayboxDirect\Variable\Currency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -24,7 +24,7 @@ final class AuthorizeRequestTest extends AbstractRequestTest
     {
         $request = new AuthorizeRequest($this->generateReference(), 7000, '1111222233334444', '1216');
         $request->setCardVerificationValue('123');
-        $request->setCurrency(PayboxVariableCurrency::US_DOLLAR);
+        $request->setCurrency(Currency::US_DOLLAR);
 
         $response = $this->paybox->request($request);
 

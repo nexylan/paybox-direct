@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Variable;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class PayboxVariableCurrency
+final class Currency
 {
     const EURO = 978;
     const US_DOLLAR = 840;
