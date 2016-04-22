@@ -57,20 +57,19 @@ final class AuthorizeRequestTest extends AbstractRequestTest
 //        $this->assertSame(0, $response->getCode(), $response->getComment());
 //        $this->assertSame('???', $response->getCountry());
 //    }
-//
-//    /**
-//     * @expectedException \Nexy\PayboxDirect\Exception\PayboxException
-//     * @expectedExceptionCode 4
-//     * @expectedExceptionMessage PAYBOX : Numéro de porteur invalide
-//     */
-//    public function testCallInvalidPorteur()
-//    {
-//        $this->paybox->authorize([
-//            'MONTANT' => 7000,
-//            'REFERENCE' => uniqid('ref_'),
-//            'PORTEUR' => '9999999999999999',
-//            'DATEVAL' => '1216',
-//            'CVV' => '123',
-//        ]);
-//    }
+
+    /**
+     * @expectedException \Nexy\PayboxDirect\Exception\PayboxException
+     * @expectedExceptionCode 4
+     * @expectedExceptionMessage PAYBOX : Numéro de porteur invalide
+     */
+    public function testCallInvalidPorteur()
+    {
+        $request = new AuthorizeRequest($this->generateReference(), 7000, '999999999999', '1216');
+        $request->setCardVerificationValue('123');
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
 }
