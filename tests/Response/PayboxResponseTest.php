@@ -33,12 +33,11 @@ final class PayboxResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->response->getDiscount());
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Undefined method getFake
-     */
     public function testNotExistsGetter()
     {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Undefined method getFake');
+
         $this->response->getFake();
     }
 }
