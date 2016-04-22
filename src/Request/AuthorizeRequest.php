@@ -30,7 +30,7 @@ class AuthorizeRequest implements RequestInterface
     /**
      * @var string
      */
-    private $cardVerificationValue;
+    private $cardVerificationValue = null;
 
     /**
      * @param string $reference
@@ -47,9 +47,9 @@ class AuthorizeRequest implements RequestInterface
     }
 
     /**
-     * @param string $cardVerificationValue
+     * @param string|null $cardVerificationValue
      */
-    public function setCardVerificationValue($cardVerificationValue)
+    public function setCardVerificationValue($cardVerificationValue = null)
     {
         $this->cardVerificationValue = $cardVerificationValue;
     }
@@ -63,12 +63,21 @@ class AuthorizeRequest implements RequestInterface
     }
 
     /**
-     * Returns Paybox formatted parameters array.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getParameters()
     {
-        return [];
+        $parameters = [
+            'REFERENCE' => $this->reference,
+            'MONTANT' => $this->amount,
+            'PORTEUR' => $this->cardSerial,
+            'DATEVAL' => $this->cardValidity,
+        ];
+
+        if (null !== $this->cardVerificationValue) {
+            $parameters['CVV'] = $this->cardVerificationValue;
+        }
+
+        return $parameters;
     }
 }
