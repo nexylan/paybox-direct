@@ -18,7 +18,7 @@
     "require-dev": {
         "symfony/http-kernel": "^2.7 || ^3.0",
         "symfony/dependency-injection": "^2.7 || ^3.0",
-        "phpunit/phpunit": "^4.8 || ^5.3",
+        "phpunit/phpunit": "^5.3",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "sllh/php-cs-fixer-styleci-bridge": "^2.0"
     },
