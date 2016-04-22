@@ -12,11 +12,11 @@ class DebitRequestTest extends AbstractRequestTest
 {
     public function testCall()
     {
-        $request = new AuthorizeRequest($this->generateReference(), 7000, '1111222233334444', '1216');
+        $request = new AuthorizeRequest($this->generateReference(), 20000, '1111222233334444', '1216');
         $request->setCardVerificationValue('123');
         $response = $this->paybox->request($request);
 
-        $request = new DebitRequest($this->generateReference(), 7000, $response->getTransactionNumber(), $response->getCallNumber());
+        $request = new DebitRequest($this->generateReference(), 20000, $response->getTransactionNumber(), $response->getCallNumber());
         $response = $this->paybox->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
