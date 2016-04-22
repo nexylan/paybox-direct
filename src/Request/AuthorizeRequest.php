@@ -5,23 +5,8 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class AuthorizeRequest extends AbstractRequest
+final class AuthorizeRequest extends AbstractReferencedTransactionRequest
 {
-    /**
-     * @var string
-     */
-    private $reference;
-
-    /**
-     * @var int
-     */
-    private $amount;
-
-    /**
-     * @var int
-     */
-    private $currency = null;
-
     /**
      * @var string
      */
@@ -45,18 +30,10 @@ final class AuthorizeRequest extends AbstractRequest
      */
     public function __construct($reference, $amount, $cardSerial, $cardValidity)
     {
-        $this->reference = $reference;
-        $this->amount = $amount;
+        parent::__construct($reference, $amount);
+
         $this->cardSerial = $cardSerial;
         $this->cardValidity = $cardValidity;
-    }
-
-    /**
-     * @param int $currency
-     */
-    public function setCurrency($currency = null)
-    {
-        $this->currency = $currency;
     }
 
     /**
@@ -81,9 +58,6 @@ final class AuthorizeRequest extends AbstractRequest
     public function getParameters()
     {
         $parameters = [
-            'REFERENCE' => $this->reference,
-            'MONTANT' => $this->amount,
-            'DEVISE' => $this->currency,
             'PORTEUR' => $this->cardSerial,
             'DATEVAL' => $this->cardValidity,
         ];
