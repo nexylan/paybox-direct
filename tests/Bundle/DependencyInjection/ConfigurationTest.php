@@ -46,7 +46,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'rank' => '32',
                 'identifier' => '107904482',
                 'key' => '1999888I',
-                'currency' => 'us_dollar',
+                'default_currency' => 'us_dollar',
             ],
         ];
 

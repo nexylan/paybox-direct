@@ -45,7 +45,7 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('rank')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('identifier')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('key')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('currency')
+                        ->scalarNode('default_currency')
                             ->validate()
                                 ->ifNotInArray(array_keys(Paybox::CURRENCIES))
                                 ->thenInvalid('Invalid Paybox version')
