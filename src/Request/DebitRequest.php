@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Nexy\PayboxDirect\Request;
 
 /**
@@ -52,6 +51,4 @@ final class DebitRequest extends AbstractReferencedTransactionRequest
 
         return array_merge(parent::getParameters(), $parameters);
     }
-
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Request\AuthorizeRequest;

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nexy\PayboxDirect\Request;
-
 
 abstract class AbstractTransactionRequest extends AbstractRequest
 {
@@ -41,6 +39,4 @@ abstract class AbstractTransactionRequest extends AbstractRequest
 
         return array_merge(parent::getParameters(), $parameters);
     }
-
-
 }
