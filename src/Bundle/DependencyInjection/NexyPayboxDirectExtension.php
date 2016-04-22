@@ -65,7 +65,8 @@ final class NexyPayboxDirectExtension extends Extension
             return;
         }
 
-        $httpClientDefinition = $container->findDefinition('nexy_paybox_direct.http_client.'.$config['client']);
-        $container->findDefinition('nexy_paybox_direct.sdk')->addArgument($httpClientDefinition);
+        $container->findDefinition('nexy_paybox_direct.sdk')->addArgument(
+            $container->findDefinition('nexy_paybox_direct.http_client.'.$config['client'])
+        );
     }
 }
