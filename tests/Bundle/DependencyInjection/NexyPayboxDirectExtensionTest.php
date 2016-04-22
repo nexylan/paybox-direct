@@ -7,6 +7,7 @@ use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
+use Nexy\PayboxDirect\Variable\PayboxVariableCurrency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -47,7 +48,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         $payboxOptions = [
             'timeout' => 20,
             'production' => true,
-            'paybox_default_currency' => Paybox::CURRENCY_US_DOLLAR,
+            'paybox_default_currency' => PayboxVariableCurrency::US_DOLLAR,
             'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',

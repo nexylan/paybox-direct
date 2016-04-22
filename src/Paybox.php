@@ -8,6 +8,7 @@ use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\PayboxResponse;
 use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
+use Nexy\PayboxDirect\Variable\PayboxVariableCurrency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -43,16 +44,6 @@ final class Paybox
     const VERSIONS = [
         'direct' => self::VERSION_DIRECT,
         'direct_plus' => self::VERSION_DIRECT_PLUS,
-    ];
-
-    const CURRENCY_EURO = 978;
-    const CURRENCY_US_DOLLAR = 840;
-    const CURRENCY_CFA = 952;
-
-    const CURRENCIES = [
-        'euro' => self::CURRENCY_EURO,
-        'us_dollar' => self::CURRENCY_US_DOLLAR,
-        'cfa' => self::CURRENCY_CFA,
     ];
 
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
@@ -385,7 +376,7 @@ final class Paybox
         $resolver->setDefaults([
             'timeout' => 10,
             'production' => false,
-            'paybox_default_currency' => static::CURRENCY_EURO,
+            'paybox_default_currency' => PayboxVariableCurrency::EURO,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
@@ -455,7 +446,12 @@ final class Paybox
                 PayboxVariableActivity::WEB_REQUEST,
                 PayboxVariableActivity::RECURRING_PAYMENT,
             ])
-            ->setAllowedValuesIfDefined('DEVISE', [null, static::CURRENCY_EURO, static::CURRENCY_US_DOLLAR, static::CURRENCY_CFA])
+            ->setAllowedValuesIfDefined('DEVISE', [
+                null,
+                PayboxVariableCurrency::EURO,
+                PayboxVariableCurrency::US_DOLLAR,
+                PayboxVariableCurrency::CFA,
+            ])
             ->setAllowedValuesIfDefined('PAYS', '')
             ->setAllowedValuesIfDefined('SHA-1', '')
             ->setAllowedValuesIfDefined('TYPECARTE', '')
