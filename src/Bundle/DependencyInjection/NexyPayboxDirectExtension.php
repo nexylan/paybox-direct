@@ -43,7 +43,7 @@ final class NexyPayboxDirectExtension extends Extension
         $options['paybox_version'] = Paybox::VERSIONS[$config['paybox']['version']];
         unset($config['paybox']['version']);
         if (array_key_exists('devise', $config['paybox'])) {
-            $options['paybox_devise'] = Paybox::DEVISES[$config['paybox']['devise']];
+            $options['paybox_devise'] = Paybox::CURRENCIES[$config['paybox']['devise']];
             unset($config['paybox']['devise']);
         }
 

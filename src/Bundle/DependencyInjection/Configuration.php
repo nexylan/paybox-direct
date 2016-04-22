@@ -47,7 +47,7 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('cle')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('devise')
                             ->validate()
-                                ->ifNotInArray(array_keys(Paybox::DEVISES))
+                                ->ifNotInArray(array_keys(Paybox::CURRENCIES))
                                 ->thenInvalid('Invalid Paybox version')
                             ->end()
                         ->end()
