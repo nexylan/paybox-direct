@@ -58,7 +58,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $response = $this->paybox->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
-        $this->assertSame('???', $response->getCountry());
+        $this->assertSame($this->getExpectedCountry(), $response->getCountry());
     }
 
     public function testCallNotShowCountry()
@@ -78,6 +78,14 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     protected function getPayboxVersion()
     {
         return Paybox::VERSION_DIRECT_PLUS;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getExpectedCountry()
+    {
+        return '???';
     }
 
     /**

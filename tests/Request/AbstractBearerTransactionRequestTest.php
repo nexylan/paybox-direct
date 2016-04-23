@@ -2,6 +2,7 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
+use Nexy\PayboxDirect\Exception\PayboxException;
 use Nexy\PayboxDirect\Request\AbstractBearerTransactionRequest;
 
 /**
@@ -9,6 +10,35 @@ use Nexy\PayboxDirect\Request\AbstractBearerTransactionRequest;
  */
 abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionRequestTest
 {
+    public function testCallDefault()
+    {
+        $requestClass = $this->getRequestClass();
+        $request = new $requestClass(
+            $this->generateReference(),
+            42000,
+            $this->getCreditCardSerial(),
+            $this->getCreditCardValidDate()
+        );
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
+    public function testCallInvalidBearer()
+    {
+        $this->expectException(PayboxException::class);
+        $this->expectExceptionCode($this->getInvalidBearerCode());
+        $this->expectExceptionMessage('PAYBOX : '.$this->getInvalidBearerMessage());
+
+        $requestClass = $this->getRequestClass();
+        $request = new $requestClass($this->generateReference(), 42100, '9999999999999999', '1216');
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
     public function testCallWithCVV()
     {
         /** @var AbstractBearerTransactionRequest $request */
@@ -20,5 +50,69 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
         $response = $this->paybox->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createBaseRequest()
+    {
+        $requestClass = $this->getRequestClass();
+        $request = new $requestClass(
+            $this->generateReference(),
+            42042,
+            $this->getCreditCardSerial(),
+            $this->getCreditCardValidDate()
+        );
+
+        return $request;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedCountry()
+    {
+        return 'USA';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCreditCardSerial()
+    {
+        return '4012001037141112';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCreditCardValidDate()
+    {
+        return '1216';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getInvalidBearerMessage()
+    {
+        return 'Numéro de porteur invalide';
+    }
+
+    /**
+     * @return int
+     */
+    protected function getInvalidBearerCode()
+    {
+        return 4;
+    }
+
+    private function getRequestClass()
+    {
+        $testClassTab = explode('\\', get_class($this));
+        $className = str_replace('Test', '', end($testClassTab));
+
+        return 'Nexy\\PayboxDirect\\Request\\'.$className;
     }
 }
