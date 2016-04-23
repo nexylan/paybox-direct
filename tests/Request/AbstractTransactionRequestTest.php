@@ -22,4 +22,28 @@ abstract class AbstractTransactionRequestTest extends AbstractRequestTest
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedCountry()
+    {
+        return 'USA';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCreditCardSerial()
+    {
+        return '4012001037141112';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCreditCardValidDate()
+    {
+        return '1216';
+    }
 }

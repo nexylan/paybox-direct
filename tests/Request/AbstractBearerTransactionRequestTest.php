@@ -69,30 +69,6 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function getExpectedCountry()
-    {
-        return 'USA';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCreditCardSerial()
-    {
-        return '4012001037141112';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCreditCardValidDate()
-    {
-        return '1216';
-    }
-
-    /**
      * @return string
      */
     protected function getInvalidBearerMessage()

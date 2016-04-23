@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nexy\PayboxDirect\Request;
-
 
 trait CallNumberTrait
 {
