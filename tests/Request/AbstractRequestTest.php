@@ -4,6 +4,7 @@ namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
+use Nexy\PayboxDirect\Variable\Activity;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -24,6 +25,18 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
             'paybox_identifier' => '107904482',
             'paybox_key' => '1999888I',
         ]);
+    }
+
+    public function testCallWithCustomActivity()
+    {
+        $request = $this->createBaseRequest();
+        $request
+            ->setActivity(Activity::PHONE_REQUEST)
+        ;
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
     }
 
     public function testCallCustomDate()

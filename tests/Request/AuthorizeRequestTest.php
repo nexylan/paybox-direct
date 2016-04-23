@@ -19,18 +19,6 @@ final class AuthorizeRequestTest extends AbstractBearerTransactionRequestTest
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
 
-    public function testCallWithCustomActivity()
-    {
-        $request = new AuthorizeRequest($this->generateReference(), 11000, '1111222233334444', '1216');
-        $request
-            ->setActivity(Activity::PHONE_REQUEST)
-        ;
-
-        $response = $this->paybox->request($request);
-
-        $this->assertSame(0, $response->getCode(), $response->getComment());
-    }
-
     /**
      * @expectedException \Nexy\PayboxDirect\Exception\PayboxException
      * @expectedExceptionCode 4
@@ -38,7 +26,7 @@ final class AuthorizeRequestTest extends AbstractBearerTransactionRequestTest
      */
     public function testCallInvalidPorteur()
     {
-        $request = new AuthorizeRequest($this->generateReference(), 12000, '999999999999', '1216');
+        $request = new AuthorizeRequest($this->generateReference(), 11000, '999999999999', '1216');
 
         $response = $this->paybox->request($request);
 
