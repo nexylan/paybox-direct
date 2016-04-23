@@ -3,6 +3,7 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Paybox;
+use Nexy\PayboxDirect\Request\AbstractRequest;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -25,6 +26,17 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+    public function testCallCustomDate()
+    {
+        $request = $this->createBaseRequest();
+        // Have to find a way to test the date result on response.
+        $request->setDate(new \DateTime('now - 10 days'));
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
     /**
      * @return string
      */
@@ -43,4 +55,11 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
 
         return uniqid('npd_'.$requestName.'_');
     }
+
+    /**
+     * The goal of this methods is to have a base working object of each request to perform common test on it.
+     *
+     * @return AbstractRequest
+     */
+    abstract protected function createBaseRequest();
 }

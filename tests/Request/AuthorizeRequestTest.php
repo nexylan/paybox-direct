@@ -69,11 +69,22 @@ final class AuthorizeRequestTest extends AbstractRequestTest
      */
     public function testCallInvalidPorteur()
     {
-        $request = new AuthorizeRequest($this->generateReference(), 7000, '999999999999', '1216');
+        $request = new AuthorizeRequest($this->generateReference(), 13000, '999999999999', '1216');
         $request->setCardVerificationValue('123');
 
         $response = $this->paybox->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createBaseRequest()
+    {
+        $request = new AuthorizeRequest($this->generateReference(), 10042, '1111222233334444', '1216');
+        $request->setCardVerificationValue('123');
+
+        return $request;
     }
 }

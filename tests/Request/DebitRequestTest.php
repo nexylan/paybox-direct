@@ -21,4 +21,18 @@ class DebitRequestTest extends AbstractRequestTest
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createBaseRequest()
+    {
+        $request = new AuthorizeRequest($this->generateReference(), 20042, '1111222233334444', '1216');
+        $request->setCardVerificationValue('123');
+        $response = $this->paybox->request($request);
+
+        $request = new DebitRequest($this->generateReference(), 20042, $response->getTransactionNumber(), $response->getCallNumber());
+
+        return $request;
+    }
 }
