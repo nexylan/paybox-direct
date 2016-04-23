@@ -100,6 +100,17 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return string
+     */
+    final protected function getRequestClass()
+    {
+        $testClassTab = explode('\\', get_class($this));
+        $className = str_replace('Test', '', end($testClassTab));
+
+        return 'Nexy\\PayboxDirect\\Request\\'.$className;
+    }
+
+    /**
      * The goal of this methods is to have a base working object of each request to perform common test on it.
      *
      * @return AbstractRequest

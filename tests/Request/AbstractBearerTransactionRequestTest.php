@@ -15,7 +15,7 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
         $requestClass = $this->getRequestClass();
         $request = new $requestClass(
             $this->generateReference(),
-            42000,
+            40000,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
         );
@@ -32,7 +32,7 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
         $this->expectExceptionMessage('PAYBOX : '.$this->getInvalidBearerMessage());
 
         $requestClass = $this->getRequestClass();
-        $request = new $requestClass($this->generateReference(), 42100, '9999999999999999', '1216');
+        $request = new $requestClass($this->generateReference(), 40100, '9999999999999999', '1216');
 
         $response = $this->paybox->request($request);
 
@@ -55,12 +55,12 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
     /**
      * {@inheritdoc}
      */
-    protected function createBaseRequest()
+    final protected function createBaseRequest()
     {
         $requestClass = $this->getRequestClass();
         $request = new $requestClass(
             $this->generateReference(),
-            42042,
+            40042,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
         );
@@ -82,13 +82,5 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
     protected function getInvalidBearerCode()
     {
         return 4;
-    }
-
-    private function getRequestClass()
-    {
-        $testClassTab = explode('\\', get_class($this));
-        $className = str_replace('Test', '', end($testClassTab));
-
-        return 'Nexy\\PayboxDirect\\Request\\'.$className;
     }
 }
