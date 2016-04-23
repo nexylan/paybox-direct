@@ -8,7 +8,7 @@ use Nexy\PayboxDirect\Request\DebitRequest;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-class DebitRequestTest extends AbstractRequestTest
+class DebitRequestTest extends AbstractTransactionRequestTest
 {
     public function testCall()
     {
