@@ -2,9 +2,9 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
+use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
-use Nexy\PayboxDirect\Variable\Activity;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

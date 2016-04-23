@@ -2,7 +2,7 @@
 
 namespace Nexy\PayboxDirect\Request;
 
-use Nexy\PayboxDirect\Variable\Activity;
+use Nexy\PayboxDirect\Enum\Activity;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

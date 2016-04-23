@@ -2,13 +2,13 @@
 
 namespace Nexy\PayboxDirect;
 
+use Nexy\PayboxDirect\Enum\Activity;
+use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\PayboxResponse;
-use Nexy\PayboxDirect\Variable\Activity;
-use Nexy\PayboxDirect\Variable\Currency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

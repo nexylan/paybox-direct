@@ -4,10 +4,10 @@ namespace Nexy\PayboxDirect\Tests\Bundle\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
+use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
-use Nexy\PayboxDirect\Variable\Currency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

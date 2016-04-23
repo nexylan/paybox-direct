@@ -2,8 +2,8 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
+use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Request\AbstractTransactionRequest;
-use Nexy\PayboxDirect\Variable\Currency;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexy\PayboxDirect\Variable;
+namespace Nexy\PayboxDirect\Enum;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
