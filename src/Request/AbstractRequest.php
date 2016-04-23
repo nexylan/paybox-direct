@@ -70,6 +70,13 @@ abstract class AbstractRequest implements RequestInterface
             $parameters['PAYS'] = '';
         }
 
+        if (method_exists($this, 'getTransactionNumber')) {
+            $parameters['NUMTRANS'] = $this->getTransactionNumber();
+        }
+        if (method_exists($this, 'getCallNumber')) {
+            $parameters['NUMAPPEL'] = $this->getCallNumber();
+        }
+
         return $parameters;
     }
 }
