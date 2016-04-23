@@ -10,7 +10,7 @@ final class DebitRequest extends AbstractNumberedReferencedTransactionRequest
     /**
      * {@inheritdoc}
      */
-    public function getRequestId()
+    public function getRequestType()
     {
         return RequestInterface::DEBIT;
     }

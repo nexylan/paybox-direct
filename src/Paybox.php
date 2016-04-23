@@ -361,7 +361,7 @@ final class Paybox
     public function request(RequestInterface $request)
     {
         return $this->httpClient->call(
-            $request->getRequestId(),
+            $request->getRequestType(),
             $this->resolveRequestParameters($request->getParameters())
         );
     }

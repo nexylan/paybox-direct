@@ -10,7 +10,7 @@ class CreditRequest extends AbstractBearerTransactionRequest
     /**
      * {@inheritdoc}
      */
-    public function getRequestId()
+    public function getRequestType()
     {
         return RequestInterface::CREDIT;
     }

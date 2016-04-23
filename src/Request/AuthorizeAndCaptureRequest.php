@@ -10,7 +10,7 @@ final class AuthorizeAndCaptureRequest extends AbstractBearerTransactionRequest
     /**
      * {@inheritdoc}
      */
-    public function getRequestId()
+    public function getRequestType()
     {
         return RequestInterface::AUTHORIZE_AND_CAPTURE;
     }

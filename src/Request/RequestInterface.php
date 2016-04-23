@@ -29,13 +29,13 @@ interface RequestInterface
     const SUBSCRIBER_TRANSACT = 61;
 
     /**
-     * Returns the request ID.
+     * Returns the request type.
      *
      * Corresponds to the TYPE parameters of PayBox.
      *
      * @return int
      */
-    public function getRequestId();
+    public function getRequestType();
 
     /**
      * Returns Paybox formatted parameters array.
