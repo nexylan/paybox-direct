@@ -44,6 +44,6 @@ abstract class AbstractTransactionRequestTest extends AbstractRequestTest
      */
     protected function getCreditCardValidDate()
     {
-        return '1216';
+        return '12'.(date('y') + 2);
     }
 }
