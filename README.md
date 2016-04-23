@@ -34,7 +34,7 @@ This version of the project requires:
 | 4  | X | X | X | X | X |   |   |   |   |
 | 5  | X | X | X |   |   |   | X | X |   |
 | 11 | X | X | X |   |   |   |   |   |   |
-| ~~12~~ | X | X | X | X | X |   |   |   |   |
+| ~~12~~ | ~~X~~ | ~~X~~ | ~~X~~ | ~~X~~ | ~~X~~ |   |   |   |   |
 | 13 | X | X |   |   |   | X | X | X |   |
 | 14 | X | X |   |   |   |   | X | X |   |
 | 17 |   |   |   |   |   |   |   | X |   |
