@@ -16,7 +16,12 @@ abstract class AbstractNumberedReferencedTransactionRequestTest extends Abstract
 
         /** @var AbstractNumberedReferencedTransactionRequest $requestClass */
         $requestClass = $this->getRequestClass();
-        $request = new $requestClass($this->generateReference(), 41000, $response->getTransactionNumber(), $response->getCallNumber());
+        $request = new $requestClass(
+            $this->generateReference(),
+            41000,
+            $response->getTransactionNumber(),
+            $response->getCallNumber()
+        );
         $response = $this->paybox->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
@@ -31,7 +36,12 @@ abstract class AbstractNumberedReferencedTransactionRequestTest extends Abstract
 
         /** @var AbstractNumberedReferencedTransactionRequest $requestClass */
         $requestClass = $this->getRequestClass();
-        $request = new $requestClass($this->generateReference(), 41042, $response->getTransactionNumber(), $response->getCallNumber());
+        $request = new $requestClass(
+            $this->generateReference(),
+            41042,
+            $response->getTransactionNumber(),
+            $response->getCallNumber()
+        );
 
         return $request;
     }
