@@ -39,7 +39,6 @@ final class AuthorizeRequestTest extends AbstractBearerTransactionRequestTest
     public function testCallInvalidPorteur()
     {
         $request = new AuthorizeRequest($this->generateReference(), 12000, '999999999999', '1216');
-//        $request->setCardVerificationValue('123');
 
         $response = $this->paybox->request($request);
 
