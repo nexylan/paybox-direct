@@ -6,7 +6,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class UpdateAmountRequest extends AbstractNumberedReferencedTransactionRequest
+final class UpdateAmountRequest extends AbstractNumberedTransactionRequest
 {
     /**
      * {@inheritdoc}

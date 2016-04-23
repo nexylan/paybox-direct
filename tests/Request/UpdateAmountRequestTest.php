@@ -7,7 +7,7 @@ use Nexy\PayboxDirect\Request\AuthorizeRequest;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class UpdateAmountRequestTest extends AbstractNumberedReferencedTransactionRequestTest
+final class UpdateAmountRequestTest extends AbstractNumberedTransactionRequestTest
 {
     /**
      * {@inheritdoc}
