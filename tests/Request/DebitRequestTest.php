@@ -13,7 +13,6 @@ class DebitRequestTest extends AbstractTransactionRequestTest
     public function testCall()
     {
         $request = new AuthorizeRequest($this->generateReference(), 20000, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
         $response = $this->paybox->request($request);
 
         $request = new DebitRequest($this->generateReference(), 20000, $response->getTransactionNumber(), $response->getCallNumber());
@@ -28,7 +27,6 @@ class DebitRequestTest extends AbstractTransactionRequestTest
     protected function createBaseRequest()
     {
         $request = new AuthorizeRequest($this->generateReference(), 20042, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
         $response = $this->paybox->request($request);
 
         $request = new DebitRequest($this->generateReference(), 20042, $response->getTransactionNumber(), $response->getCallNumber());

@@ -8,12 +8,11 @@ use Nexy\PayboxDirect\Variable\Activity;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class AuthorizeRequestTest extends AbstractTransactionRequestTest
+final class AuthorizeRequestTest extends AbstractBearerTransactionRequestTest
 {
     public function testCall()
     {
         $request = new AuthorizeRequest($this->generateReference(), 10000, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
 
         $response = $this->paybox->request($request);
 
@@ -24,7 +23,6 @@ final class AuthorizeRequestTest extends AbstractTransactionRequestTest
     {
         $request = new AuthorizeRequest($this->generateReference(), 11000, '1111222233334444', '1216');
         $request
-            ->setCardVerificationValue('123')
             ->setActivity(Activity::PHONE_REQUEST)
         ;
 
@@ -41,7 +39,7 @@ final class AuthorizeRequestTest extends AbstractTransactionRequestTest
     public function testCallInvalidPorteur()
     {
         $request = new AuthorizeRequest($this->generateReference(), 12000, '999999999999', '1216');
-        $request->setCardVerificationValue('123');
+//        $request->setCardVerificationValue('123');
 
         $response = $this->paybox->request($request);
 
@@ -54,7 +52,6 @@ final class AuthorizeRequestTest extends AbstractTransactionRequestTest
     protected function createBaseRequest()
     {
         $request = new AuthorizeRequest($this->generateReference(), 10042, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
 
         return $request;
     }

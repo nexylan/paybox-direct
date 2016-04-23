@@ -2,20 +2,19 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
-use Nexy\PayboxDirect\Request\AbstractTransactionRequest;
-use Nexy\PayboxDirect\Variable\Currency;
+use Nexy\PayboxDirect\Request\AbstractBearerTransactionRequest;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractTransactionRequestTest extends AbstractRequestTest
+abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionRequestTest
 {
-    public function testCallCustomCurrency()
+    public function testCallWithCVV()
     {
-        /** @var AbstractTransactionRequest $request */
+        /** @var AbstractBearerTransactionRequest $request */
         $request = $this->createBaseRequest();
         $request
-            ->setCurrency(Currency::US_DOLLAR)
+            ->setCardVerificationValue('123')
         ;
 
         $response = $this->paybox->request($request);

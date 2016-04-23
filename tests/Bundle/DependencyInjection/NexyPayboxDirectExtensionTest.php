@@ -86,8 +86,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $request = new AuthorizeRequest(uniqid('ref_'), 7000, '1111222233334444', '1216');
-        $request->setCardVerificationValue('123');
+        $request = new AuthorizeRequest(uniqid('npd_extension_'), 1337, '1111222233334444', '1216');
 
         $response = $this->container->get('nexy_paybox_direct.sdk')->request($request);
 
