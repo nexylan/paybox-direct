@@ -23,7 +23,7 @@ final class AuthorizeRequestTest extends AbstractBearerTransactionRequestTest
      * @expectedExceptionCode 4
      * @expectedExceptionMessage PAYBOX : Numéro de porteur invalide
      */
-    public function testCallInvalidPorteur()
+    public function testCallInvalidBearer()
     {
         $request = new AuthorizeRequest($this->generateReference(), 11000, '999999999999', '1216');
 
