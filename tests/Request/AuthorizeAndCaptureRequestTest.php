@@ -11,7 +11,7 @@ final class AuthorizeAndCaptureRequestTest extends AbstractBearerTransactionRequ
 {
     public function testCall()
     {
-        $request = new AuthorizeAndCaptureRequest($this->generateReference(), 10000, '1111222233334444', '1216');
+        $request = new AuthorizeAndCaptureRequest($this->generateReference(), 30000, '1111222233334444', '1216');
 
         $response = $this->paybox->request($request);
 
@@ -25,7 +25,7 @@ final class AuthorizeAndCaptureRequestTest extends AbstractBearerTransactionRequ
      */
     public function testCallInvalidPorteur()
     {
-        $request = new AuthorizeAndCaptureRequest($this->generateReference(), 11000, '999999999999', '1216');
+        $request = new AuthorizeAndCaptureRequest($this->generateReference(), 31000, '999999999999', '1216');
 
         $response = $this->paybox->request($request);
 
@@ -37,7 +37,7 @@ final class AuthorizeAndCaptureRequestTest extends AbstractBearerTransactionRequ
      */
     protected function createBaseRequest()
     {
-        $request = new AuthorizeAndCaptureRequest($this->generateReference(), 10042, '1111222233334444', '1216');
+        $request = new AuthorizeAndCaptureRequest($this->generateReference(), 30042, '1111222233334444', '1216');
 
         return $request;
     }
