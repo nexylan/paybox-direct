@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Nexy\PayboxDirect\Request;
 
 /**

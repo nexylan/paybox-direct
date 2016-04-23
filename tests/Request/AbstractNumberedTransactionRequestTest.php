@@ -2,7 +2,6 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
-use Nexy\PayboxDirect\Request\AbstractNumberedReferencedTransactionRequest;
 use Nexy\PayboxDirect\Request\AbstractNumberedTransactionRequest;
 use Nexy\PayboxDirect\Response\PayboxResponse;
 
