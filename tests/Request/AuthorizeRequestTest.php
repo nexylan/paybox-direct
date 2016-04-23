@@ -3,7 +3,6 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
-use Nexy\PayboxDirect\Variable\Activity;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

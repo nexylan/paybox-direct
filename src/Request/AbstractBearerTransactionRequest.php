@@ -27,8 +27,8 @@ abstract class AbstractBearerTransactionRequest extends AbstractReferencedTransa
     private $cardVerificationValue = null;
 
     /**
-     * @param int $reference
-     * @param int $amount
+     * @param int    $reference
+     * @param int    $amount
      * @param string $bearer
      * @param string $validityDate
      */
