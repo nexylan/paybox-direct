@@ -20,6 +20,11 @@ abstract class AbstractRequest implements RequestInterface
     private $date = null;
 
     /**
+     * @var bool
+     */
+    private $showCountry = false;
+
+    /**
      * @param int $activity
      *
      * @return $this
@@ -44,13 +49,27 @@ abstract class AbstractRequest implements RequestInterface
     }
 
     /**
+     * @param bool $showCountry
+     */
+    public function setShowCountry($showCountry)
+    {
+        $this->showCountry = $showCountry;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getParameters()
     {
-        return [
+        $parameters = [
             'ACTIVITE' => $this->activity,
             'DATEQ' => $this->date instanceof \DateTime ? $this->date->format('dmYHis') : null,
         ];
+
+        if (true === $this->showCountry) {
+            $parameters['PAYS'] = '';
+        }
+
+        return $parameters;
     }
 }

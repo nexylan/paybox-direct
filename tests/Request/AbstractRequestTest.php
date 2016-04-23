@@ -37,6 +37,28 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
 
+    public function testCallShowCountry()
+    {
+        $request = $this->createBaseRequest();
+        $request->setShowCountry(true);
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+        $this->assertSame('???', $response->getCountry());
+    }
+
+    public function testCallNotShowCountry()
+    {
+        // Show country is false by default
+        $request = $this->createBaseRequest();
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+        $this->assertNull($response->getCountry());
+    }
+
     /**
      * @return string
      */
