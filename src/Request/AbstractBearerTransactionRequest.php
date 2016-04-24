@@ -27,14 +27,15 @@ abstract class AbstractBearerTransactionRequest extends AbstractReferencedTransa
     private $cardVerificationValue = null;
 
     /**
-     * @param int    $reference
-     * @param int    $amount
-     * @param string $bearer
-     * @param string $validityDate
+     * @param int         $reference
+     * @param int         $amount
+     * @param string      $bearer
+     * @param string      $validityDate
+     * @param string|null $subscriberRef
      */
-    public function __construct($reference, $amount, $bearer, $validityDate)
+    public function __construct($reference, $amount, $bearer, $validityDate, $subscriberRef = null)
     {
-        parent::__construct($reference, $amount);
+        parent::__construct($reference, $amount, $subscriberRef);
 
         $this->bearer = $bearer;
         $this->validityDate = $validityDate;
