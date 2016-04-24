@@ -12,13 +12,13 @@ abstract class AbstractNumberedReferencedTransactionRequestTest extends Abstract
 {
     public function testCallDefault()
     {
-        $response = $this->getPreviousResponse(41000);
+        $response = $this->getPreviousResponse(42000);
 
         /** @var AbstractNumberedReferencedTransactionRequest $requestClass */
         $requestClass = $this->getRequestClass();
         $request = new $requestClass(
             $this->generateReference(),
-            41000,
+            42000,
             $response->getTransactionNumber(),
             $response->getCallNumber()
         );
@@ -32,13 +32,13 @@ abstract class AbstractNumberedReferencedTransactionRequestTest extends Abstract
      */
     final protected function createBaseRequest()
     {
-        $response = $this->getPreviousResponse(41042);
+        $response = $this->getPreviousResponse(42042);
 
         /** @var AbstractNumberedReferencedTransactionRequest $requestClass */
         $requestClass = $this->getRequestClass();
         $request = new $requestClass(
             $this->generateReference(),
-            41042,
+            42042,
             $response->getTransactionNumber(),
             $response->getCallNumber()
         );

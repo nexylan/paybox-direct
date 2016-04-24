@@ -28,7 +28,7 @@ class SubscriberDeleteRequestTest extends AbstractRequestTest
     protected function createBaseRequest()
     {
         $request = new SubscriberRegisterRequest(
-            uniqid('sub_up_'),
+            $this->generateSubscriberReference(),
             $this->generateReference(),
             58000,
             $this->getCreditCardSerial(),

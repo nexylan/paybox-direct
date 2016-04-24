@@ -63,15 +63,4 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
 
         return $request;
     }
-
-    /**
-     * @return string
-     */
-    final protected function generateSubscriberReference()
-    {
-        $requestClassTab = explode('\\', get_class($this));
-        $requestName = strtolower(str_replace('RequestTest', '', end($requestClassTab)));
-
-        return uniqid('sub_'.$requestName.'_');
-    }
 }

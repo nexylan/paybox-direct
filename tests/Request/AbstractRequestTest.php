@@ -118,6 +118,17 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @return string
      */
+    final protected function generateSubscriberReference()
+    {
+        $requestClassTab = explode('\\', get_class($this));
+        $requestName = strtolower(str_replace('RequestTest', '', end($requestClassTab)));
+
+        return uniqid('sub_'.$requestName.'_');
+    }
+
+    /**
+     * @return string
+     */
     final protected function getRequestClass()
     {
         $testClassTab = explode('\\', get_class($this));

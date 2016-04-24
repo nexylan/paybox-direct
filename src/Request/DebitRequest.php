@@ -12,6 +12,9 @@ final class DebitRequest extends AbstractNumberedReferencedTransactionRequest
      */
     public function getRequestType()
     {
-        return RequestInterface::DEBIT;
+        return null !== $this->getSubscriberRef()
+            ? RequestInterface::SUBSCRIBER_DEBIT
+            : RequestInterface::DEBIT
+        ;
     }
 }

@@ -12,6 +12,9 @@ class CreditRequest extends AbstractReferencedBearerTransactionRequest
      */
     public function getRequestType()
     {
-        return RequestInterface::CREDIT;
+        return null !== $this->getSubscriberRef()
+            ? RequestInterface::SUBSCRIBER_CREDIT
+            : RequestInterface::CREDIT
+        ;
     }
 }

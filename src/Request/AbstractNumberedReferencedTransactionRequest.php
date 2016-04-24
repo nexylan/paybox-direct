@@ -9,9 +9,9 @@ abstract class AbstractNumberedReferencedTransactionRequest extends AbstractRefe
 {
     use TransactionNumberTrait, CallNumberTrait;
 
-    public function __construct($reference, $amount, $transactionNumber, $callNumber)
+    public function __construct($reference, $amount, $transactionNumber, $callNumber, $subscriberRef = null)
     {
-        parent::__construct($reference, $amount);
+        parent::__construct($reference, $amount, $subscriberRef);
 
         $this->transactionNumber = $transactionNumber;
         $this->callNumber = $callNumber;

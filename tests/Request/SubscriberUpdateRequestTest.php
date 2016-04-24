@@ -16,7 +16,7 @@ final class SubscriberUpdateRequestTest extends AbstractTransactionRequestTest
     protected function createBaseRequest()
     {
         $request = new SubscriberRegisterRequest(
-            uniqid('sub_up_'),
+            $this->generateSubscriberReference(),
             $this->generateReference(),
             57000,
             $this->getCreditCardSerial(),
