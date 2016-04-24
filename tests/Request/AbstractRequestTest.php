@@ -109,8 +109,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
      */
     final protected function generateReference()
     {
-        $requestClassTab = explode('\\', get_class($this));
-        $requestName = strtolower(str_replace('RequestTest', '', end($requestClassTab)));
+        $requestName = strtolower(str_replace([__NAMESPACE__.'\\', 'RequestTest'], '', get_class($this)));
 
         return uniqid('npd_'.$requestName.'_');
     }
@@ -120,8 +119,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
      */
     final protected function generateSubscriberReference()
     {
-        $requestClassTab = explode('\\', get_class($this));
-        $requestName = strtolower(str_replace('RequestTest', '', end($requestClassTab)));
+        $requestName = strtolower(str_replace([__NAMESPACE__.'\\', 'RequestTest'], '', get_class($this)));
 
         return uniqid('sub_'.$requestName.'_');
     }
@@ -131,8 +129,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
      */
     final protected function getRequestClass()
     {
-        $testClassTab = explode('\\', get_class($this));
-        $className = str_replace('Test', '', end($testClassTab));
+        $className = str_replace([__NAMESPACE__.'\\', 'Test'], '', get_class($this));
 
         return 'Nexy\\PayboxDirect\\Request\\'.$className;
     }
