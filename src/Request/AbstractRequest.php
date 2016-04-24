@@ -29,7 +29,7 @@ abstract class AbstractRequest implements RequestInterface
      *
      * @return $this
      */
-    public function setActivity($activity)
+    final public function setActivity($activity)
     {
         $this->activity = $activity;
 
@@ -51,7 +51,7 @@ abstract class AbstractRequest implements RequestInterface
     /**
      * @param bool $showCountry
      */
-    public function setShowCountry($showCountry)
+    final public function setShowCountry($showCountry)
     {
         $this->showCountry = $showCountry;
     }
