@@ -10,7 +10,7 @@ use Nexy\PayboxDirect\Request\SubscriberRegisterRequest;
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
 abstract class AbstractNumberedReferencedTransactionRequestWithSubscriberTest
-    extends AbstractNumberedReferencedTransactionRequestTest
+extends AbstractNumberedReferencedTransactionRequestTest
 {
     public function testCallWithSubscriber()
     {
