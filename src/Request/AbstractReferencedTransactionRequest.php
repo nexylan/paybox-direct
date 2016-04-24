@@ -13,12 +13,13 @@ abstract class AbstractReferencedTransactionRequest extends AbstractTransactionR
     private $reference;
 
     /**
-     * @param int $reference
-     * @param int $amount
+     * @param int         $reference
+     * @param int         $amount
+     * @param string|null $subscriberRef
      */
-    public function __construct($reference, $amount)
+    public function __construct($reference, $amount, $subscriberRef = null)
     {
-        parent::__construct($amount);
+        parent::__construct($amount, $subscriberRef);
 
         $this->reference = $reference;
     }

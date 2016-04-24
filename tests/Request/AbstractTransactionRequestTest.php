@@ -30,20 +30,4 @@ abstract class AbstractTransactionRequestTest extends AbstractRequestTest
     {
         return 'USA';
     }
-
-    /**
-     * @return string
-     */
-    protected function getCreditCardSerial()
-    {
-        return '4012001037141112';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCreditCardValidDate()
-    {
-        return '12'.(date('y') + 2);
-    }
 }

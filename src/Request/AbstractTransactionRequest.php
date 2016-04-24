@@ -15,10 +15,13 @@ abstract class AbstractTransactionRequest extends AbstractRequest
     private $currency = null;
 
     /**
-     * @param int $amount
+     * @param int         $amount
+     * @param string|null $subscriberRef
      */
-    public function __construct($amount)
+    public function __construct($amount, $subscriberRef = null)
     {
+        parent::__construct($subscriberRef);
+
         $this->amount = $amount;
     }
 

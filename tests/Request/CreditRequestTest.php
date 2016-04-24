@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Tests\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class CreditRequestTest extends AbstractBearerTransactionRequestTest
+final class CreditRequestTest extends AbstractReferencedBearerTransactionRequestTest
 {
     /**
      * {@inheritdoc}

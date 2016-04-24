@@ -12,6 +12,7 @@ namespace Nexy\PayboxDirect\Response;
  * @method int getQuestionNumber()
  * @method int getTransactionNumber()
  * @method string getCountry()
+ * @method string getBearer()
  * @method string getRank()
  * @method string getSubscriberRef()
  * @method string getDiscount()
@@ -30,6 +31,7 @@ final class PayboxResponse
         'getQuestionNumber' => 'NUMQUESTION:int',
         'getTransactionNumber' => 'NUMTRANS:int',
         'getCountry' => 'PAYS:string',
+        'getBearer' => 'PORTEUR:string',
         'getRank' => 'RANG:string',
         'getSubscriberRef' => 'REFABONNE:string',
         'getDiscount' => 'REMISE:string',

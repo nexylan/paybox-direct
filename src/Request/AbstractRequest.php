@@ -25,6 +25,19 @@ abstract class AbstractRequest implements RequestInterface
     private $showCountry = false;
 
     /**
+     * @var string|null
+     */
+    private $subscriberRef = null;
+
+    /**
+     * @param null|string $subscriberRef
+     */
+    public function __construct($subscriberRef = null)
+    {
+        $this->subscriberRef = $subscriberRef;
+    }
+
+    /**
      * @param int $activity
      *
      * @return $this
@@ -57,6 +70,14 @@ abstract class AbstractRequest implements RequestInterface
     }
 
     /**
+     * @return null|string
+     */
+    final protected function getSubscriberRef()
+    {
+        return $this->subscriberRef;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getParameters()
@@ -75,6 +96,11 @@ abstract class AbstractRequest implements RequestInterface
         }
         if (method_exists($this, 'getCallNumber')) {
             $parameters['NUMAPPEL'] = $this->getCallNumber();
+        }
+
+        // Direct Plus requests special case.
+        if (null !== $this->getSubscriberRef()) {
+            $parameters['REFABONNE'] = $this->getSubscriberRef();
         }
 
         return $parameters;

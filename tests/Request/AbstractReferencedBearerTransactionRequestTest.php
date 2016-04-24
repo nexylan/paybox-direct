@@ -3,12 +3,13 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Exception\PayboxException;
-use Nexy\PayboxDirect\Request\AbstractBearerTransactionRequest;
+use Nexy\PayboxDirect\Request\AbstractReferencedBearerTransactionRequest;
+use Nexy\PayboxDirect\Request\SubscriberRegisterRequest;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionRequestTest
+abstract class AbstractReferencedBearerTransactionRequestTest extends AbstractTransactionRequestTest
 {
     public function testCallDefault()
     {
@@ -39,9 +40,37 @@ abstract class AbstractBearerTransactionRequestTest extends AbstractTransactionR
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
 
+    public function testCallWithSubscriber()
+    {
+        $request = new SubscriberRegisterRequest(
+            $this->generateSubscriberReference(),
+            $this->generateReference(),
+            40200,
+            $this->getCreditCardSerial(),
+            $this->getCreditCardValidDate()
+        );
+        $request->setCardVerificationValue('123');
+        $response = $this->paybox->request($request);
+
+        $requestClass = $this->getRequestClass();
+        /** @var AbstractReferencedBearerTransactionRequest $requestClass */
+        $request = new $requestClass(
+            $this->generateReference(),
+            40100,
+            $response->getBearer(),
+            $this->getCreditCardValidDate(),
+            $response->getSubscriberRef()
+        );
+        $this->assertGreaterThan(50, $request->getRequestType(), 'Should be a subscriber request.');
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+    }
+
     public function testCallWithCVV()
     {
-        /** @var AbstractBearerTransactionRequest $request */
+        /** @var AbstractReferencedBearerTransactionRequest $request */
         $request = $this->createBaseRequest();
         $request
             ->setCardVerificationValue('123')
