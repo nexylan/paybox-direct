@@ -91,6 +91,22 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @return string
      */
+    protected function getCreditCardSerial()
+    {
+        return '4012001037141112';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCreditCardValidDate()
+    {
+        return '12'.(date('y') + 2);
+    }
+
+    /**
+     * @return string
+     */
     final protected function generateReference()
     {
         $requestClassTab = explode('\\', get_class($this));

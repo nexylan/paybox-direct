@@ -18,7 +18,7 @@ final class SubscriberUpdateRequestTest extends AbstractTransactionRequestTest
         $request = new SubscriberRegisterRequest(
             uniqid('sub_up_'),
             $this->generateReference(),
-            56000,
+            57000,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
         );
@@ -28,7 +28,7 @@ final class SubscriberUpdateRequestTest extends AbstractTransactionRequestTest
 
         return new SubscriberUpdateRequest(
             $response->getSubscriberRef(),
-            56042,
+            57042,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
         );
