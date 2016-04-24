@@ -1,11 +1,11 @@
 <?php
 
-namespace Nexy\PayboxDirect\Variable;
+namespace Nexy\PayboxDirect\Enum;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class PayboxVariableActivity
+final class Activity
 {
     const NOT_SPECIFIED = 20;
     const PHONE_REQUEST = 21;

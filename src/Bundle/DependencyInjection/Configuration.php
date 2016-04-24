@@ -2,6 +2,7 @@
 
 namespace Nexy\PayboxDirect\Bundle\DependencyInjection;
 
+use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Paybox;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -47,7 +48,7 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('key')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('default_currency')
                             ->validate()
-                                ->ifNotInArray(array_keys(Paybox::CURRENCIES))
+                                ->ifNotInArray(array_keys(Currency::ALL))
                                 ->thenInvalid('Invalid Paybox version')
                             ->end()
                         ->end()

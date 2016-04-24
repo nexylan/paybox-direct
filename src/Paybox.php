@@ -2,37 +2,19 @@
 
 namespace Nexy\PayboxDirect;
 
+use Nexy\PayboxDirect\Enum\Activity;
+use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
+use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\PayboxResponse;
-use Nexy\PayboxDirect\Variable\PayboxVariableActivity;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *
  * @see http://www1.paybox.com/espace-integrateur-documentation/les-solutions-paybox-direct-et-paybox-direct-plus/les-operations-de-caisse-direct-plus/
  * @see http://www1.paybox.com/espace-integrateur-documentation/dictionnaire-des-donnees/paybox-direct-et-direct-plus/
- *
- * @method PayboxResponse authorize(array $parameters)
- * @method PayboxResponse debit(array $parameters)
- * @method PayboxResponse authorizeAndCapture(array $parameters)
- * @method PayboxResponse credit(array $parameters)
- * @method PayboxResponse cancel(array $parameters)
- * @method PayboxResponse check(array $parameters)
- * @method PayboxResponse transact(array $parameters)
- * @method PayboxResponse updateAmount(array $parameters)
- * @method PayboxResponse refund(array $parameters)
- * @method PayboxResponse inquiry(array $parameters)
- * @method PayboxResponse authorizeSubscriber(array $parameters)
- * @method PayboxResponse debitSubscriber(array $parameters)
- * @method PayboxResponse authorizeAndCaptureSubscriber(array $parameters)
- * @method PayboxResponse creditSubscriber(array $parameters)
- * @method PayboxResponse cancelSubscriberTransaction(array $parameters)
- * @method PayboxResponse registerSubscriber(array $parameters)
- * @method PayboxResponse updateSubscriber(array $parameters)
- * @method PayboxResponse deleteSubscriber(array $parameters)
- * @method PayboxResponse transactSubscriber(array $parameters)
  */
 final class Paybox
 {
@@ -44,297 +26,9 @@ final class Paybox
         'direct_plus' => self::VERSION_DIRECT_PLUS,
     ];
 
-    const CURRENCY_EURO = 978;
-    const CURRENCY_US_DOLLAR = 840;
-    const CURRENCY_CFA = 952;
-
-    const CURRENCIES = [
-        'euro' => self::CURRENCY_EURO,
-        'us_dollar' => self::CURRENCY_US_DOLLAR,
-        'cfa' => self::CURRENCY_CFA,
-    ];
-
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
-
-    private static $operations = [
-        'authorize' => [
-            'code' => '00001',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'debit' => [
-            'code' => '00002',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'authorizeAndCapture' => [
-            'code' => '00003',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'credit' => [
-            'code' => '00004',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'cancel' => [
-            'code' => '00005',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANSL',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'check' => [
-            'code' => '00011',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'transact' => [
-            'code' => '00012',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'updateAmount' => [
-            'code' => '00013',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                ],
-            ],
-        ],
-        'refund' => [
-            'code' => '00014',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                ],
-            ],
-        ],
-        'inquiry' => [
-            'code' => '00017',
-            'parameters' => [
-                'required' => [
-                    'NUMTRANS',
-                ],
-            ],
-        ],
-        'authorizeSubscriber' => [
-            'code' => '00051',
-            'parameters' => [
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'debitSubscriber' => [
-            'code' => '00052',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'authorizeAndCaptureSubscriber' => [
-            'code' => '00053',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'creditSubscriber' => [
-            'code' => '00054',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'cancelSubscriberTransaction' => [
-            'code' => '00055',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'NUMAPPEL',
-                    'NUMTRANS',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'registerSubscriber' => [
-            'code' => '00056',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-        'updateSubscriber' => [
-            'code' => '00057',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'defined' => [
-                    'AUTORISATION',
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                ],
-            ],
-        ],
-        'deleteSubscriber' => [
-            'code' => '00058',
-            'parameters' => [
-                'required' => [
-                    'REFABONNE',
-                ],
-            ],
-        ],
-        'transactSubscriber' => [
-            'code' => '00061',
-            'parameters' => [
-                'defaults' => [
-                    'DEVISE' => null,
-                ],
-                'required' => [
-                    'DATEVAL',
-                    'MONTANT',
-                    'PORTEUR',
-                    'REFABONNE',
-                    'REFERENCE',
-                ],
-            ],
-        ],
-    ];
 
     /**
      * @var AbstractHttpClient
@@ -358,29 +52,32 @@ final class Paybox
         $this->httpClient->init();
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param RequestInterface $request
+     *
+     * @return PayboxResponse
+     *
+     * @throws Exception\PayboxException
+     */
+    public function request(RequestInterface $request)
     {
-        if (!isset(static::$operations[$name])) {
-            throw new \BadMethodCallException('Undefined method '.$name);
-        }
-        if (count($arguments) != 1 || !is_array($arguments[0])) {
-            throw new \InvalidArgumentException('Expected argument 1 of '.__CLASS__.'::'.$name.' to be an array');
-        }
-
-        $operation = static::$operations[$name];
-        $resolver = new OptionsResolver();
-        $this->configurePayboxCallParameters($operation, $resolver);
-        $parameters = $resolver->resolve($arguments[0]);
-
-        return $this->httpClient->call($operation['code'], $parameters);
+        return $this->httpClient->call(
+            $request->getRequestType(),
+            $this->resolveRequestParameters($request->getParameters())
+        );
     }
 
+    /**
+     * Paybox base options validation.
+     *
+     * @param OptionsResolver $resolver
+     */
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'timeout' => 10,
             'production' => false,
-            'paybox_default_currency' => static::CURRENCY_EURO,
+            'paybox_default_currency' => Currency::EURO,
         ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
@@ -403,41 +100,20 @@ final class Paybox
     }
 
     /**
-     * @param string          $operation
-     * @param OptionsResolver $resolver
+     * Paybox request paramaters validation.
+     *
+     * @param array $parameters
+     *
+     * @return array
      */
-    private function configurePayboxCallParameters($operation, OptionsResolver $resolver)
+    private function resolveRequestParameters(array $parameters)
     {
-        $parametersDefinition = $operation['parameters'];
+        $resolver = new OptionsResolver();
 
-        // Available for each Paybox Action
-        $defaults = [
-            'ACTIVITE' => PayboxVariableActivity::WEB_REQUEST,
-            'DATEQ' => null,
-        ];
-        $defined = [
-            'CVV',
-            'DATENAISS',
-            'DIFFERE',
-            'ERRORCODETEST',
-            'ID3D',
-            'PAYS',
-            'PRIV_CODETRAITEMENT',
-            'SHA-1',
-            'TYPECARTE',
-        ];
-
-        if (isset($parametersDefinition['defaults'])) {
-            $defaults = array_merge($defaults, $parametersDefinition['defaults']);
+        // Defines parameters keys to enable them.
+        foreach (array_keys($parameters) as $key) {
+            $resolver->setDefined($key);
         }
-        $resolver->setDefaults($defaults);
-        if (isset($parametersDefinition['required'])) {
-            $resolver->setRequired($parametersDefinition['required']);
-        }
-        if (isset($parametersDefinition['defined'])) {
-            $defined = array_merge($defined, $parametersDefinition['defined']);
-        }
-        $resolver->setDefined($defined);
 
         $resolver
             ->setAllowedTypesIfDefined('ACQUEREUR', 'string')
@@ -464,17 +140,24 @@ final class Paybox
         $resolver
             ->setAllowedValuesIfDefined('ACQUEREUR', ['PAYPAL', 'EMS', 'ATOSBE', 'BCMC', 'PSC', 'FINAREF', 'BUYSTER', '34ONEY'])
             ->setAllowedValuesIfDefined('ACTIVITE', [
-                PayboxVariableActivity::NOT_SPECIFIED,
-                PayboxVariableActivity::PHONE_REQUEST,
-                PayboxVariableActivity::MAIL_REQUEST,
-                PayboxVariableActivity::MINITEL_REQUEST,
-                PayboxVariableActivity::WEB_REQUEST,
-                PayboxVariableActivity::RECURRING_PAYMENT,
+                Activity::NOT_SPECIFIED,
+                Activity::PHONE_REQUEST,
+                Activity::MAIL_REQUEST,
+                Activity::MINITEL_REQUEST,
+                Activity::WEB_REQUEST,
+                Activity::RECURRING_PAYMENT,
             ])
-            ->setAllowedValuesIfDefined('DEVISE', [null, static::CURRENCY_EURO, static::CURRENCY_US_DOLLAR, static::CURRENCY_CFA])
+            ->setAllowedValuesIfDefined('DEVISE', [
+                null,
+                Currency::EURO,
+                Currency::US_DOLLAR,
+                Currency::CFA,
+            ])
             ->setAllowedValuesIfDefined('PAYS', '')
             ->setAllowedValuesIfDefined('SHA-1', '')
             ->setAllowedValuesIfDefined('TYPECARTE', '')
         ;
+
+        return $resolver->resolve($parameters);
     }
 }
