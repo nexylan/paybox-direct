@@ -23,28 +23,3 @@ Paybox Direct and Paybox Direct Plus PHP SDK. Under development.
 This version of the project requires:
 
 * PHP 5.5+
-
-# TO BE REMOVED
-
-12 is deprecated.
-
-| TYPE | MONTANT | DEVISE | REFERENCE | PORTEUR | DATEVAL | AUTORISATION | NUMAPPEL | NUMTRANS | REFABONNE |
-| ---- | ------- | ------ | --------- | ------- | ------- | ------------ | -------- | -------- | --------- |
-| 1  | X | X | X | X | X | X |   |   |   |
-| 2  | X | X | X |   |   |   | X | X |   |
-| 3  | X | X | X | X | X | X |   |   |   |
-| 4  | X | X | X | X | X |   |   |   |   |
-| 5  | X | X | X |   |   |   | X | X |   |
-| 11 | X | X | X |   |   |   |   |   |   |
-| 13 | X | X |   |   |   | X | X | X |   |
-| 14 | X | X |   |   |   |   | X | X |   |
-| 17 |   |   |   |   |   |   |   | X |   |
-| 51 | X | X | X | X | X | X |   |   | X |
-| 52 | X | X | X |   |   |   | X | X |   |
-| 53 | X | X | X | X | X |   |   |   | X |
-| 54 | X | X | X | X | X |   |   |   | X |
-| 55 | X | X | X | X | X |   | X | X | X |
-| 56 | X | X | X | X | X | X |   |   | X |
-| 57 | X | X |   | X | X | X |   |   | X |
-| 58 |   |   |   |   |   |   |   |   | X |
-| 61 | X | X | X | X | X |   |   |   | X |
