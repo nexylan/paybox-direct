@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class AuthorizeAndCaptureRequest extends AbstractBearerTransactionRequest
+final class AuthorizeAndCaptureRequest extends AbstractReferencedBearerTransactionRequest
 {
     /**
      * {@inheritdoc}

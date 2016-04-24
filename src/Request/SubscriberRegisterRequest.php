@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class SubscriberRegisterRequest extends AbstractBearerTransactionRequest
+final class SubscriberRegisterRequest extends AbstractReferencedBearerTransactionRequest
 {
     /**
      * @param string $subscriberRef

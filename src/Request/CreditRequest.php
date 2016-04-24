@@ -5,7 +5,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-class CreditRequest extends AbstractBearerTransactionRequest
+class CreditRequest extends AbstractReferencedBearerTransactionRequest
 {
     /**
      * {@inheritdoc}

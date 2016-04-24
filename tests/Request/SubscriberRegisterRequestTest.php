@@ -16,7 +16,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         $request = new SubscriberRegisterRequest(
             $this->generateSubscriberReference(),
             $this->generateReference(),
-            60000,
+            56000,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
         );
@@ -36,7 +36,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         $request = new SubscriberRegisterRequest(
             $this->generateSubscriberReference(),
             $this->generateReference(),
-            60100,
+            56100,
             '9999999999999999',
             '1216'
         );
@@ -56,7 +56,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         $request = new SubscriberRegisterRequest(
             $this->generateSubscriberReference(),
             $this->generateReference(),
-            60042,
+            56042,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
         );
