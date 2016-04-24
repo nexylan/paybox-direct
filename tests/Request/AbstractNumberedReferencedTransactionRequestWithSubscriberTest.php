@@ -2,6 +2,7 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
+use Nexy\PayboxDirect\Request\AbstractNumberedTransactionRequest;
 use Nexy\PayboxDirect\Request\SubscriberRegisterRequest;
 
 /**
@@ -9,8 +10,7 @@ use Nexy\PayboxDirect\Request\SubscriberRegisterRequest;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractNumberedReferencedTransactionRequestWithSubscriberTest
-extends AbstractNumberedReferencedTransactionRequestTest
+abstract class AbstractNumberedReferencedTransactionRequestWithSubscriberTest extends AbstractNumberedReferencedTransactionRequestTest
 {
     public function testCallWithSubscriber()
     {
