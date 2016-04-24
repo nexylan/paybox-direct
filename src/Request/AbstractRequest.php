@@ -66,7 +66,7 @@ abstract class AbstractRequest implements RequestInterface
             'DATEQ' => $this->date instanceof \DateTime ? $this->date->format('dmYHis') : null,
         ];
 
-        if (true === $this->showCountry) {
+        if ($this->showCountry) {
             $parameters['PAYS'] = '';
         }
 
