@@ -3,6 +3,7 @@
 namespace Nexy\PayboxDirect\Bundle\DependencyInjection;
 
 use Nexy\PayboxDirect\Enum\Currency;
+use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -41,10 +42,10 @@ final class NexyPayboxDirectExtension extends Extension
         $options = $config['options'];
 
         // Paybox version and default_currency special hack: Get the number.
-        $options['paybox_version'] = Paybox::VERSIONS[$config['paybox']['version']];
+        $options['paybox_version'] = constant(Version::class.'::'.strtoupper($config['paybox']['version']));
         unset($config['paybox']['version']);
         if (array_key_exists('default_currency', $config['paybox'])) {
-            $options['paybox_default_currency'] = Currency::ALL[$config['paybox']['default_currency']];
+            $options['paybox_default_currency'] = constant(Currency::class.'::'.strtoupper($config['paybox']['default_currency']));
             unset($config['paybox']['default_currency']);
         }
 

@@ -13,7 +13,8 @@
     "require": {
         "php": "^5.6 || ^7.0",
         "guzzlehttp/guzzle": "^6.0",
-        "symfony/options-resolver": "^2.7 || ^3.0"
+        "symfony/options-resolver": "^2.7 || ^3.0",
+        "greg0ire/enum": "^2.0"
     },
     "require-dev": {
         "symfony/http-kernel": "^2.7 || ^3.0",
