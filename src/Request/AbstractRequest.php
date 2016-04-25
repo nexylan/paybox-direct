@@ -63,10 +63,14 @@ abstract class AbstractRequest implements RequestInterface
 
     /**
      * @param bool $showCountry
+     *
+     * @return $this
      */
     final public function setShowCountry($showCountry)
     {
         $this->showCountry = $showCountry;
+
+        return $this;
     }
 
     /**
