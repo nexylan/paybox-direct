@@ -2,6 +2,7 @@
 
 namespace Nexy\PayboxDirect\Tests;
 
+use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 
 /**
@@ -12,7 +13,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
     public function testValidOptions()
     {
         $client = new Paybox([
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
@@ -23,7 +24,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'timeout' => 10,
             'production' => false,
             'paybox_default_currency' => 978,
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
@@ -36,7 +37,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
         $client = new Paybox([
             'timeout' => 5,
             'production' => true,
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
@@ -47,7 +48,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'timeout' => 5,
             'production' => true,
             'paybox_default_currency' => 978,
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
@@ -63,7 +64,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
     public function testMissingOption($option)
     {
         $requiredOptionsData = [
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',

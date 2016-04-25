@@ -3,6 +3,7 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Enum\Activity;
+use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
 
@@ -77,7 +78,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
      */
     protected function getPayboxVersion()
     {
-        return Paybox::VERSION_DIRECT_PLUS;
+        return Version::DIRECT_PLUS;
     }
 
     /**

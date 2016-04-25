@@ -5,6 +5,7 @@ namespace Nexy\PayboxDirect\Tests\Bundle\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
 use Nexy\PayboxDirect\Enum\Currency;
+use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
@@ -19,7 +20,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $payboxOptions = [
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
@@ -49,7 +50,7 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
             'timeout' => 20,
             'production' => true,
             'paybox_default_currency' => Currency::US_DOLLAR,
-            'paybox_version' => Paybox::VERSION_DIRECT_PLUS,
+            'paybox_version' => Version::DIRECT_PLUS,
             'paybox_site' => '1999888',
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',

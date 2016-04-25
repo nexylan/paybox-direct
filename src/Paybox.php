@@ -4,6 +4,7 @@ namespace Nexy\PayboxDirect;
 
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
+use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
@@ -18,14 +19,6 @@ use Nexy\PayboxDirect\Response\PayboxResponse;
  */
 final class Paybox
 {
-    const VERSION_DIRECT = '00103';
-    const VERSION_DIRECT_PLUS = '00104';
-
-    const VERSIONS = [
-        'direct' => self::VERSION_DIRECT,
-        'direct_plus' => self::VERSION_DIRECT_PLUS,
-    ];
-
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
@@ -96,7 +89,7 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_identifier', 'string');
         $resolver->setAllowedTypes('paybox_key', 'string');
 
-        $resolver->setAllowedValues('paybox_version', static::VERSIONS);
+        $resolver->setAllowedValues('paybox_version', Version::getConstants());
     }
 
     /**
@@ -139,20 +132,8 @@ final class Paybox
 
         $resolver
             ->setAllowedValuesIfDefined('ACQUEREUR', ['PAYPAL', 'EMS', 'ATOSBE', 'BCMC', 'PSC', 'FINAREF', 'BUYSTER', '34ONEY'])
-            ->setAllowedValuesIfDefined('ACTIVITE', [
-                Activity::NOT_SPECIFIED,
-                Activity::PHONE_REQUEST,
-                Activity::MAIL_REQUEST,
-                Activity::MINITEL_REQUEST,
-                Activity::WEB_REQUEST,
-                Activity::RECURRING_PAYMENT,
-            ])
-            ->setAllowedValuesIfDefined('DEVISE', [
-                null,
-                Currency::EURO,
-                Currency::US_DOLLAR,
-                Currency::CFA,
-            ])
+            ->setAllowedValuesIfDefined('ACTIVITE', Activity::getConstants())
+            ->setAllowedValuesIfDefined('DEVISE', array_merge([null], Currency::getConstants()))
             ->setAllowedValuesIfDefined('PAYS', '')
             ->setAllowedValuesIfDefined('SHA-1', '')
             ->setAllowedValuesIfDefined('TYPECARTE', '')

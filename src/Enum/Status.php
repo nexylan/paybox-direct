@@ -2,10 +2,12 @@
 
 namespace Nexy\PayboxDirect\Enum;
 
+use Greg0ire\Enum\BaseEnum;
+
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class Status
+final class Status extends BaseEnum
 {
     const REFUNDED = 'Remboursé';
     const CANCELED = 'Annulé';
