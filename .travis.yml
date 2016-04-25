@@ -25,7 +25,6 @@ matrix:
       env: SYMFONY_VERSION=3.1.*@dev
   allow_failures:
     - php: nightly
-    - php: hhvm
     - env: SYMFONY_VERSION=3.1.*@dev
 
 sudo: false
