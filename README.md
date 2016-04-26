@@ -16,7 +16,7 @@ Paybox Direct and Paybox Direct Plus PHP SDK. Under development.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nexylan/paybox-direct/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nexylan/paybox-direct/?branch=master)
 [![Code Climate](https://codeclimate.com/github/nexylan/paybox-direct/badges/gpa.svg)](https://codeclimate.com/github/nexylan/paybox-direct)
 [![Coverage Status](https://coveralls.io/repos/nexylan/paybox-direct/badge.svg?branch=master)](https://coveralls.io/r/nexylan/paybox-direct?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec7d670c-71e3-4c1a-8c12-d91a1c90c2a7/mini.png)](https://insight.sensiolabs.com/projects/8a6b5dd0-e974-478c-92ee-43125cb7bae3)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec7d670c-71e3-4c1a-8c12-d91a1c90c2a7/mini.png)](https://insight.sensiolabs.com/projects/ec7d670c-71e3-4c1a-8c12-d91a1c90c2a7)
 
 ## Prerequisites
 
