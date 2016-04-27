@@ -51,11 +51,11 @@ final class Paybox
      *
      * @return DirectResponse
      */
-    public function requestDirect(RequestInterface $request)
+    public function sendDirectRequest(RequestInterface $request)
     {
         if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
             throw new \InvalidArgumentException(
-                'Direct Plus requests must be passed onto '.__CLASS__.'::requestDirectPlus method.'
+                'Direct Plus requests must be passed onto '.__CLASS__.'::sendDirectPlusRequest method.'
             );
         }
 
@@ -67,11 +67,11 @@ final class Paybox
      *
      * @return DirectPlusResponse
      */
-    public function requestDirectPlus(RequestInterface $request)
+    public function sendDirectPlusRequest(RequestInterface $request)
     {
         if ($request->getRequestType() < RequestInterface::SUBSCRIBER_AUTHORIZE) {
             throw new \InvalidArgumentException(
-                'Direct requests must be passed onto '.__CLASS__.'::requestDirect method.'
+                'Direct requests must be passed onto '.__CLASS__.'::sendDirectRequest method.'
             );
         }
 

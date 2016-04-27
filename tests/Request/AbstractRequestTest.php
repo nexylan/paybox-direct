@@ -207,10 +207,10 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     final protected function payboxRequest(RequestInterface $request)
     {
         if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
-            return $this->paybox->requestDirectPlus($request);
+            return $this->paybox->sendDirectPlusRequest($request);
         }
 
-        return $this->paybox->requestDirect($request);
+        return $this->paybox->sendDirectRequest($request);
     }
 
     /**
