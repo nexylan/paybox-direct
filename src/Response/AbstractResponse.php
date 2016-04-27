@@ -18,6 +18,16 @@ abstract class AbstractResponse implements ResponseInterface
     private $comment;
 
     /**
+     * @var string
+     */
+    private $site;
+
+    /**
+     * @var string
+     */
+    private $rank;
+
+    /**
      * @var int
      */
     private $callNumber;
@@ -39,6 +49,8 @@ abstract class AbstractResponse implements ResponseInterface
     {
         $this->code = intval($data['CODEREPONSE']);
         $this->comment = $data['COMMENTAIRE'];
+        $this->site = $data['SITE'];
+        $this->rank = $data['RANG'];
         $this->callNumber = intval($data['NUMAPPEL']);
         $this->questionNumber = intval($data['NUMQUESTION']);
         $this->transactionNumber = intval($data['NUMTRANS']);
@@ -58,6 +70,22 @@ abstract class AbstractResponse implements ResponseInterface
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRank()
+    {
+        return $this->rank;
     }
 
     /**

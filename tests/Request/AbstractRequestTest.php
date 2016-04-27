@@ -38,6 +38,8 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('int', $response->getCode());
         $this->assertInternalType('string', $response->getComment());
+        $this->assertSame('1999888', $response->getSite());
+        $this->assertSame('32', $response->getRank());
         $this->assertInternalType('int', $response->getCallNumber());
         $this->assertInternalType('int', $response->getQuestionNumber());
         $this->assertInternalType('int', $response->getTransactionNumber());

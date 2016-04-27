@@ -8,11 +8,9 @@ namespace Nexy\PayboxDirect\Response;
  * @method string getAuthorization()
  * @method string getCountry()
  * @method string getBearer()
- * @method string getRank()
  * @method string getSubscriberRef()
  * @method string getDiscount()
  * @method string getSha1()
- * @method string getSite()
  * @method string getStatus()
  * @method string getCardType()
  */
@@ -22,11 +20,9 @@ final class PayboxResponse extends AbstractResponse
         'getAuthorization' => 'AUTORISATION:string',
         'getCountry' => 'PAYS:string',
         'getBearer' => 'PORTEUR:string',
-        'getRank' => 'RANG:string',
         'getSubscriberRef' => 'REFABONNE:string',
         'getDiscount' => 'REMISE:string',
         'getSha1' => 'SHA-1:string',
-        'getSite' => 'SITE:string',
         'getStatus' => 'STATUS:string',
         'getCardType' => 'TYPECARTE:string',
     ];
