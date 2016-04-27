@@ -45,6 +45,11 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @var string|null
      */
+    private $country = null;
+
+    /**
+     * @var string|null
+     */
     private $sha1 = null;
 
     /**
@@ -63,10 +68,13 @@ abstract class AbstractResponse implements ResponseInterface
         if (array_key_exists('SHA-1', $data)) {
             $this->sha1 = $data['SHA-1'];
         }
+        if (array_key_exists('PAYS', $data)) {
+            $this->country = $data['PAYS'];
+        }
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     final public function getCode()
     {
@@ -74,7 +82,7 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     final public function getComment()
     {
@@ -82,7 +90,7 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     final public function getSite()
     {
@@ -90,7 +98,7 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     final public function getRank()
     {
@@ -98,7 +106,7 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     final public function getCallNumber()
     {
@@ -106,7 +114,7 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     final public function getQuestionNumber()
     {
@@ -114,7 +122,7 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     final public function getTransactionNumber()
     {
@@ -122,7 +130,15 @@ abstract class AbstractResponse implements ResponseInterface
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     final public function getSha1()
     {

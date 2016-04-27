@@ -6,7 +6,6 @@ namespace Nexy\PayboxDirect\Response;
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *
  * @method string getAuthorization()
- * @method string getCountry()
  * @method string getBearer()
  * @method string getSubscriberRef()
  * @method string getDiscount()
@@ -17,7 +16,6 @@ final class PayboxResponse extends AbstractResponse
 {
     private static $availableProperties = [
         'getAuthorization' => 'AUTORISATION:string',
-        'getCountry' => 'PAYS:string',
         'getBearer' => 'PORTEUR:string',
         'getSubscriberRef' => 'REFABONNE:string',
         'getDiscount' => 'REMISE:string',

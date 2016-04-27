@@ -57,6 +57,13 @@ interface ResponseInterface
     public function getTransactionNumber();
 
     /**
+     * Corresponding to `PAYS`.
+     *
+     * @return string|null
+     */
+    public function getCountry();
+
+    /**
      * Corresponding to `SHA-1`.
      *
      * @return string|null
