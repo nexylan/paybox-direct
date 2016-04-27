@@ -8,9 +8,12 @@ use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
+use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
 use Nexy\PayboxDirect\Response\DirectResponse;
+use Nexy\PayboxDirect\Response\InquiryResponse;
+use Nexy\PayboxDirect\Response\ResponseInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -58,6 +61,11 @@ final class Paybox
                 'Direct Plus requests must be passed onto '.__CLASS__.'::sendDirectPlusRequest method.'
             );
         }
+        if ($request instanceof InquiryRequest) {
+            throw new \InvalidArgumentException(
+                'Inquiry requests must be passed onto '.__CLASS__.'::sendInquiryRequest method.'
+            );
+        }
 
         return $this->request($request);
     }
@@ -75,23 +83,33 @@ final class Paybox
             );
         }
 
-        return $this->request($request, true);
+        return $this->request($request, DirectPlusResponse::class);
+    }
+
+    /**
+     * @param InquiryRequest $request
+     *
+     * @return InquiryResponse
+     */
+    public function sendInquiryRequest(InquiryRequest $request)
+    {
+        return $this->request($request, InquiryResponse::class);
     }
 
     /**
      * @param RequestInterface $request
-     * @param bool             $directPlus
+     * @param string           $responseClass
      *
-     * @return DirectResponse|DirectPlusResponse
+     * @return ResponseInterface
      *
      * @throws Exception\PayboxException
      */
-    private function request(RequestInterface $request, $directPlus = false)
+    private function request(RequestInterface $request, $responseClass = DirectResponse::class)
     {
         return $this->httpClient->call(
             $request->getRequestType(),
             $this->resolveRequestParameters($request->getParameters()),
-            $directPlus
+            $responseClass
         );
     }
 

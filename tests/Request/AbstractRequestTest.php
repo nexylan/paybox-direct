@@ -7,6 +7,7 @@ use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
+use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
 use Nexy\PayboxDirect\Response\DirectResponse;
@@ -206,6 +207,9 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
      */
     final protected function payboxRequest(RequestInterface $request)
     {
+        if ($request instanceof InquiryRequest) {
+            return $this->paybox->sendInquiryRequest($request);
+        }
         if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
             return $this->paybox->sendDirectPlusRequest($request);
         }
