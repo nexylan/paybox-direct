@@ -55,4 +55,11 @@ interface ResponseInterface
      * @return int
      */
     public function getTransactionNumber();
+
+    /**
+     * Corresponding to `SHA-1`.
+     *
+     * @return string|null
+     */
+    public function getSha1();
 }

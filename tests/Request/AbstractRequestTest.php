@@ -68,6 +68,28 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
 
+    public function testCallShowSha1()
+    {
+        $request = $this->createBaseRequest();
+        $request->setShowSha1(true);
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+        $this->assertInternalType('string', $response->getSha1());
+    }
+
+    public function testCallNotShowSha1()
+    {
+        // Show Sha1 is false by default
+        $request = $this->createBaseRequest();
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame(0, $response->getCode(), $response->getComment());
+        $this->assertNull($response->getSha1());
+    }
+
     public function testCallShowCountry()
     {
         $request = $this->createBaseRequest();

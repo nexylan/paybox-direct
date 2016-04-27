@@ -43,6 +43,11 @@ abstract class AbstractResponse implements ResponseInterface
     private $transactionNumber;
 
     /**
+     * @var string|null
+     */
+    private $sha1 = null;
+
+    /**
      * @param string[] $data
      */
     public function __construct(array $data)
@@ -54,12 +59,16 @@ abstract class AbstractResponse implements ResponseInterface
         $this->callNumber = intval($data['NUMAPPEL']);
         $this->questionNumber = intval($data['NUMQUESTION']);
         $this->transactionNumber = intval($data['NUMTRANS']);
+
+        if (array_key_exists('SHA-1', $data)) {
+            $this->sha1 = $data['SHA-1'];
+        }
     }
 
     /**
      * @return int
      */
-    public function getCode()
+    final public function getCode()
     {
         return $this->code;
     }
@@ -67,7 +76,7 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return string
      */
-    public function getComment()
+    final public function getComment()
     {
         return $this->comment;
     }
@@ -75,7 +84,7 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return string
      */
-    public function getSite()
+    final public function getSite()
     {
         return $this->site;
     }
@@ -83,7 +92,7 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return string
      */
-    public function getRank()
+    final public function getRank()
     {
         return $this->rank;
     }
@@ -91,7 +100,7 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return int
      */
-    public function getCallNumber()
+    final public function getCallNumber()
     {
         return $this->callNumber;
     }
@@ -99,7 +108,7 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return int
      */
-    public function getQuestionNumber()
+    final public function getQuestionNumber()
     {
         return $this->questionNumber;
     }
@@ -107,8 +116,16 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return int
      */
-    public function getTransactionNumber()
+    final public function getTransactionNumber()
     {
         return $this->transactionNumber;
+    }
+
+    /**
+     * @return string|null
+     */
+    final public function getSha1()
+    {
+        return $this->sha1;
     }
 }
