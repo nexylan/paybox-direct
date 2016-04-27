@@ -69,4 +69,11 @@ interface ResponseInterface
      * @return string|null
      */
     public function getSha1();
+
+    /**
+     * Corresponding to `TYPECARTE`.
+     *
+     * @return string|null
+     */
+    public function getCardType();
 }

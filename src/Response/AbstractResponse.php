@@ -53,6 +53,11 @@ abstract class AbstractResponse implements ResponseInterface
     private $sha1 = null;
 
     /**
+     * @var string|null
+     */
+    private $cardType = null;
+
+    /**
      * @param string[] $data
      */
     public function __construct(array $data)
@@ -65,11 +70,14 @@ abstract class AbstractResponse implements ResponseInterface
         $this->questionNumber = intval($data['NUMQUESTION']);
         $this->transactionNumber = intval($data['NUMTRANS']);
 
+        if (array_key_exists('PAYS', $data)) {
+            $this->country = $data['PAYS'];
+        }
         if (array_key_exists('SHA-1', $data)) {
             $this->sha1 = $data['SHA-1'];
         }
-        if (array_key_exists('PAYS', $data)) {
-            $this->country = $data['PAYS'];
+        if (array_key_exists('TYPECARTE', $data)) {
+            $this->cardType = $data['TYPECARTE'];
         }
     }
 
@@ -143,5 +151,13 @@ abstract class AbstractResponse implements ResponseInterface
     final public function getSha1()
     {
         return $this->sha1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCardType()
+    {
+        return $this->cardType;
     }
 }

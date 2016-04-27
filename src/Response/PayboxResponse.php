@@ -10,7 +10,6 @@ namespace Nexy\PayboxDirect\Response;
  * @method string getSubscriberRef()
  * @method string getDiscount()
  * @method string getStatus()
- * @method string getCardType()
  */
 final class PayboxResponse extends AbstractResponse
 {
@@ -20,7 +19,6 @@ final class PayboxResponse extends AbstractResponse
         'getSubscriberRef' => 'REFABONNE:string',
         'getDiscount' => 'REMISE:string',
         'getStatus' => 'STATUS:string',
-        'getCardType' => 'TYPECARTE:string',
     ];
 
     private $data = [];
