@@ -55,6 +55,4 @@ interface ResponseInterface
      * @return int
      */
     public function getTransactionNumber();
-
-
 }
