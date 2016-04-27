@@ -9,7 +9,7 @@ use Greg0ire\Enum\BaseEnum;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-class Receiver extends BaseEnum
+final class Receiver extends BaseEnum
 {
     const PAYPAL = 'PAYPAL';
     const EMS = 'EMS';
