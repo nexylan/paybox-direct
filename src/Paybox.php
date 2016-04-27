@@ -4,6 +4,7 @@ namespace Nexy\PayboxDirect;
 
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
+use Nexy\PayboxDirect\Enum\Receiver;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
@@ -131,7 +132,7 @@ final class Paybox
         ;
 
         $resolver
-            ->setAllowedValuesIfDefined('ACQUEREUR', ['PAYPAL', 'EMS', 'ATOSBE', 'BCMC', 'PSC', 'FINAREF', 'BUYSTER', '34ONEY'])
+            ->setAllowedValuesIfDefined('ACQUEREUR', Receiver::getConstants())
             ->setAllowedValuesIfDefined('ACTIVITE', Activity::getConstants())
             ->setAllowedValuesIfDefined('DEVISE', array_merge([null], Currency::getConstants()))
             ->setAllowedValuesIfDefined('PAYS', '')
