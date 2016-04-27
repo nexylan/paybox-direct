@@ -6,11 +6,6 @@ namespace Nexy\PayboxDirect\Response;
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *
  * @method string getAuthorization()
- * @method int getCode()
- * @method string getComment()
- * @method int getCallNumber()
- * @method int getQuestionNumber()
- * @method int getTransactionNumber()
  * @method string getCountry()
  * @method string getBearer()
  * @method string getRank()
@@ -21,15 +16,10 @@ namespace Nexy\PayboxDirect\Response;
  * @method string getStatus()
  * @method string getCardType()
  */
-final class PayboxResponse
+final class PayboxResponse extends AbstractResponse
 {
     private static $availableProperties = [
         'getAuthorization' => 'AUTORISATION:string',
-        'getCode' => 'CODEREPONSE:int',
-        'getComment' => 'COMMENTAIRE:string',
-        'getCallNumber' => 'NUMAPPEL:int',
-        'getQuestionNumber' => 'NUMQUESTION:int',
-        'getTransactionNumber' => 'NUMTRANS:int',
         'getCountry' => 'PAYS:string',
         'getBearer' => 'PORTEUR:string',
         'getRank' => 'RANG:string',
@@ -48,6 +38,8 @@ final class PayboxResponse
      */
     public function __construct(array $data)
     {
+        parent::__construct($data);
+
         $this->data = $data;
     }
 

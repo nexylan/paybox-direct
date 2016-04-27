@@ -28,6 +28,21 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+    /**
+     * Check types and also call getter for each request type to be sures elements are always returned.
+     */
+    public function testCallResponseAttributes()
+    {
+        $request = $this->createBaseRequest();
+        $response = $this->paybox->request($request);
+
+        $this->assertInternalType('int', $response->getCode());
+        $this->assertInternalType('string', $response->getComment());
+        $this->assertInternalType('int', $response->getCallNumber());
+        $this->assertInternalType('int', $response->getQuestionNumber());
+        $this->assertInternalType('int', $response->getTransactionNumber());
+    }
+
     public function testCallWithCustomActivity()
     {
         $request = $this->createBaseRequest();
