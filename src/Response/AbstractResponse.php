@@ -43,17 +43,17 @@ abstract class AbstractResponse implements ResponseInterface
     private $transactionNumber;
 
     /**
-     * @var string|null
+     * @var string|null|false
      */
     private $country = null;
 
     /**
-     * @var string|null
+     * @var string|null|false
      */
     private $sha1 = null;
 
     /**
-     * @var string|null
+     * @var string|null|false
      */
     private $cardType = null;
 
@@ -71,13 +71,13 @@ abstract class AbstractResponse implements ResponseInterface
         $this->transactionNumber = intval($data['NUMTRANS']);
 
         if (array_key_exists('PAYS', $data)) {
-            $this->country = $data['PAYS'];
+            $this->country = in_array($data['PAYS'], ['', '???'], true) ? false : $data['PAYS'];
         }
         if (array_key_exists('SHA-1', $data)) {
-            $this->sha1 = $data['SHA-1'];
+            $this->sha1 = '' === $data['SHA-1'] ? false : $data['SHA-1'];
         }
         if (array_key_exists('TYPECARTE', $data)) {
-            $this->cardType = $data['TYPECARTE'];
+            $this->cardType = '' === $data['TYPECARTE'] ? false : $data['TYPECARTE'];
         }
     }
 

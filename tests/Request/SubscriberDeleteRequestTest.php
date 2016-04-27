@@ -44,8 +44,24 @@ class SubscriberDeleteRequestTest extends AbstractRequestTest
     /**
      * {@inheritdoc}
      */
+    protected function getExpectedSha1()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getExpectedCountry()
     {
-        return '';
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedCardType()
+    {
+        return false;
     }
 }

@@ -80,9 +80,9 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $response = $this->paybox->request($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
-        $this->assertInternalType('string', $response->getSha1());
+        $this->assertSame($this->getExpectedSha1(), $response->getSha1());
         $this->assertSame($this->getExpectedCountry(), $response->getCountry());
-        $this->assertInternalType('string', $response->getCardType());
+        $this->assertSame($this->getExpectedCardType(), $response->getCardType());
     }
 
     public function testCallNotExtraAttributes()
@@ -107,11 +107,27 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return string
+     * @return string|bool
+     */
+    protected function getExpectedSha1()
+    {
+        return '678AEDDA00FA890C9056626FFB5699C57BC602B0';
+    }
+
+    /**
+     * @return string|bool
      */
     protected function getExpectedCountry()
     {
-        return '???';
+        return false;
+    }
+
+    /**
+     * @return string|bool
+     */
+    protected function getExpectedCardType()
+    {
+        return 'Visa';
     }
 
     /**

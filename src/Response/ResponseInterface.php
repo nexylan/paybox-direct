@@ -59,21 +59,21 @@ interface ResponseInterface
     /**
      * Corresponding to `PAYS`.
      *
-     * @return string|null
+     * @return string|null|false Null if not requested, false if '???' or empty string returned by Paybox.
      */
     public function getCountry();
 
     /**
      * Corresponding to `SHA-1`.
      *
-     * @return string|null
+     * @return string|null|false Null if not requested, false if empty string returned by Paybox.
      */
     public function getSha1();
 
     /**
      * Corresponding to `TYPECARTE`.
      *
-     * @return string|null
+     * @return string|null|false Null if not requested, false if empty string returned by Paybox.
      */
     public function getCardType();
 }
