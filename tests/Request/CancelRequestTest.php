@@ -21,7 +21,7 @@ final class CancelRequestTest extends AbstractNumberedReferencedTransactionReque
             $this->getCreditCardValidDate()
         );
 
-        return $this->paybox->request($request);
+        return $this->payboxRequest($request);
     }
 
     /**

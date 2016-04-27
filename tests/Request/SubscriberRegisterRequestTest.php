@@ -22,7 +22,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         );
         $request->setCardVerificationValue('123');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -41,7 +41,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
             '1216'
         );
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }

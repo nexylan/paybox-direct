@@ -24,7 +24,7 @@ final class SubscriberUpdateRequestTest extends AbstractTransactionRequestTest
         );
         $request->setCardVerificationValue('123');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         return new SubscriberUpdateRequest(
             $response->getSubscriberRef(),

@@ -2,10 +2,14 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
+use GuzzleHttp\Psr7\Request;
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
+use Nexy\PayboxDirect\Request\RequestInterface;
+use Nexy\PayboxDirect\Response\DirectPlusResponse;
+use Nexy\PayboxDirect\Response\DirectResponse;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -15,7 +19,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Paybox
      */
-    protected $paybox;
+    private $paybox;
 
     protected function setUp()
     {
@@ -34,7 +38,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     public function testCallResponseAttributes()
     {
         $request = $this->createBaseRequest();
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertInternalType('int', $response->getCode());
         $this->assertInternalType('string', $response->getComment());
@@ -49,6 +53,16 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($response->getSha1());
         $this->assertNull($response->getCountry());
         $this->assertNull($response->getCardType());
+
+        // Direct plus special attributes
+        if ($response instanceof DirectPlusResponse) {
+            $this->assertNotEmpty($response->getSubscriberRef());
+            if (false === $this->getExpectedEmptyBearer()) {
+                $this->assertNotEmpty($response->getBearer());
+            } else {
+                $this->assertFalse($response->getBearer());
+            }
+        }
     }
 
     public function testCallWithCustomActivity()
@@ -58,7 +72,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
             ->setActivity(Activity::PHONE_REQUEST)
         ;
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -69,7 +83,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         // Have to find a way to test the date result on response.
         $request->setDate(new \DateTime('now - 10 days'));
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -83,7 +97,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
             ->setShowCardType(true)
         ;
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
         $this->assertSame($this->getExpectedSha1(), $response->getSha1());
@@ -132,6 +146,14 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return bool
+     */
+    protected function getExpectedEmptyBearer()
+    {
+        return false;
+    }
+
+    /**
      * @return string
      */
     protected function getCreditCardSerial()
@@ -175,6 +197,20 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $className = str_replace([__NAMESPACE__.'\\', 'Test'], '', get_class($this));
 
         return 'Nexy\\PayboxDirect\\Request\\'.$className;
+    }
+
+    /**
+     * @param RequestInterface $request
+     *
+     * @return DirectResponse|DirectPlusResponse
+     */
+    final protected function payboxRequest(RequestInterface $request)
+    {
+        if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
+            return $this->paybox->requestDirectPlus($request);
+        }
+
+        return $this->paybox->requestDirect($request);
     }
 
     /**

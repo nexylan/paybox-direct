@@ -4,6 +4,8 @@ namespace Nexy\PayboxDirect\HttpClient;
 
 use Nexy\PayboxDirect\Exception\PayboxException;
 use Nexy\PayboxDirect\Paybox;
+use Nexy\PayboxDirect\Response\DirectPlusResponse;
+use Nexy\PayboxDirect\Response\DirectResponse;
 use Nexy\PayboxDirect\Response\PayboxResponse;
 
 /**
@@ -68,12 +70,13 @@ abstract class AbstractHttpClient
      *
      * @param string   $type       Request type
      * @param string[] $parameters Request parameters
+     * @param bool     $directPlus
      *
-     * @return PayboxResponse The response content
+     * @return DirectResponse|DirectPlusResponse The response content
      *
      * @throws PayboxException
      */
-    final public function call($type, array $parameters)
+    public function call($type, array $parameters, $directPlus = false)
     {
         $bodyParams = array_merge($parameters, $this->baseParameters);
         $bodyParams['TYPE'] = $type;
@@ -100,7 +103,11 @@ abstract class AbstractHttpClient
             throw new PayboxException($results['COMMENTAIRE'], $results['CODEREPONSE']);
         }
 
-        return new PayboxResponse($results);
+        if (true === $directPlus) {
+            return new DirectPlusResponse($results);
+        }
+
+        return new DirectResponse($results);
     }
 
     /**

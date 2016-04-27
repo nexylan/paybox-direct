@@ -24,7 +24,7 @@ final class SubscriberCancelTransactionRequestTest extends AbstractTransactionRe
             $this->getCreditCardValidDate()
         );
         $request->setCardVerificationValue('123');
-        $subscriberRegisterResponse = $this->paybox->request($request);
+        $subscriberRegisterResponse = $this->payboxRequest($request);
 
         $request = new AuthorizeAndCaptureRequest(
             $this->generateReference(),
@@ -34,7 +34,7 @@ final class SubscriberCancelTransactionRequestTest extends AbstractTransactionRe
             $subscriberRegisterResponse->getSubscriberRef()
         );
 
-        $authorizeAndCaptureResponse = $this->paybox->request($request);
+        $authorizeAndCaptureResponse = $this->payboxRequest($request);
 
         return new SubscriberCancelTransactionRequest(
             $subscriberRegisterResponse->getSubscriberRef(),

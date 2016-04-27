@@ -21,7 +21,7 @@ final class DebitRequestTest extends AbstractNumberedReferencedTransactionReques
             $this->getCreditCardValidDate()
         );
 
-        return $this->paybox->request($request);
+        return $this->payboxRequest($request);
     }
 
     /**

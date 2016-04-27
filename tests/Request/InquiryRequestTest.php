@@ -21,7 +21,7 @@ final class InquiryRequestTest extends AbstractNumberedTransactionRequestTest
             $this->getCreditCardValidDate()
         );
 
-        return $this->paybox->request($request);
+        return $this->payboxRequest($request);
     }
 
     /**

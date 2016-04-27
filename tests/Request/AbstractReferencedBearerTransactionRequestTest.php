@@ -21,7 +21,7 @@ abstract class AbstractReferencedBearerTransactionRequestTest extends AbstractTr
             $this->getCreditCardValidDate()
         );
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -35,7 +35,7 @@ abstract class AbstractReferencedBearerTransactionRequestTest extends AbstractTr
         $requestClass = $this->getRequestClass();
         $request = new $requestClass($this->generateReference(), 40100, '9999999999999999', '1216');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -50,7 +50,7 @@ abstract class AbstractReferencedBearerTransactionRequestTest extends AbstractTr
             $this->getCreditCardValidDate()
         );
         $request->setCardVerificationValue('123');
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $requestClass = $this->getRequestClass();
         /** @var AbstractReferencedBearerTransactionRequest $requestClass */
@@ -63,7 +63,7 @@ abstract class AbstractReferencedBearerTransactionRequestTest extends AbstractTr
         );
         $this->assertGreaterThan(50, $request->getRequestType(), 'Should be a subscriber request.');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -76,7 +76,7 @@ abstract class AbstractReferencedBearerTransactionRequestTest extends AbstractTr
             ->setCardVerificationValue('123')
         ;
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }

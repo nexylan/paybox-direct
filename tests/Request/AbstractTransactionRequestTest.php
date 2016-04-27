@@ -18,7 +18,7 @@ abstract class AbstractTransactionRequestTest extends AbstractRequestTest
             ->setCurrency(Currency::US_DOLLAR)
         ;
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
