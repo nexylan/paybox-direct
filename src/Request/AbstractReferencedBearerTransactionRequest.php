@@ -12,7 +12,7 @@ abstract class AbstractReferencedBearerTransactionRequest extends AbstractRefere
     use BearerRequestTrait;
 
     /**
-     * @param int         $reference
+     * @param string      $reference
      * @param int         $amount
      * @param string      $bearer
      * @param string      $validityDate

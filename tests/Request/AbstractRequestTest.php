@@ -106,6 +106,18 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->getExpectedCardType(), $response->getCardType());
     }
 
+    public function testInvalidRequestCall()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $request = $this->createBaseRequest();
+        if ($request instanceof InquiryRequest || $request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
+            $this->paybox->sendDirectRequest($request);
+        } else {
+            $this->paybox->sendDirectPlusRequest($request);
+        }
+    }
+
     /**
      * @return string
      */

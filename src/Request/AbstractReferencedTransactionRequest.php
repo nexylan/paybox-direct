@@ -13,7 +13,7 @@ abstract class AbstractReferencedTransactionRequest extends AbstractTransactionR
     private $reference;
 
     /**
-     * @param int         $reference
+     * @param string      $reference
      * @param int         $amount
      * @param string|null $subscriberRef
      */
