@@ -43,6 +43,12 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $response->getCallNumber());
         $this->assertInternalType('int', $response->getQuestionNumber());
         $this->assertInternalType('int', $response->getTransactionNumber());
+        $this->assertSame($this->getExpectedAuthorization(), $response->getAuthorization());
+
+        // Not called extra attributes
+        $this->assertNull($response->getSha1());
+        $this->assertNull($response->getCountry());
+        $this->assertNull($response->getCardType());
     }
 
     public function testCallWithCustomActivity()
@@ -83,28 +89,6 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->getExpectedSha1(), $response->getSha1());
         $this->assertSame($this->getExpectedCountry(), $response->getCountry());
         $this->assertSame($this->getExpectedCardType(), $response->getCardType());
-    }
-
-    public function testCallNotExtraAttributes()
-    {
-        // Show Sha1 is false by default
-        $request = $this->createBaseRequest();
-
-        $response = $this->paybox->request($request);
-
-        $this->assertSame(0, $response->getCode(), $response->getComment());
-        $this->assertNull($response->getSha1());
-        $this->assertNull($response->getCountry());
-        $this->assertNull($response->getCardType());
-    }
-
-    public function testCallAuthorization()
-    {
-        $request = $this->createBaseRequest();
-
-        $response = $this->paybox->request($request);
-
-        $this->assertSame($this->getExpectedAuthorization(), $response->getAuthorization());
     }
 
     /**
