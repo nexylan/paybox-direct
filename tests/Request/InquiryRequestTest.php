@@ -23,4 +23,12 @@ final class InquiryRequestTest extends AbstractNumberedTransactionRequestTest
 
         return $this->paybox->request($request);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

@@ -71,4 +71,12 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
     {
         return '678AEDDA00FA890C9056626FFB5699C57BC602B0L';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

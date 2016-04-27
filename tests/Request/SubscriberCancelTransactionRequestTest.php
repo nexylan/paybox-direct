@@ -46,4 +46,12 @@ final class SubscriberCancelTransactionRequestTest extends AbstractTransactionRe
             $authorizeAndCaptureResponse->getCallNumber()
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

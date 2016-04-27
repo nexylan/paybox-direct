@@ -57,6 +57,13 @@ interface ResponseInterface
     public function getTransactionNumber();
 
     /**
+     * Corresponding to `AUTORISATION`.
+     *
+     * @return string|null|false Null if not provided, false if empty.
+     */
+    public function getAuthorization();
+
+    /**
      * Corresponding to `PAYS`.
      *
      * @return string|null|false Null if not requested, false if '???' or empty string returned by Paybox.

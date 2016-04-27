@@ -33,4 +33,12 @@ final class SubscriberUpdateRequestTest extends AbstractTransactionRequestTest
             $this->getCreditCardValidDate()
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

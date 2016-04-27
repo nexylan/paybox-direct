@@ -23,4 +23,12 @@ final class DebitRequestTest extends AbstractNumberedReferencedTransactionReques
 
         return $this->paybox->request($request);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

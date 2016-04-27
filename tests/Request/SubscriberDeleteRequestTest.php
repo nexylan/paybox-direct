@@ -64,4 +64,12 @@ class SubscriberDeleteRequestTest extends AbstractRequestTest
     {
         return false;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return false;
+    }
 }

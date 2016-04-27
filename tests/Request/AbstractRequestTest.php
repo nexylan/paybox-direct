@@ -98,6 +98,15 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($response->getCardType());
     }
 
+    public function testCallAuthorization()
+    {
+        $request = $this->createBaseRequest();
+
+        $response = $this->paybox->request($request);
+
+        $this->assertSame($this->getExpectedAuthorization(), $response->getAuthorization());
+    }
+
     /**
      * @return string
      */
@@ -128,6 +137,14 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     protected function getExpectedCardType()
     {
         return 'Visa';
+    }
+
+    /**
+     * @return string|null|false
+     */
+    protected function getExpectedAuthorization()
+    {
+        return;
     }
 
     /**

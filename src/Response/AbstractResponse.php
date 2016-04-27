@@ -45,6 +45,11 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @var string|null|false
      */
+    private $authorization = null;
+
+    /**
+     * @var string|null|false
+     */
     private $country = null;
 
     /**
@@ -70,6 +75,9 @@ abstract class AbstractResponse implements ResponseInterface
         $this->questionNumber = intval($data['NUMQUESTION']);
         $this->transactionNumber = intval($data['NUMTRANS']);
 
+        if (array_key_exists('AUTORISATION', $data)) {
+            $this->authorization = '' === $data['AUTORISATION'] ? false : $data['AUTORISATION'];
+        }
         if (array_key_exists('PAYS', $data)) {
             $this->country = in_array($data['PAYS'], ['', '???'], true) ? false : $data['PAYS'];
         }
@@ -135,6 +143,14 @@ abstract class AbstractResponse implements ResponseInterface
     final public function getTransactionNumber()
     {
         return $this->transactionNumber;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthorization()
+    {
+        return $this->authorization;
     }
 
     /**

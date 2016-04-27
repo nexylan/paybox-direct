@@ -23,4 +23,12 @@ final class UpdateAmountRequestTest extends AbstractNumberedTransactionRequestTe
 
         return $this->paybox->request($request);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }
