@@ -19,14 +19,17 @@ final class InquiryResponse extends AbstractResponse
      */
     private $discount = null;
 
-    public function __construct($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($parameters)
     {
-        parent::__construct($data);
+        parent::__construct($parameters);
 
-        $this->status = $data['STATUS'];
+        $this->status = $parameters['STATUS'];
 
-        if (array_key_exists('REMISE', $data)) {
-            $this->discount = $data['REMISE'];
+        if (array_key_exists('REMISE', $parameters)) {
+            $this->discount = $parameters['REMISE'];
         }
     }
 

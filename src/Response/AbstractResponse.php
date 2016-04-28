@@ -63,36 +63,36 @@ abstract class AbstractResponse implements ResponseInterface
     private $cardType = null;
 
     /**
-     * @param string[] $data
+     * @param string[] $parameters
      */
-    public function __construct(array $data)
+    public function __construct(array $parameters)
     {
         // Cleanup array to set false for empty/invalid values.
-        array_walk($data, function (&$value) {
+        array_walk($parameters, function (&$value) {
             if (in_array($value, ['', '???'], true)) {
                 $value = false;
             }
         });
 
-        $this->code = intval($data['CODEREPONSE']);
-        $this->comment = $data['COMMENTAIRE'];
-        $this->site = $data['SITE'];
-        $this->rank = $data['RANG'];
-        $this->callNumber = intval($data['NUMAPPEL']);
-        $this->questionNumber = intval($data['NUMQUESTION']);
-        $this->transactionNumber = intval($data['NUMTRANS']);
+        $this->code = intval($parameters['CODEREPONSE']);
+        $this->comment = $parameters['COMMENTAIRE'];
+        $this->site = $parameters['SITE'];
+        $this->rank = $parameters['RANG'];
+        $this->callNumber = intval($parameters['NUMAPPEL']);
+        $this->questionNumber = intval($parameters['NUMQUESTION']);
+        $this->transactionNumber = intval($parameters['NUMTRANS']);
 
-        if (array_key_exists('AUTORISATION', $data)) {
-            $this->authorization = $data['AUTORISATION'];
+        if (array_key_exists('AUTORISATION', $parameters)) {
+            $this->authorization = $parameters['AUTORISATION'];
         }
-        if (array_key_exists('PAYS', $data)) {
-            $this->country = $data['PAYS'];
+        if (array_key_exists('PAYS', $parameters)) {
+            $this->country = $parameters['PAYS'];
         }
-        if (array_key_exists('SHA-1', $data)) {
-            $this->sha1 = $data['SHA-1'];
+        if (array_key_exists('SHA-1', $parameters)) {
+            $this->sha1 = $parameters['SHA-1'];
         }
-        if (array_key_exists('TYPECARTE', $data)) {
-            $this->cardType = $data['TYPECARTE'];
+        if (array_key_exists('TYPECARTE', $parameters)) {
+            $this->cardType = $parameters['TYPECARTE'];
         }
     }
 

@@ -20,12 +20,12 @@ final class DirectPlusResponse extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function __construct(array $data)
+    public function __construct(array $parameters)
     {
-        parent::__construct($data);
+        parent::__construct($parameters);
 
-        $this->subscriberRef = $data['REFABONNE'];
-        $this->bearer = $data['PORTEUR'];
+        $this->subscriberRef = $parameters['REFABONNE'];
+        $this->bearer = $parameters['PORTEUR'];
     }
 
     /**
