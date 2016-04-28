@@ -101,11 +101,14 @@ abstract class AbstractHttpClient
 
         $this->questionNumber = (int) $results['NUMQUESTION'] + 1;
 
-        if ('00000' !== $results['CODEREPONSE']) {
-            throw new PayboxException($results['COMMENTAIRE'], $results['CODEREPONSE']);
+        /** @var ResponseInterface $response */
+        $response = new $responseClass($results);
+
+        if (!$response->isSuccessful()) {
+            throw new PayboxException($response);
         }
 
-        return new $responseClass($results);
+        return $response;
     }
 
     /**

@@ -106,6 +106,14 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * {@inheritdoc}
      */
+    final public function isSuccessful()
+    {
+        return 0 === $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     final public function getCode()
     {
         return $this->code;
