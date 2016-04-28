@@ -21,6 +21,20 @@ final class Activity extends Choice
         parent::__construct($options);
 
         $this->choices = \Nexy\PayboxDirect\Enum\Activity::getConstants();
+
+        // Option to choose to show constant or options
+        $this->message = 'The value you selected is not a valid '
+            .\Nexy\PayboxDirect\Enum\Activity::class
+            .' enum value. Valid constants are: '
+            .implode(', ', \Nexy\PayboxDirect\Enum\Activity::getKeys())
+            .'.'
+        ;
+        $this->multipleMessage = 'One or more of the given '
+            .\Nexy\PayboxDirect\Enum\Activity::class
+            .' enum values is invalid. Valid constants are: '
+            .implode(', ', \Nexy\PayboxDirect\Enum\Activity::getKeys())
+            .'.'
+        ;
     }
 
     /**
