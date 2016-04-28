@@ -22,4 +22,12 @@ final class CreditRequestTest extends AbstractReferencedBearerTransactionRequest
     {
         return 21;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

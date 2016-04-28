@@ -22,7 +22,7 @@ abstract class AbstractNumberedReferencedTransactionRequestWithSubscriberTest ex
             $this->getCreditCardValidDate()
         );
         $request->setCardVerificationValue('123');
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $requestClass = $this->getRequestClass();
         /** @var AbstractNumberedTransactionRequest $requestClass */
@@ -35,7 +35,7 @@ abstract class AbstractNumberedReferencedTransactionRequestWithSubscriberTest ex
         );
         $this->assertGreaterThan(50, $request->getRequestType(), 'Should be a subscriber request.');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }

@@ -22,7 +22,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         );
         $request->setCardVerificationValue('123');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -41,7 +41,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
             '1216'
         );
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -62,5 +62,21 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         );
 
         return $request;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedSha1()
+    {
+        return '678AEDDA00FA890C9056626FFB5699C57BC602B0L';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
     }
 }

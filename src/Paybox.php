@@ -9,8 +9,12 @@ use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
+use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
-use Nexy\PayboxDirect\Response\PayboxResponse;
+use Nexy\PayboxDirect\Response\DirectPlusResponse;
+use Nexy\PayboxDirect\Response\DirectResponse;
+use Nexy\PayboxDirect\Response\InquiryResponse;
+use Nexy\PayboxDirect\Response\ResponseInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -49,15 +53,64 @@ final class Paybox
     /**
      * @param RequestInterface $request
      *
-     * @return PayboxResponse
+     * @return DirectResponse
+     */
+    public function sendDirectRequest(RequestInterface $request)
+    {
+        if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
+            throw new \InvalidArgumentException(
+                'Direct Plus requests must be passed onto '.__CLASS__.'::sendDirectPlusRequest method.'
+            );
+        }
+        if ($request instanceof InquiryRequest) {
+            throw new \InvalidArgumentException(
+                'Inquiry requests must be passed onto '.__CLASS__.'::sendInquiryRequest method.'
+            );
+        }
+
+        return $this->request($request);
+    }
+
+    /**
+     * @param RequestInterface $request
+     *
+     * @return DirectPlusResponse
+     */
+    public function sendDirectPlusRequest(RequestInterface $request)
+    {
+        if ($request->getRequestType() < RequestInterface::SUBSCRIBER_AUTHORIZE) {
+            throw new \InvalidArgumentException(
+                'Direct requests must be passed onto '.__CLASS__.'::sendDirectRequest method.'
+            );
+        }
+
+        return $this->request($request, DirectPlusResponse::class);
+    }
+
+    /**
+     * @param InquiryRequest $request
+     *
+     * @return InquiryResponse
+     */
+    public function sendInquiryRequest(InquiryRequest $request)
+    {
+        return $this->request($request, InquiryResponse::class);
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @param string           $responseClass
+     *
+     * @return ResponseInterface
      *
      * @throws Exception\PayboxException
      */
-    public function request(RequestInterface $request)
+    private function request(RequestInterface $request, $responseClass = DirectResponse::class)
     {
         return $this->httpClient->call(
             $request->getRequestType(),
-            $this->resolveRequestParameters($request->getParameters())
+            $this->resolveRequestParameters($request->getParameters()),
+            $responseClass
         );
     }
 

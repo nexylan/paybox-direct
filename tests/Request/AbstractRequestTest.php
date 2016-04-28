@@ -2,10 +2,15 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
+use GuzzleHttp\Psr7\Request;
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
+use Nexy\PayboxDirect\Request\InquiryRequest;
+use Nexy\PayboxDirect\Request\RequestInterface;
+use Nexy\PayboxDirect\Response\DirectPlusResponse;
+use Nexy\PayboxDirect\Response\DirectResponse;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -15,7 +20,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Paybox
      */
-    protected $paybox;
+    private $paybox;
 
     protected function setUp()
     {
@@ -28,6 +33,39 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+    /**
+     * Check types and also call getter for each request type to be sures elements are always returned.
+     */
+    public function testCallResponseAttributes()
+    {
+        $request = $this->createBaseRequest();
+        $response = $this->payboxRequest($request);
+
+        $this->assertInternalType('int', $response->getCode());
+        $this->assertInternalType('string', $response->getComment());
+        $this->assertSame('1999888', $response->getSite());
+        $this->assertSame('32', $response->getRank());
+        $this->assertInternalType('int', $response->getCallNumber());
+        $this->assertInternalType('int', $response->getQuestionNumber());
+        $this->assertInternalType('int', $response->getTransactionNumber());
+        $this->assertSame($this->getExpectedAuthorization(), $response->getAuthorization());
+
+        // Not called extra attributes
+        $this->assertNull($response->getSha1());
+        $this->assertNull($response->getCountry());
+        $this->assertNull($response->getCardType());
+
+        // Direct plus special attributes
+        if ($response instanceof DirectPlusResponse) {
+            $this->assertNotEmpty($response->getSubscriberRef());
+            if (false === $this->getExpectedEmptyBearer()) {
+                $this->assertNotEmpty($response->getBearer());
+            } else {
+                $this->assertFalse($response->getBearer());
+            }
+        }
+    }
+
     public function testCallWithCustomActivity()
     {
         $request = $this->createBaseRequest();
@@ -35,7 +73,7 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
             ->setActivity(Activity::PHONE_REQUEST)
         ;
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
@@ -46,31 +84,38 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         // Have to find a way to test the date result on response.
         $request->setDate(new \DateTime('now - 10 days'));
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
     }
 
-    public function testCallShowCountry()
+    public function testCallShowExtraAttributes()
     {
         $request = $this->createBaseRequest();
-        $request->setShowCountry(true);
+        $request
+            ->setShowSha1(true)
+            ->setShowCountry(true)
+            ->setShowCardType(true)
+        ;
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
+        $this->assertSame($this->getExpectedSha1(), $response->getSha1());
         $this->assertSame($this->getExpectedCountry(), $response->getCountry());
+        $this->assertSame($this->getExpectedCardType(), $response->getCardType());
     }
 
-    public function testCallNotShowCountry()
+    public function testInvalidRequestCall()
     {
-        // Show country is false by default
+        $this->expectException(\InvalidArgumentException::class);
+
         $request = $this->createBaseRequest();
-
-        $response = $this->paybox->request($request);
-
-        $this->assertSame(0, $response->getCode(), $response->getComment());
-        $this->assertNull($response->getCountry());
+        if ($request instanceof InquiryRequest || $request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
+            $this->paybox->sendDirectRequest($request);
+        } else {
+            $this->paybox->sendDirectPlusRequest($request);
+        }
     }
 
     /**
@@ -82,11 +127,43 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return string
+     * @return string|bool
+     */
+    protected function getExpectedSha1()
+    {
+        return '678AEDDA00FA890C9056626FFB5699C57BC602B0';
+    }
+
+    /**
+     * @return string|bool
      */
     protected function getExpectedCountry()
     {
-        return '???';
+        return false;
+    }
+
+    /**
+     * @return string|bool
+     */
+    protected function getExpectedCardType()
+    {
+        return 'Visa';
+    }
+
+    /**
+     * @return string|null|false
+     */
+    protected function getExpectedAuthorization()
+    {
+        return;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function getExpectedEmptyBearer()
+    {
+        return false;
     }
 
     /**
@@ -133,6 +210,23 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $className = str_replace([__NAMESPACE__.'\\', 'Test'], '', get_class($this));
 
         return 'Nexy\\PayboxDirect\\Request\\'.$className;
+    }
+
+    /**
+     * @param RequestInterface $request
+     *
+     * @return DirectResponse|DirectPlusResponse
+     */
+    final protected function payboxRequest(RequestInterface $request)
+    {
+        if ($request instanceof InquiryRequest) {
+            return $this->paybox->sendInquiryRequest($request);
+        }
+        if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
+            return $this->paybox->sendDirectPlusRequest($request);
+        }
+
+        return $this->paybox->sendDirectRequest($request);
     }
 
     /**

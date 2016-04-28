@@ -7,4 +7,11 @@ namespace Nexy\PayboxDirect\Tests\Request;
  */
 final class AuthorizeRequestTest extends AbstractReferencedBearerTransactionRequestTest
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
+    }
 }

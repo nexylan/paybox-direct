@@ -19,7 +19,7 @@ class SubscriberDeleteRequestTest extends AbstractRequestTest
 
         $request = new SubscriberDeleteRequest('fake');
 
-        $this->paybox->request($request);
+        $this->payboxRequest($request);
     }
 
     /**
@@ -36,7 +36,7 @@ class SubscriberDeleteRequestTest extends AbstractRequestTest
         );
         $request->setCardVerificationValue('123');
 
-        $response = $this->paybox->request($request);
+        $response = $this->payboxRequest($request);
 
         return new SubscriberDeleteRequest($response->getSubscriberRef());
     }
@@ -44,8 +44,40 @@ class SubscriberDeleteRequestTest extends AbstractRequestTest
     /**
      * {@inheritdoc}
      */
+    protected function getExpectedSha1()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getExpectedCountry()
     {
-        return '';
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedCardType()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function getExpectedEmptyBearer()
+    {
+        return true;
     }
 }

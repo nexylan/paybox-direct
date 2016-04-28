@@ -21,6 +21,14 @@ final class UpdateAmountRequestTest extends AbstractNumberedTransactionRequestTe
             $this->getCreditCardValidDate()
         );
 
-        return $this->paybox->request($request);
+        return $this->payboxRequest($request);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getExpectedAuthorization()
+    {
+        return 'XXXXXX';
     }
 }

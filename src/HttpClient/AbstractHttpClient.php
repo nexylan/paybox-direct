@@ -4,7 +4,7 @@ namespace Nexy\PayboxDirect\HttpClient;
 
 use Nexy\PayboxDirect\Exception\PayboxException;
 use Nexy\PayboxDirect\Paybox;
-use Nexy\PayboxDirect\Response\PayboxResponse;
+use Nexy\PayboxDirect\Response\ResponseInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -66,15 +66,20 @@ abstract class AbstractHttpClient
     /**
      * Calls PayBox Direct platform with given operation type and parameters.
      *
-     * @param string   $type       Request type
-     * @param string[] $parameters Request parameters
+     * @param int      $type          Request type
+     * @param string[] $parameters    Request parameters
+     * @param string   $responseClass
      *
-     * @return PayboxResponse The response content
+     * @return ResponseInterface The response content
      *
      * @throws PayboxException
      */
-    final public function call($type, array $parameters)
+    public function call($type, array $parameters, $responseClass)
     {
+        if (!in_array(ResponseInterface::class, class_implements($responseClass))) {
+            throw new \InvalidArgumentException('The response class must implement '.ResponseInterface::class.'.');
+        }
+
         $bodyParams = array_merge($parameters, $this->baseParameters);
         $bodyParams['TYPE'] = $type;
         $bodyParams['NUMQUESTION'] = $this->questionNumber;
@@ -100,7 +105,7 @@ abstract class AbstractHttpClient
             throw new PayboxException($results['COMMENTAIRE'], $results['CODEREPONSE']);
         }
 
-        return new PayboxResponse($results);
+        return new $responseClass($results);
     }
 
     /**

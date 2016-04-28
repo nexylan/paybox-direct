@@ -25,6 +25,16 @@ abstract class AbstractRequest implements RequestInterface
     private $showCountry = false;
 
     /**
+     * @var bool
+     */
+    private $showSha1 = false;
+
+    /**
+     * @var bool
+     */
+    private $showCardType = false;
+
+    /**
      * @var string|null
      */
     private $subscriberRef = null;
@@ -74,6 +84,30 @@ abstract class AbstractRequest implements RequestInterface
     }
 
     /**
+     * @param bool $showSha1
+     *
+     * @return $this
+     */
+    final public function setShowSha1($showSha1)
+    {
+        $this->showSha1 = $showSha1;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $showCardType
+     *
+     * @return $this
+     */
+    final public function setShowCardType($showCardType)
+    {
+        $this->showCardType = $showCardType;
+
+        return $this;
+    }
+
+    /**
      * @return null|string
      */
     final protected function getSubscriberRef()
@@ -93,6 +127,12 @@ abstract class AbstractRequest implements RequestInterface
 
         if ($this->showCountry) {
             $parameters['PAYS'] = '';
+        }
+        if ($this->showSha1) {
+            $parameters['SHA-1'] = '';
+        }
+        if ($this->showCardType) {
+            $parameters['TYPECARTE'] = '';
         }
 
         if (method_exists($this, 'getTransactionNumber')) {
