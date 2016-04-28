@@ -67,6 +67,13 @@ abstract class AbstractResponse implements ResponseInterface
      */
     public function __construct(array $data)
     {
+        // Cleanup array to set false for empty/invalid values.
+        array_walk($data, function (&$value) {
+            if (in_array($value, ['', '???'], true)) {
+                $value = false;
+            }
+        });
+
         $this->code = intval($data['CODEREPONSE']);
         $this->comment = $data['COMMENTAIRE'];
         $this->site = $data['SITE'];
@@ -76,16 +83,16 @@ abstract class AbstractResponse implements ResponseInterface
         $this->transactionNumber = intval($data['NUMTRANS']);
 
         if (array_key_exists('AUTORISATION', $data)) {
-            $this->authorization = '' === $data['AUTORISATION'] ? false : $data['AUTORISATION'];
+            $this->authorization = $data['AUTORISATION'];
         }
         if (array_key_exists('PAYS', $data)) {
-            $this->country = in_array($data['PAYS'], ['', '???'], true) ? false : $data['PAYS'];
+            $this->country = $data['PAYS'];
         }
         if (array_key_exists('SHA-1', $data)) {
-            $this->sha1 = '' === $data['SHA-1'] ? false : $data['SHA-1'];
+            $this->sha1 = $data['SHA-1'];
         }
         if (array_key_exists('TYPECARTE', $data)) {
-            $this->cardType = '' === $data['TYPECARTE'] ? false : $data['TYPECARTE'];
+            $this->cardType = $data['TYPECARTE'];
         }
     }
 

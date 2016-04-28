@@ -25,7 +25,7 @@ final class DirectPlusResponse extends AbstractResponse
         parent::__construct($data);
 
         $this->subscriberRef = $data['REFABONNE'];
-        $this->bearer = '' === $data['PORTEUR'] ? false : $data['PORTEUR'];
+        $this->bearer = $data['PORTEUR'];
     }
 
     /**
