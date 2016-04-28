@@ -4,7 +4,7 @@ namespace Nexy\PayboxDirect\HttpClient;
 
 use Nexy\PayboxDirect\Exception\PayboxException;
 use Nexy\PayboxDirect\Paybox;
-use Psr\Http\Message\ResponseInterface;
+use Nexy\PayboxDirect\Response\ResponseInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
