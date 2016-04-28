@@ -7,6 +7,8 @@ namespace Nexy\PayboxDirect\Request;
  */
 final class AuthorizeRequest extends AbstractReferencedBearerTransactionRequest
 {
+    use AuthorizationTrait;
+
     /**
      * {@inheritdoc}
      */

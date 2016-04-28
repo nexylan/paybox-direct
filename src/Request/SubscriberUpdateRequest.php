@@ -7,6 +7,8 @@ namespace Nexy\PayboxDirect\Request;
  */
 final class SubscriberUpdateRequest extends AbstractBearerTransactionRequest
 {
+    use AuthorizationTrait;
+
     /**
      * @param string $subscriberRef
      * @param string $amount
