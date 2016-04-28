@@ -77,7 +77,7 @@ abstract class AbstractHttpClient
     public function call($type, array $parameters, $responseClass)
     {
         if (!in_array(ResponseInterface::class, class_implements($responseClass))) {
-            throw new \InvalidArgumentException('The response class must implements '.ResponseInterface::class.'.');
+            throw new \InvalidArgumentException('The response class must implement '.ResponseInterface::class.'.');
         }
 
         $bodyParams = array_merge($parameters, $this->baseParameters);
