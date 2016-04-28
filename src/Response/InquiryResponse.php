@@ -26,10 +26,10 @@ final class InquiryResponse extends AbstractResponse
     {
         parent::__construct($parameters);
 
-        $this->status = $parameters['STATUS'];
+        $this->status = $this->filteredParameters['STATUS'];
 
-        if (array_key_exists('REMISE', $parameters)) {
-            $this->discount = $parameters['REMISE'];
+        if (array_key_exists('REMISE', $this->filteredParameters)) {
+            $this->discount = $this->filteredParameters['REMISE'];
         }
     }
 

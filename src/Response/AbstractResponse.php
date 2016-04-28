@@ -63,36 +63,43 @@ abstract class AbstractResponse implements ResponseInterface
     private $cardType = null;
 
     /**
+     * @var mixed[]
+     */
+    protected $filteredParameters;
+
+    /**
      * @param string[] $parameters
      */
     public function __construct(array $parameters)
     {
         // Cleanup array to set false for empty/invalid values.
-        array_walk($parameters, function (&$value) {
+        $this->filteredParameters = array_map(function ($value) {
             if (in_array($value, ['', '???'], true)) {
-                $value = false;
+                return false;
             }
-        });
 
-        $this->code = intval($parameters['CODEREPONSE']);
-        $this->comment = $parameters['COMMENTAIRE'];
-        $this->site = $parameters['SITE'];
-        $this->rank = $parameters['RANG'];
-        $this->callNumber = intval($parameters['NUMAPPEL']);
-        $this->questionNumber = intval($parameters['NUMQUESTION']);
-        $this->transactionNumber = intval($parameters['NUMTRANS']);
+            return $value;
+        }, $parameters);
 
-        if (array_key_exists('AUTORISATION', $parameters)) {
-            $this->authorization = $parameters['AUTORISATION'];
+        $this->code = intval($this->filteredParameters['CODEREPONSE']);
+        $this->comment = $this->filteredParameters['COMMENTAIRE'];
+        $this->site = $this->filteredParameters['SITE'];
+        $this->rank = $this->filteredParameters['RANG'];
+        $this->callNumber = intval($this->filteredParameters['NUMAPPEL']);
+        $this->questionNumber = intval($this->filteredParameters['NUMQUESTION']);
+        $this->transactionNumber = intval($this->filteredParameters['NUMTRANS']);
+
+        if (array_key_exists('AUTORISATION', $this->filteredParameters)) {
+            $this->authorization = $this->filteredParameters['AUTORISATION'];
         }
-        if (array_key_exists('PAYS', $parameters)) {
-            $this->country = $parameters['PAYS'];
+        if (array_key_exists('PAYS', $this->filteredParameters)) {
+            $this->country = $this->filteredParameters['PAYS'];
         }
-        if (array_key_exists('SHA-1', $parameters)) {
-            $this->sha1 = $parameters['SHA-1'];
+        if (array_key_exists('SHA-1', $this->filteredParameters)) {
+            $this->sha1 = $this->filteredParameters['SHA-1'];
         }
-        if (array_key_exists('TYPECARTE', $parameters)) {
-            $this->cardType = $parameters['TYPECARTE'];
+        if (array_key_exists('TYPECARTE', $this->filteredParameters)) {
+            $this->cardType = $this->filteredParameters['TYPECARTE'];
         }
     }
 

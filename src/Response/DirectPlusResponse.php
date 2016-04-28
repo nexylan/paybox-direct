@@ -24,8 +24,8 @@ final class DirectPlusResponse extends AbstractResponse
     {
         parent::__construct($parameters);
 
-        $this->subscriberRef = $parameters['REFABONNE'];
-        $this->bearer = $parameters['PORTEUR'];
+        $this->subscriberRef = $this->filteredParameters['REFABONNE'];
+        $this->bearer = $this->filteredParameters['PORTEUR'];
     }
 
     /**
