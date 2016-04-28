@@ -66,23 +66,17 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCallWithCustomActivity()
+    public function testCallWithOptionalParameters()
     {
         $request = $this->createBaseRequest();
         $request
             ->setActivity(Activity::PHONE_REQUEST)
+            ->setDate(new \DateTime('now - 10 days'))
         ;
 
-        $response = $this->payboxRequest($request);
-
-        $this->assertSame(0, $response->getCode(), $response->getComment());
-    }
-
-    public function testCallCustomDate()
-    {
-        $request = $this->createBaseRequest();
-        // Have to find a way to test the date result on response.
-        $request->setDate(new \DateTime('now - 10 days'));
+        if (method_exists($request, 'setAuthorization')) {
+            $request->setAuthorization('XXXXXX');
+        }
 
         $response = $this->payboxRequest($request);
 

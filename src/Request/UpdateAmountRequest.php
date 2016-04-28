@@ -7,6 +7,8 @@ namespace Nexy\PayboxDirect\Request;
  */
 final class UpdateAmountRequest extends AbstractNumberedTransactionRequest
 {
+    use AuthorizationTrait;
+
     /**
      * {@inheritdoc}
      */
