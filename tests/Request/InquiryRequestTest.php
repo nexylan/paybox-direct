@@ -12,7 +12,7 @@ final class InquiryRequestTest extends AbstractNumberedTransactionRequestTest
     /**
      * {@inheritdoc}
      */
-    final protected function getPreviousResponse($amount)
+    protected function getPreviousResponse($amount)
     {
         $request = new AuthorizeRequest(
             $this->generateReference(),

@@ -12,7 +12,7 @@ final class RefundRequestTest extends AbstractNumberedReferencedTransactionReque
     /**
      * {@inheritdoc}
      */
-    final protected function getPreviousResponse($amount)
+    protected function getPreviousResponse($amount)
     {
         $request = new AuthorizeAndCaptureRequest(
             $this->generateReference(),
