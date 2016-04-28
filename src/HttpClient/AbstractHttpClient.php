@@ -66,7 +66,7 @@ abstract class AbstractHttpClient
     /**
      * Calls PayBox Direct platform with given operation type and parameters.
      *
-     * @param string   $type          Request type
+     * @param int      $type          Request type
      * @param string[] $parameters    Request parameters
      * @param string   $responseClass
      *
@@ -76,6 +76,10 @@ abstract class AbstractHttpClient
      */
     public function call($type, array $parameters, $responseClass)
     {
+        if (!in_array(ResponseInterface::class, class_implements($responseClass))) {
+            throw new \InvalidArgumentException('The response class must implements '.ResponseInterface::class.'.');
+        }
+
         $bodyParams = array_merge($parameters, $this->baseParameters);
         $bodyParams['TYPE'] = $type;
         $bodyParams['NUMQUESTION'] = $this->questionNumber;
