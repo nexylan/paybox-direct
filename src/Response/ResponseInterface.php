@@ -8,6 +8,13 @@ namespace Nexy\PayboxDirect\Response;
 interface ResponseInterface
 {
     /**
+     * Tells if response is successful based on `CODEREPONSE` parameter.
+     *
+     * @return bool
+     */
+    public function isSuccessful();
+
+    /**
      * Corresponding to `CODEREPONSE`.
      *
      * @return int
