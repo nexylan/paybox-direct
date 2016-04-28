@@ -2,11 +2,12 @@
 
 namespace Nexy\PayboxDirect\Tests\Request;
 
-use GuzzleHttp\Psr7\Request;
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Version;
+use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
+use Nexy\PayboxDirect\Request\AuthorizeRequest;
 use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
@@ -110,6 +111,32 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->paybox->sendDirectPlusRequest($request);
         }
+    }
+
+    /**
+     * @dataProvider getInvalidRequests
+     *
+     * @param RequestInterface $request
+     * @param int              $expectedErrorsCount
+     */
+    public function testInvalidRequestProperties(RequestInterface $request, $expectedErrorsCount)
+    {
+        /* @var InvalidRequestPropertiesException $exception */
+        try {
+            $this->payboxRequest($request);
+        } catch (\Exception $exception) {
+            $this->assertInstanceOf(InvalidRequestPropertiesException::class, $exception);
+            $this->assertCount($expectedErrorsCount, $exception->getErrors()->count());
+        }
+    }
+
+    public function getInvalidRequests()
+    {
+        $request = new AuthorizeRequest('dfsdf', 100, '1111222233334444', '1218');
+        $request->setActivity(1337);
+        yield 'Wrong activity' => [
+            $request, 1,
+        ];
     }
 
     /**

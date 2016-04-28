@@ -2,7 +2,9 @@
 
 namespace Nexy\PayboxDirect\Request;
 
+use Nexy\PayboxDirect\Constraints as PayboxAssert;
 use Nexy\PayboxDirect\Enum\Activity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -11,6 +13,9 @@ abstract class AbstractRequest implements RequestInterface
 {
     /**
      * @var int
+     *
+     * @Assert\NotBlank
+     * @PayboxAssert\Activity
      */
     private $activity = Activity::WEB_REQUEST;
 

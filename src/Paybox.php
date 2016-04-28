@@ -2,10 +2,12 @@
 
 namespace Nexy\PayboxDirect;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Enum\Receiver;
 use Nexy\PayboxDirect\Enum\Version;
+use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
 use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
@@ -15,6 +17,8 @@ use Nexy\PayboxDirect\Response\DirectPlusResponse;
 use Nexy\PayboxDirect\Response\DirectResponse;
 use Nexy\PayboxDirect\Response\InquiryResponse;
 use Nexy\PayboxDirect\Response\ResponseInterface;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -27,6 +31,11 @@ final class Paybox
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
+
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
 
     /**
      * @var AbstractHttpClient
@@ -44,6 +53,11 @@ final class Paybox
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
+
+        AnnotationRegistry::registerLoader('class_exists');
+        $this->validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
 
         $this->httpClient = $httpClient ? $httpClient : new GuzzleHttpClient();
         $this->httpClient->setOptions($this->options);
@@ -103,15 +117,17 @@ final class Paybox
      *
      * @return ResponseInterface
      *
+     * @throws Exception\InvalidRequestPropertiesException
      * @throws Exception\PayboxException
      */
     private function request(RequestInterface $request, $responseClass = DirectResponse::class)
     {
-        return $this->httpClient->call(
-            $request->getRequestType(),
-            $this->resolveRequestParameters($request->getParameters()),
-            $responseClass
-        );
+        $errors = $this->validator->validate($request);
+        if ($errors->count() > 0) {
+            throw new InvalidRequestPropertiesException($request, $errors);
+        }
+
+        return $this->httpClient->call($request->getRequestType(), $request->getParameters(), $responseClass);
     }
 
     /**
