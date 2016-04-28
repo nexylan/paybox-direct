@@ -74,7 +74,7 @@ abstract class AbstractHttpClient
      *
      * @throws PayboxException
      */
-    public function call($type, array $parameters, $responseClass)
+    final public function call($type, array $parameters, $responseClass)
     {
         if (!in_array(ResponseInterface::class, class_implements($responseClass))) {
             throw new \InvalidArgumentException('The response class must implement '.ResponseInterface::class.'.');
