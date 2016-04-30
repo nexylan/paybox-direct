@@ -17,7 +17,7 @@
         "symfony/validator": "^2.7 || ^3.0",
         "doctrine/annotations": "^1.0",
         "doctrine/cache": "^1.0",
-        "greg0ire/enum": "^2.0"
+        "greg0ire/enum": "^2.1"
     },
     "require-dev": {
         "symfony/http-kernel": "^2.7 || ^3.0",

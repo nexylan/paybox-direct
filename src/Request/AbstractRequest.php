@@ -2,7 +2,7 @@
 
 namespace Nexy\PayboxDirect\Request;
 
-use Nexy\PayboxDirect\Constraints as PayboxAssert;
+use Greg0ire\Enum\Bridge\Symfony\Validator\Constraint\Enum;
 use Nexy\PayboxDirect\Enum\Activity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,12 +15,14 @@ abstract class AbstractRequest implements RequestInterface
      * @var int
      *
      * @Assert\NotBlank
-     * @PayboxAssert\Activity
+     * @Enum(class="Nexy\PayboxDirect\Enum\Activity", showKeys=true)
      */
     private $activity = Activity::WEB_REQUEST;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\Type("\DateTime")
      */
     private $date = null;
 
