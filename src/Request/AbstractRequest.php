@@ -165,7 +165,7 @@ abstract class AbstractRequest implements RequestInterface
         if (method_exists($this, 'getCallNumber')) {
             $parameters['NUMAPPEL'] = $this->getCallNumber();
         }
-        if (method_exists($this, 'getAuthorization') && null !== $this->getAuthorization()) {
+        if (method_exists($this, 'hasAuthorization') && $this->hasAuthorization()) {
             $parameters['AUTORISATION'] = $this->getAuthorization();
         }
 

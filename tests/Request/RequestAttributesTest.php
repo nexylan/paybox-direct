@@ -6,6 +6,7 @@ use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
 use Nexy\PayboxDirect\Request\RefundRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
+use Nexy\PayboxDirect\Request\UpdateAmountRequest;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -67,5 +68,31 @@ class RequestAttributesTest extends AbstractPayboxSetupTest
 
         $request = new AuthorizeRequest(str_repeat('0', 251), 100, '1111222233334444', '1218');
         yield 'Reference too long' => [$request, 1];
+
+        $request = new AuthorizeRequest('reference', 100, 42, 1218);
+        $request->setCardVerificationValue(123);
+        yield 'Bearer, ValidityDate and CVV should be string' => [$request, 3];
+
+        $request = new AuthorizeRequest('reference', 100, str_repeat('0', 20), '12188');
+        $request->setCardVerificationValue('12345');
+        yield 'Bearer, ValidityDate and CVV are too long' => [$request, 3];
+
+        $request = new AuthorizeRequest('reference', 100, '1111222233334444', '121');
+        $request->setCardVerificationValue('12');
+        yield 'ValidityDate and CVV are too short' => [$request, 2];
+
+        $request = new AuthorizeRequest('reference', 100, '1111222233334444', 'abcd');
+        $request->setCardVerificationValue('abc');
+        yield 'ValidityDate and CVV are invalid' => [$request, 2];
+
+        $request = new UpdateAmountRequest(100, 42, 42);
+        $request->setAuthorization(str_repeat('0', 11));
+        yield 'Authorization too long' => [$request, 1];
+
+        $request = new UpdateAmountRequest(100, '42', '42');
+        yield 'TransactionNumber and CallNumber should be int' => [$request, 2];
+
+        $request = new UpdateAmountRequest(100, 12345678900, 12345678900);
+        yield 'TransactionNumber and CallNumber are to long' => [$request, 2];
     }
 }
