@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^6.0",
         "symfony/options-resolver": "^2.7 || ^3.0",
         "symfony/validator": "^2.7 || ^3.0",
-        "doctrine/annotations": "^1.0",
+        "doctrine/annotations": "^1.2",
         "doctrine/cache": "^1.0",
         "greg0ire/enum": "^2.1"
     },
