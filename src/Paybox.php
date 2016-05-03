@@ -3,9 +3,7 @@
 namespace Nexy\PayboxDirect;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
-use Nexy\PayboxDirect\Enum\Receiver;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
@@ -160,55 +158,5 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_key', 'string');
 
         $resolver->setAllowedValues('paybox_version', Version::getConstants());
-    }
-
-    /**
-     * Paybox request paramaters validation.
-     *
-     * @param array $parameters
-     *
-     * @return array
-     */
-    private function resolveRequestParameters(array $parameters)
-    {
-        $resolver = new OptionsResolver();
-
-        // Defines parameters keys to enable them.
-        foreach (array_keys($parameters) as $key) {
-            $resolver->setDefined($key);
-        }
-
-        $resolver
-            ->setAllowedTypesIfDefined('ACQUEREUR', 'string')
-            ->setAllowedTypesIfDefined('ACTIVITE', 'int')
-            ->setAllowedTypesIfDefined('ARCHIVAGE', 'string')
-            ->setAllowedTypesIfDefined('AUTORISATION', 'string')
-            ->setAllowedTypesIfDefined('CVV', 'string')
-            ->setAllowedTypesIfDefined('DATENAISS', 'string')
-            ->setAllowedTypesIfDefined('DATEQ', ['string', 'null'])
-            ->setAllowedTypesIfDefined('DATEVAL', 'string')
-            ->setAllowedTypesIfDefined('DEVISE', ['int', 'null'])
-            ->setAllowedTypesIfDefined('DIFFERE', 'int')
-            ->setAllowedTypesIfDefined('ERRORCODETEST', 'int')
-            ->setAllowedTypesIfDefined('ID3D', 'string')
-            ->setAllowedTypesIfDefined('MONTANT', 'int')
-            ->setAllowedTypesIfDefined('NUMAPPEL', 'int')
-            ->setAllowedTypesIfDefined('NUMTRANS', 'int')
-            ->setAllowedTypesIfDefined('PORTEUR', 'string')
-            ->setAllowedTypesIfDefined('PRIV_CODETRAITEMENT', 'string')
-            ->setAllowedTypesIfDefined('REFABONNE', 'string')
-            ->setAllowedTypesIfDefined('REFERENCE', 'string') // TODO: Auto-generated if not provided?
-        ;
-
-        $resolver
-            ->setAllowedValuesIfDefined('ACQUEREUR', Receiver::getConstants())
-            ->setAllowedValuesIfDefined('ACTIVITE', Activity::getConstants())
-            ->setAllowedValuesIfDefined('DEVISE', array_merge([null], Currency::getConstants()))
-            ->setAllowedValuesIfDefined('PAYS', '')
-            ->setAllowedValuesIfDefined('SHA-1', '')
-            ->setAllowedValuesIfDefined('TYPECARTE', '')
-        ;
-
-        return $resolver->resolve($parameters);
     }
 }
