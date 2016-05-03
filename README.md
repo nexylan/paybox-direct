@@ -21,7 +21,7 @@ Paybox Direct and Paybox Direct Plus PHP SDK.
 ## Documentation
 
 All the installation and usage instructions are located in this README.
-Check it for specific version:
+Check it for a specific versions:
 
 * [__0.x__](https://github.com/nexylan/paybox-direct/tree/master) with support for Symfony `^2.7 || ^3.0`
 
