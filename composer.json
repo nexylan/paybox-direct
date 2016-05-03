@@ -12,19 +12,19 @@
     ],
     "require": {
         "php": "^5.6 || ^7.0",
-        "guzzlehttp/guzzle": "^6.0",
-        "symfony/options-resolver": "^2.7 || ^3.0",
-        "symfony/validator": "^2.7 || ^3.0",
         "doctrine/annotations": "^1.2",
         "doctrine/cache": "^1.0",
-        "greg0ire/enum": "^2.1"
+        "greg0ire/enum": "^2.1",
+        "guzzlehttp/guzzle": "^6.0",
+        "symfony/options-resolver": "^2.7 || ^3.0",
+        "symfony/validator": "^2.7 || ^3.0"
     },
     "require-dev": {
-        "symfony/http-kernel": "^2.7 || ^3.0",
-        "symfony/dependency-injection": "^2.7.10 || ^3.0",
-        "phpunit/phpunit": "^5.3",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-        "sllh/php-cs-fixer-styleci-bridge": "^2.0"
+        "phpunit/phpunit": "^5.3",
+        "sllh/php-cs-fixer-styleci-bridge": "^2.0",
+        "symfony/dependency-injection": "^2.7.10 || ^3.0",
+        "symfony/http-kernel": "^2.7 || ^3.0"
     },
     "suggest": {
         "symfony/http-kernel": "For Symfony integration as a bundle",
@@ -33,6 +33,9 @@
     "conflict": {
         "symfony/http-kernel": "<2.7|>=4.0",
         "symfony/dependency-injection": "<2.7.10|>=4.0"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": { "Nexy\\PayboxDirect\\": "src" }
