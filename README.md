@@ -34,7 +34,7 @@ This version of the project requires:
 
 ## Installation
 
-First of all, you need to require this library through composer:
+First of all, you need to require this library through Composer:
 
 ``` bash
 composer require nexylan/paybox-direct
