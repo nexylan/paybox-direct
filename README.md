@@ -21,7 +21,7 @@ Paybox Direct and Paybox Direct Plus PHP SDK.
 ## Documentation
 
 All the installation and usage instructions are located in this README.
-Check it for specific version:
+Check it for a specific versions:
 
 * [__0.x__](https://github.com/nexylan/paybox-direct/tree/master) with support for Symfony `^2.7 || ^3.0`
 
@@ -34,7 +34,7 @@ This version of the project requires:
 
 ## Installation
 
-First of all, you need to require this library through composer:
+First of all, you need to require this library through Composer:
 
 ``` bash
 composer require nexylan/paybox-direct
@@ -54,7 +54,7 @@ you must add the following dependencies:
 composer require symfony/dependency-injection symfony/http-kernel
 ```
 
-Enable the bundle on the `AppKernel` class:
+Register the bundle in the kernel of your application:
 
 ``` php
 // app/AppKernel.php
@@ -114,7 +114,7 @@ $paybox = new Paybox([
 
 If you are using the Symfony bundle bridge, all the parameters are already defined on the configuration side.
 
-All you have to do is to call the paybox service:
+All you have to do is call the paybox service:
 
 ```php
 /** @var \Nexy\PayboxDirect\Paybox $paybox */
