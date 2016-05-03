@@ -28,21 +28,30 @@ abstract class AbstractRequest implements RequestInterface
 
     /**
      * @var bool
+     *
+     * @Assert\Type("bool")
      */
     private $showCountry = false;
 
     /**
      * @var bool
+     *
+     * @Assert\Type("bool")
      */
     private $showSha1 = false;
 
     /**
      * @var bool
+     *
+     * @Assert\Type("bool")
      */
     private $showCardType = false;
 
     /**
      * @var string|null
+     *
+     * @Assert\Type("string")
+     * @Assert\Length(min=1, max=250)
      */
     private $subscriberRef = null;
 
@@ -115,6 +124,14 @@ abstract class AbstractRequest implements RequestInterface
     }
 
     /**
+     * @return bool
+     */
+    final protected function hasSubscriberRef()
+    {
+        return !empty($this->subscriberRef);
+    }
+
+    /**
      * @return null|string
      */
     final protected function getSubscriberRef()
@@ -153,7 +170,7 @@ abstract class AbstractRequest implements RequestInterface
         }
 
         // Direct Plus requests special case.
-        if (null !== $this->getSubscriberRef()) {
+        if ($this->hasSubscriberRef()) {
             $parameters['REFABONNE'] = $this->getSubscriberRef();
         }
 

@@ -4,36 +4,16 @@ namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Version;
-use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
-use Nexy\PayboxDirect\Paybox;
 use Nexy\PayboxDirect\Request\AbstractRequest;
-use Nexy\PayboxDirect\Request\AuthorizeRequest;
 use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
-use Nexy\PayboxDirect\Response\DirectResponse;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractRequestTest extends AbstractPayboxSetupTest
 {
-    /**
-     * @var Paybox
-     */
-    private $paybox;
-
-    protected function setUp()
-    {
-        $this->paybox = new Paybox([
-            'paybox_version' => $this->getPayboxVersion(),
-            'paybox_site' => '1999888',
-            'paybox_rank' => '32',
-            'paybox_identifier' => '107904482',
-            'paybox_key' => '1999888I',
-        ]);
-    }
-
     /**
      * Check types and also call getter for each request type to be sures elements are always returned.
      */
@@ -111,40 +91,6 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->paybox->sendDirectPlusRequest($request);
         }
-    }
-
-    /**
-     * @dataProvider getInvalidRequests
-     *
-     * @param RequestInterface $request
-     * @param int              $expectedErrorsCount
-     */
-    public function testInvalidRequestProperties(RequestInterface $request, $expectedErrorsCount)
-    {
-        /* @var InvalidRequestPropertiesException $exception */
-        try {
-            $this->payboxRequest($request);
-        } catch (\Exception $exception) {
-            $this->assertInstanceOf(InvalidRequestPropertiesException::class, $exception);
-            $this->assertCount($expectedErrorsCount, $exception->getErrors()->count());
-        }
-    }
-
-    public function getInvalidRequests()
-    {
-        $request = new AuthorizeRequest('dfsdf', 100, '1111222233334444', '1218');
-        $request->setActivity(1337);
-        yield 'Wrong activity' => [
-            $request, 1,
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPayboxVersion()
-    {
-        return Version::DIRECT_PLUS;
     }
 
     /**
@@ -231,23 +177,6 @@ abstract class AbstractRequestTest extends \PHPUnit_Framework_TestCase
         $className = str_replace([__NAMESPACE__.'\\', 'Test'], '', get_class($this));
 
         return 'Nexy\\PayboxDirect\\Request\\'.$className;
-    }
-
-    /**
-     * @param RequestInterface $request
-     *
-     * @return DirectResponse|DirectPlusResponse
-     */
-    final protected function payboxRequest(RequestInterface $request)
-    {
-        if ($request instanceof InquiryRequest) {
-            return $this->paybox->sendInquiryRequest($request);
-        }
-        if ($request->getRequestType() >= RequestInterface::SUBSCRIBER_AUTHORIZE) {
-            return $this->paybox->sendDirectPlusRequest($request);
-        }
-
-        return $this->paybox->sendDirectRequest($request);
     }
 
     /**
