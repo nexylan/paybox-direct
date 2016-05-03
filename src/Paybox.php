@@ -8,13 +8,13 @@ use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
-use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
 use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
 use Nexy\PayboxDirect\Response\DirectResponse;
 use Nexy\PayboxDirect\Response\InquiryResponse;
 use Nexy\PayboxDirect\Response\ResponseInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
