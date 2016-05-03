@@ -1,10 +1,9 @@
 <?php
 
-namespace Nexy\PayboxDirect\Bundle\DependencyInjection;
+namespace Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection;
 
 use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Enum\Version;
-use Nexy\PayboxDirect\Paybox;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 

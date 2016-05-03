@@ -1,9 +1,9 @@
 <?php
 
-namespace Nexy\PayboxDirect\Tests\Bundle\DependencyInjection;
+namespace Nexy\PayboxDirect\Tests\Symfony\Bridge\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
+use Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection\NexyPayboxDirectExtension;
 use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
