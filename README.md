@@ -114,7 +114,7 @@ $paybox = new Paybox([
 
 If you are using the Symfony bundle bridge, all the parameters are already defined on the configuration side.
 
-All you have to do is to call the paybox service:
+All you have to do is call the paybox service:
 
 ```php
 /** @var \Nexy\PayboxDirect\Paybox $paybox */
