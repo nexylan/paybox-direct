@@ -3,7 +3,6 @@
 namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Enum\Activity;
-use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Request\AbstractRequest;
 use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;

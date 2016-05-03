@@ -4,7 +4,6 @@ namespace Nexy\PayboxDirect\Tests\Request;
 
 use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\Request\AuthorizeRequest;
-use Nexy\PayboxDirect\Request\RefundRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Request\UpdateAmountRequest;
 
@@ -26,6 +25,7 @@ class RequestAttributesTest extends AbstractPayboxSetupTest
             $this->payboxRequest($request);
         } catch (InvalidRequestPropertiesException $exception) {
             $this->assertCount($expectedErrorsCount, $exception->getErrors());
+
             return;
         }
 
