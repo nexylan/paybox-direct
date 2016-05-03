@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexy\PayboxDirect\Tests\Bundle\DependencyInjection;
+namespace Nexy\PayboxDirect\Tests\Symfony\Bridge\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
-use Nexy\PayboxDirect\Bundle\DependencyInjection\Configuration;
-use Nexy\PayboxDirect\Bundle\DependencyInjection\NexyPayboxDirectExtension;
+use Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection\Configuration;
+use Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection\NexyPayboxDirectExtension;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -26,7 +26,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ];
 
         $sources = [
-            __DIR__.'/../../fixtures/config/config_minimal.yml',
+            __DIR__.'/../../../fixtures/config/config_minimal.yml',
         ];
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
@@ -51,7 +51,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ];
 
         $sources = [
-            __DIR__.'/../../fixtures/config/config_full.yml',
+            __DIR__.'/../../../fixtures/config/config_full.yml',
         ];
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
@@ -63,7 +63,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     public function testNoneConfigurationProcess()
     {
         $sources = [
-            __DIR__.'/../../fixtures/config/config_none.yml',
+            __DIR__.'/../../../fixtures/config/config_none.yml',
         ];
 
         $this->assertProcessedConfigurationEquals([], $sources);
