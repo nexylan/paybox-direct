@@ -54,7 +54,7 @@ you must add the following dependencies:
 composer require symfony/dependency-injection symfony/http-kernel
 ```
 
-Enable the bundle on the `AppKernel` class:
+Register the bundle in the kernel of your application:
 
 ``` php
 // app/AppKernel.php
