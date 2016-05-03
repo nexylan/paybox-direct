@@ -14,7 +14,7 @@ final class AuthorizeAndCaptureRequest extends AbstractReferencedBearerTransacti
      */
     public function getRequestType()
     {
-        return null !== $this->getSubscriberRef()
+        return $this->hasSubscriberRef()
             ? RequestInterface::SUBSCRIBER_AUTHORIZE_AND_CAPTURE
             : RequestInterface::AUTHORIZE_AND_CAPTURE
         ;

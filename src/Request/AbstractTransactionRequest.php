@@ -2,15 +2,25 @@
 
 namespace Nexy\PayboxDirect\Request;
 
+use Greg0ire\Enum\Bridge\Symfony\Validator\Constraint\Enum;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @author Sullivan Senechal <soullivaneuh@gmail.com>
+ */
 abstract class AbstractTransactionRequest extends AbstractRequest
 {
     /**
      * @var int
+     *
+     * @Assert\Type("int")
      */
     private $amount;
 
     /**
      * @var int|null
+     *
+     * @Enum(class="Nexy\PayboxDirect\Enum\Currency", showKeys=true)
      */
     private $currency = null;
 

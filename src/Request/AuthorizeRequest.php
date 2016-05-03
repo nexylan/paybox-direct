@@ -14,7 +14,7 @@ final class AuthorizeRequest extends AbstractReferencedBearerTransactionRequest
      */
     public function getRequestType()
     {
-        return null !== $this->getSubscriberRef()
+        return $this->hasSubscriberRef()
             ? RequestInterface::SUBSCRIBER_AUTHORIZE
             : RequestInterface::AUTHORIZE
         ;

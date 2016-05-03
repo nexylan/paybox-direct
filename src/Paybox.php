@@ -2,19 +2,21 @@
 
 namespace Nexy\PayboxDirect;
 
-use Nexy\PayboxDirect\Enum\Activity;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Nexy\PayboxDirect\Enum\Currency;
-use Nexy\PayboxDirect\Enum\Receiver;
 use Nexy\PayboxDirect\Enum\Version;
+use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
 use Nexy\PayboxDirect\HttpClient\GuzzleHttpClient;
-use Nexy\PayboxDirect\OptionsResolver\OptionsResolver;
 use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
 use Nexy\PayboxDirect\Response\DirectResponse;
 use Nexy\PayboxDirect\Response\InquiryResponse;
 use Nexy\PayboxDirect\Response\ResponseInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -27,6 +29,11 @@ final class Paybox
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
+
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
 
     /**
      * @var AbstractHttpClient
@@ -44,6 +51,11 @@ final class Paybox
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
+
+        AnnotationRegistry::registerLoader('class_exists');
+        $this->validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
 
         $this->httpClient = $httpClient ? $httpClient : new GuzzleHttpClient();
         $this->httpClient->setOptions($this->options);
@@ -103,15 +115,17 @@ final class Paybox
      *
      * @return ResponseInterface
      *
+     * @throws Exception\InvalidRequestPropertiesException
      * @throws Exception\PayboxException
      */
     private function request(RequestInterface $request, $responseClass = DirectResponse::class)
     {
-        return $this->httpClient->call(
-            $request->getRequestType(),
-            $this->resolveRequestParameters($request->getParameters()),
-            $responseClass
-        );
+        $errors = $this->validator->validate($request);
+        if ($errors->count() > 0) {
+            throw new InvalidRequestPropertiesException($request, $errors);
+        }
+
+        return $this->httpClient->call($request->getRequestType(), $request->getParameters(), $responseClass);
     }
 
     /**
@@ -144,55 +158,5 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_key', 'string');
 
         $resolver->setAllowedValues('paybox_version', Version::getConstants());
-    }
-
-    /**
-     * Paybox request paramaters validation.
-     *
-     * @param array $parameters
-     *
-     * @return array
-     */
-    private function resolveRequestParameters(array $parameters)
-    {
-        $resolver = new OptionsResolver();
-
-        // Defines parameters keys to enable them.
-        foreach (array_keys($parameters) as $key) {
-            $resolver->setDefined($key);
-        }
-
-        $resolver
-            ->setAllowedTypesIfDefined('ACQUEREUR', 'string')
-            ->setAllowedTypesIfDefined('ACTIVITE', 'int')
-            ->setAllowedTypesIfDefined('ARCHIVAGE', 'string')
-            ->setAllowedTypesIfDefined('AUTORISATION', 'string')
-            ->setAllowedTypesIfDefined('CVV', 'string')
-            ->setAllowedTypesIfDefined('DATENAISS', 'string')
-            ->setAllowedTypesIfDefined('DATEQ', ['string', 'null'])
-            ->setAllowedTypesIfDefined('DATEVAL', 'string')
-            ->setAllowedTypesIfDefined('DEVISE', ['int', 'null'])
-            ->setAllowedTypesIfDefined('DIFFERE', 'int')
-            ->setAllowedTypesIfDefined('ERRORCODETEST', 'int')
-            ->setAllowedTypesIfDefined('ID3D', 'string')
-            ->setAllowedTypesIfDefined('MONTANT', 'int')
-            ->setAllowedTypesIfDefined('NUMAPPEL', 'int')
-            ->setAllowedTypesIfDefined('NUMTRANS', 'int')
-            ->setAllowedTypesIfDefined('PORTEUR', 'string')
-            ->setAllowedTypesIfDefined('PRIV_CODETRAITEMENT', 'string')
-            ->setAllowedTypesIfDefined('REFABONNE', 'string')
-            ->setAllowedTypesIfDefined('REFERENCE', 'string') // TODO: Auto-generated if not provided?
-        ;
-
-        $resolver
-            ->setAllowedValuesIfDefined('ACQUEREUR', Receiver::getConstants())
-            ->setAllowedValuesIfDefined('ACTIVITE', Activity::getConstants())
-            ->setAllowedValuesIfDefined('DEVISE', array_merge([null], Currency::getConstants()))
-            ->setAllowedValuesIfDefined('PAYS', '')
-            ->setAllowedValuesIfDefined('SHA-1', '')
-            ->setAllowedValuesIfDefined('TYPECARTE', '')
-        ;
-
-        return $resolver->resolve($parameters);
     }
 }

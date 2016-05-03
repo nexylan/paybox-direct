@@ -2,6 +2,8 @@
 
 namespace Nexy\PayboxDirect\Request;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
@@ -9,6 +11,9 @@ abstract class AbstractReferencedTransactionRequest extends AbstractTransactionR
 {
     /**
      * @var string
+     *
+     * @Assert\Type("string")
+     * @Assert\Length(min=1, max=250)
      */
     private $reference;
 

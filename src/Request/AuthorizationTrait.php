@@ -2,6 +2,8 @@
 
 namespace Nexy\PayboxDirect\Request;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
@@ -9,6 +11,8 @@ trait AuthorizationTrait
 {
     /**
      * @var string|null
+     *
+     * @Assert\Length(min=1, max=10)
      */
     private $authorization = null;
 
@@ -22,6 +26,14 @@ trait AuthorizationTrait
         $this->authorization = $authorization;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    final protected function hasAuthorization()
+    {
+        return !empty($this->authorization);
     }
 
     /**
