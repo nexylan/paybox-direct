@@ -37,6 +37,7 @@ final class SubscriberUpdateRequestTest extends AbstractTransactionRequestTest
 
         return new SubscriberUpdateRequest(
             $response->getSubscriberRef(),
+            $this->generateReference(),
             57042,
             $this->getCreditCardSerial(),
             $this->getCreditCardValidDate()
