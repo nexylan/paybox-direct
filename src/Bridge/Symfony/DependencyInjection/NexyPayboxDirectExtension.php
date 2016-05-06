@@ -59,7 +59,7 @@ final class NexyPayboxDirectExtension extends Extension
 
         // Convert paybox option format
         foreach ($config['paybox'] as $key => $value) {
-            $options['paybox_'.$key] = $value;
+            $options['paybox_'.$key] = (string) $value;
         }
 
         $container->setParameter('nexy_paybox_direct.options', $options);
