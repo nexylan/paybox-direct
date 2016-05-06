@@ -111,9 +111,9 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
         return [
             'paybox' => [
                 'version' => 'direct_plus',
-                'site' => '1999888',
-                'rank' => '32',
-                'identifier' => '107904482',
+                'site' => 1999888,
+                'rank' => 32,
+                'identifier' => 107904482,
                 'key' => '1999888I',
             ],
         ];
