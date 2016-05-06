@@ -14,7 +14,7 @@ namespace Nexy\PayboxDirect\Request;
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class SubscriberUpdateRequest extends AbstractBearerTransactionRequest
+final class SubscriberUpdateRequest extends AbstractReferencedBearerTransactionRequest
 {
     use AuthorizationTrait;
 
@@ -24,9 +24,9 @@ final class SubscriberUpdateRequest extends AbstractBearerTransactionRequest
      * @param string $bearer
      * @param string $validityDate
      */
-    public function __construct($subscriberRef, $amount, $bearer, $validityDate)
+    public function __construct($subscriberRef, $reference, $amount, $bearer, $validityDate)
     {
-        parent::__construct($amount, $bearer, $validityDate, $subscriberRef);
+        parent::__construct($reference, $amount, $bearer, $validityDate, $subscriberRef);
     }
 
     /**
