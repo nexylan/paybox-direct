@@ -22,8 +22,10 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
 {
     public function testCallDefault()
     {
+        $subscriberRef = $this->generateSubscriberReference();
+
         $request = new SubscriberRegisterRequest(
-            $this->generateSubscriberReference(),
+            $subscriberRef,
             $this->generateReference(),
             56000,
             $this->getCreditCardSerial(),
@@ -34,6 +36,7 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
         $response = $this->payboxRequest($request);
 
         $this->assertSame(0, $response->getCode(), $response->getComment());
+        $this->assertSame($subscriberRef, $response->getSubscriberRef());
     }
 
     public function testCallInvalidBearer()
