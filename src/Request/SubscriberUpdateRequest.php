@@ -20,6 +20,7 @@ final class SubscriberUpdateRequest extends AbstractReferencedBearerTransactionR
 
     /**
      * @param string $subscriberRef
+     * @param string $reference
      * @param string $amount
      * @param string $bearer
      * @param string $validityDate
