@@ -37,7 +37,7 @@ abstract class AbstractPayboxSetupTest extends \PHPUnit_Framework_TestCase
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
             'paybox_key' => '1999888I',
-            'paybox_default_activity' => Activity::WEB_REQUEST,
+            'paybox_default_activity' => Activity::RECURRING_PAYMENT,
         ]);
     }
 
