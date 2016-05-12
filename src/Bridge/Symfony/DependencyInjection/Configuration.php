@@ -58,7 +58,7 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('default_currency')
                             ->validate()
                                 ->ifNotInArray(Currency::getKeys('strtolower'))
-                                ->thenInvalid('Invalid Paybox version')
+                                ->thenInvalid('Invalid Paybox currency')
                             ->end()
                         ->end()
                     ->end()
