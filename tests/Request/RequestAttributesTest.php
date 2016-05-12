@@ -48,10 +48,6 @@ class RequestAttributesTest extends AbstractPayboxSetupTest
         yield 'Wrong activity' => [$request, 1];
 
         $request = new AuthorizeRequest('reference', 100, '1111222233334444', '1218');
-        $request->setActivity(null);
-        yield 'Null activity' => [$request, 1];
-
-        $request = new AuthorizeRequest('reference', 100, '1111222233334444', '1218');
         $request
             ->setShowCountry(0)
             ->setShowSha1('test')

@@ -11,6 +11,7 @@
 
 namespace Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection;
 
+use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Enum\Version;
 use Symfony\Component\Config\FileLocator;
@@ -55,6 +56,10 @@ final class NexyPayboxDirectExtension extends Extension
         if (array_key_exists('default_currency', $config['paybox'])) {
             $options['paybox_default_currency'] = constant(Currency::class.'::'.strtoupper($config['paybox']['default_currency']));
             unset($config['paybox']['default_currency']);
+        }
+        if (array_key_exists('default_activity', $config['paybox'])) {
+            $options['paybox_default_activity'] = constant(Activity::class.'::'.strtoupper($config['paybox']['default_activity']));
+            unset($config['paybox']['default_activity']);
         }
 
         // Convert paybox option format

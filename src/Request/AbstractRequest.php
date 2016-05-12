@@ -12,7 +12,6 @@
 namespace Nexy\PayboxDirect\Request;
 
 use Greg0ire\Enum\Bridge\Symfony\Validator\Constraint\Enum;
-use Nexy\PayboxDirect\Enum\Activity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,10 +22,9 @@ abstract class AbstractRequest implements RequestInterface
     /**
      * @var int
      *
-     * @Assert\NotBlank
      * @Enum(class="Nexy\PayboxDirect\Enum\Activity", showKeys=true)
      */
-    private $activity = Activity::WEB_REQUEST;
+    private $activity = null;
 
     /**
      * @var \DateTime
@@ -154,10 +152,12 @@ abstract class AbstractRequest implements RequestInterface
     public function getParameters()
     {
         $parameters = [
-            'ACTIVITE' => $this->activity,
             'DATEQ' => $this->date instanceof \DateTime ? $this->date->format('dmYHis') : null,
         ];
 
+        if ($this->activity) {
+            $parameters['ACTIVITE'] = $this->activity;
+        }
         if ($this->showCountry) {
             $parameters['PAYS'] = '';
         }
