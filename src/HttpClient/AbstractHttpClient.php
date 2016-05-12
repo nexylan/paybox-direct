@@ -40,7 +40,7 @@ abstract class AbstractHttpClient
     /**
      * @var int
      */
-    private $defaultDevise;
+    private $defaultCurrency;
 
     /**
      * @var int|null
@@ -74,7 +74,7 @@ abstract class AbstractHttpClient
             'IDENTIFIANT' => $options['paybox_identifier'],
             'CLE' => $options['paybox_key'],
         ];
-        $this->defaultDevise = $options['paybox_default_currency'];
+        $this->defaultCurrency = $options['paybox_default_currency'];
         if (array_key_exists('paybox_default_activity', $options)) {
             $this->defaultActivity = $options['paybox_default_activity'];
         }
@@ -103,7 +103,7 @@ abstract class AbstractHttpClient
         $bodyParams['DATEQ'] = null !== $parameters['DATEQ'] ? $parameters['DATEQ'] : date('dmYHis');
         // Restore default_currency from parameters if given
         if (array_key_exists('DEVISE', $parameters)) {
-            $bodyParams['DEVISE'] = null !== $parameters['DEVISE'] ? $parameters['DEVISE'] : $this->defaultDevise;
+            $bodyParams['DEVISE'] = null !== $parameters['DEVISE'] ? $parameters['DEVISE'] : $this->defaultCurrency;
         }
         if (!array_key_exists('ACTIVITE', $parameters) && $this->defaultActivity) {
             $bodyParams['ACTIVITE'] = $this->defaultActivity;
