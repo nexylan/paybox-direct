@@ -94,7 +94,11 @@ class NexyPayboxDirectExtensionTest extends AbstractExtensionTestCase
 
     public function testSdkCall()
     {
-        $this->load();
+        $this->load([
+            'paybox' => [
+                'default_activity' => 'recurring_payment',
+            ],
+        ]);
 
         $request = new AuthorizeRequest(uniqid('npd_extension_'), 1337, '1111222233334444', '1216');
 

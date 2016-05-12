@@ -87,6 +87,7 @@ nexy_paybox_direct:
         identifier:           ~ # Required
         key:                  ~ # Required
         default_currency:     ~
+        default_activity:     ~
 ```
 
 ## Usage

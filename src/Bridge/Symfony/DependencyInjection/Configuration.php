@@ -11,6 +11,7 @@
 
 namespace Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection;
 
+use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Enum\Version;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -59,6 +60,12 @@ final class Configuration implements ConfigurationInterface
                             ->validate()
                                 ->ifNotInArray(Currency::getKeys('strtolower'))
                                 ->thenInvalid('Invalid Paybox currency')
+                            ->end()
+                        ->end()
+                        ->scalarNode('default_activity')
+                            ->validate()
+                                ->ifNotInArray(Activity::getKeys('strtolower'))
+                                ->thenInvalid('Invalid Paybox activity')
                             ->end()
                         ->end()
                     ->end()

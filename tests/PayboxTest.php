@@ -11,6 +11,7 @@
 
 namespace Nexy\PayboxDirect\Tests;
 
+use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Paybox;
 
@@ -51,6 +52,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
             'paybox_key' => '1999888I',
+            'paybox_default_activity' => Activity::RECURRING_PAYMENT,
         ]);
 
         $this->assertAttributeSame([
@@ -62,6 +64,7 @@ class PayboxTest extends \PHPUnit_Framework_TestCase
             'paybox_rank' => '32',
             'paybox_identifier' => '107904482',
             'paybox_key' => '1999888I',
+            'paybox_default_activity' => Activity::RECURRING_PAYMENT,
         ], 'options', $client);
     }
 

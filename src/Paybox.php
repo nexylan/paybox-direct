@@ -12,6 +12,7 @@
 namespace Nexy\PayboxDirect;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Nexy\PayboxDirect\Enum\Activity;
 use Nexy\PayboxDirect\Enum\Currency;
 use Nexy\PayboxDirect\Enum\Version;
 use Nexy\PayboxDirect\Exception\InvalidRequestPropertiesException;
@@ -149,6 +150,9 @@ final class Paybox
             'production' => false,
             'paybox_default_currency' => Currency::EURO,
         ]);
+        $resolver->setDefined([
+            'paybox_default_activity',
+        ]);
         $resolver->setRequired([
             'paybox_version', // Paybox Direct Plus protocol
             'paybox_site',
@@ -167,5 +171,6 @@ final class Paybox
         $resolver->setAllowedTypes('paybox_key', 'string');
 
         $resolver->setAllowedValues('paybox_version', Version::getConstants());
+        $resolver->setAllowedValues('paybox_default_activity', Activity::getConstants());
     }
 }
