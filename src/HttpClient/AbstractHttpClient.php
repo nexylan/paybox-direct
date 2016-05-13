@@ -109,6 +109,11 @@ abstract class AbstractHttpClient
             $bodyParams['ACTIVITE'] = $this->defaultActivity;
         }
 
+        // `ACTIVITE` must be a string of 3 numbers to get it working with Paybox API.
+        if (array_key_exists('ACTIVITE', $bodyParams)) {
+            $bodyParams['ACTIVITE'] = str_pad($bodyParams['ACTIVITE'], 3, '0', STR_PAD_LEFT);
+        }
+
         $response = $this->request($bodyParams);
 
         // Generate results array
