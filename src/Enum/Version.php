@@ -11,12 +11,12 @@
 
 namespace Nexy\PayboxDirect\Enum;
 
-use Greg0ire\Enum\BaseEnum;
+use Greg0ire\Enum\AbstractEnum;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-class Version extends BaseEnum
+class Version extends AbstractEnum
 {
     const DIRECT = '00103';
     const DIRECT_PLUS = '00104';

@@ -11,12 +11,12 @@
 
 namespace Nexy\PayboxDirect\Enum;
 
-use Greg0ire\Enum\BaseEnum;
+use Greg0ire\Enum\AbstractEnum;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class Activity extends BaseEnum
+final class Activity extends AbstractEnum
 {
     const NOT_SPECIFIED = 20;
     const PHONE_REQUEST = 21;

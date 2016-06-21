@@ -11,12 +11,12 @@
 
 namespace Nexy\PayboxDirect\Enum;
 
-use Greg0ire\Enum\BaseEnum;
+use Greg0ire\Enum\AbstractEnum;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class Currency extends BaseEnum
+final class Currency extends AbstractEnum
 {
     const EURO = 978;
     const US_DOLLAR = 840;

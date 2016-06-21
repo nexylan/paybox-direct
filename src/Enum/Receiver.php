@@ -11,14 +11,14 @@
 
 namespace Nexy\PayboxDirect\Enum;
 
-use Greg0ire\Enum\BaseEnum;
+use Greg0ire\Enum\AbstractEnum;
 
 /**
  * Enum for `ACQUEREUR`.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class Receiver extends BaseEnum
+final class Receiver extends AbstractEnum
 {
     const PAYPAL = 'PAYPAL';
     const EMS = 'EMS';
