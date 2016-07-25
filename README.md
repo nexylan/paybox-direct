@@ -68,7 +68,7 @@ public function registerBundles()
 
     // ...
 
-    return $bundles
+    return $bundles;
 }
 ```
 
