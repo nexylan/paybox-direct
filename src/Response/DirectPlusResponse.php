@@ -22,7 +22,7 @@ final class DirectPlusResponse extends AbstractResponse
     private $subscriberRef;
 
     /**
-     * @var string|false False if empty.
+     * @var string|false false if empty
      */
     private $bearer;
 

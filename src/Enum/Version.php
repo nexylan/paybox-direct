@@ -19,5 +19,6 @@ use Greg0ire\Enum\AbstractEnum;
 class Version extends AbstractEnum
 {
     const DIRECT = '00103';
+
     const DIRECT_PLUS = '00104';
 }
