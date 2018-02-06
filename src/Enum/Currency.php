@@ -19,6 +19,8 @@ use Greg0ire\Enum\AbstractEnum;
 final class Currency extends AbstractEnum
 {
     const EURO = 978;
+
     const US_DOLLAR = 840;
+
     const CFA = 952;
 }

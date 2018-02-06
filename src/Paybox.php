@@ -37,7 +37,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 final class Paybox
 {
     const API_URL_PRODUCTION = 'https://ppps.paybox.com/PPPS.php';
+
     const API_URL_RESCUE = 'https://ppps1.paybox.com/PPPS.php';
+
     const API_URL_TEST = 'https://preprod-ppps.paybox.com/PPPS.php';
 
     /**
