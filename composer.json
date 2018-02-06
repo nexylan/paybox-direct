@@ -20,7 +20,7 @@
         "symfony/validator": "^2.7 || ^3.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
+        "matthiasnoback/symfony-dependency-injection-test": "^1.2",
         "phpunit/phpunit": "^5.3",
         "sllh/php-cs-fixer-styleci-bridge": "^2.0",
         "symfony/dependency-injection": "^2.7.10 || ^3.0",

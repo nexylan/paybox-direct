@@ -79,14 +79,6 @@ class SubscriberRegisterRequestTest extends AbstractTransactionRequestTest
     /**
      * {@inheritdoc}
      */
-    protected function getExpectedSha1()
-    {
-        return '678AEDDA00FA890C9056626FFB5699C57BC602B0L';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getExpectedAuthorization()
     {
         return 'XXXXXX';

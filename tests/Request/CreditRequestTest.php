@@ -37,6 +37,6 @@ final class CreditRequestTest extends AbstractReferencedBearerTransactionRequest
      */
     protected function getExpectedAuthorization()
     {
-        return 'XXXXXX';
+        return false;
     }
 }

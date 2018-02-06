@@ -30,6 +30,7 @@ abstract class AbstractRequestTest extends AbstractPayboxSetupTest
         $request = $this->createBaseRequest();
         $response = $this->payboxRequest($request);
 
+        $this->assertSame(0, $response->getCode());
         $this->assertInternalType('int', $response->getCode());
         $this->assertInternalType('string', $response->getComment());
         $this->assertSame('1999888', $response->getSite());
