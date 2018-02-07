@@ -57,7 +57,11 @@ abstract class AbstractHttpClient
      */
     final public function __construct()
     {
-        $this->questionNumber = rand(0, time());
+        try {
+            $this->questionNumber = random_int(0, time());
+        } catch (\Exception $exception) {
+            $this->questionNumber = rand(0, time());
+        }
     }
 
     /**
