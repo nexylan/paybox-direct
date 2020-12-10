@@ -14,6 +14,8 @@ namespace Nexy\PayboxDirect\Tests\Symfony\Bridge\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection\Configuration;
 use Nexy\PayboxDirect\Bridge\Symfony\DependencyInjection\NexyPayboxDirectExtension;
+use SebastianBergmann\Diff\ConfigurationException;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -67,11 +69,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
     public function testNoneConfigurationProcess()
     {
+        $this->expectExceptionMessageMatches('/"paybox".*"nexy_paybox_direct" must be configured.$/');
         $sources = [
             __DIR__.'/../../../fixtures/config/config_none.yml',
         ];
@@ -79,18 +79,12 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $this->assertProcessedConfigurationEquals([], $sources);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getContainerExtension()
+    protected function getContainerExtension(): ExtensionInterface
     {
         return new NexyPayboxDirectExtension();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getConfiguration()
+    protected function getConfiguration(): Configuration
     {
         return new Configuration();
     }
