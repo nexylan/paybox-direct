@@ -18,18 +18,19 @@ use Nexy\PayboxDirect\Request\InquiryRequest;
 use Nexy\PayboxDirect\Request\RequestInterface;
 use Nexy\PayboxDirect\Response\DirectPlusResponse;
 use Nexy\PayboxDirect\Response\DirectResponse;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractPayboxSetupTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractPayboxSetupTest extends TestCase
 {
     /**
      * @var Paybox
      */
     protected $paybox;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->paybox = new Paybox([
             'paybox_version' => $this->getPayboxVersion(),

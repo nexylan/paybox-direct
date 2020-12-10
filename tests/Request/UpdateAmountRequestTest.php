@@ -38,6 +38,6 @@ final class UpdateAmountRequestTest extends AbstractNumberedTransactionRequestTe
      */
     protected function getExpectedAuthorization()
     {
-        return false;
+        return 'XXXXXX';
     }
 }

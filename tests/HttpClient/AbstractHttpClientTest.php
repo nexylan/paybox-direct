@@ -12,13 +12,14 @@
 namespace Nexy\PayboxDirect\Tests\HttpClient;
 
 use Nexy\PayboxDirect\HttpClient\AbstractHttpClient;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractHttpClientTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractHttpClientTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->getHttpClient()->init();
     }
