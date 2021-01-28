@@ -29,7 +29,7 @@ Check it for a specific versions:
 
 This version of the project requires:
 
-* PHP 5.6+
+* PHP 7.4+
 * Symfony 2.7+ for bundle integration
 
 ## Installation
